@@ -379,7 +379,14 @@ http://localhost:8000/
 見えた
 
 これを初期ソースとする
+
 ```sh
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:JQinglong/poli-link.git
+git push -u origin main
 ```
 
 
