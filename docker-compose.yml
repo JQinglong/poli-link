@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  db:
+    container_name: poli-link-db
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: polilink_database
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    volumes:
+      - ./poli-link-db/mysql:/var/lib/mysql
+    ports:
+      - 33306:3306
+  api:
+    container_name: poli-link-api
+    build: ./poli-link-api
+    command: python3 manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./poli-link-api/:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
