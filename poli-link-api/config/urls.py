@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from polilink_api.urls import router as polilink_api_router
 
 urlpatterns = [
     path('', include('polilink_api.urls')),
     path('admin/', admin.site.urls),
+    path('api/', include(polilink_api_router.urls)),
 ]
