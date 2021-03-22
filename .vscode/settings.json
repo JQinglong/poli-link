@@ -1,0 +1,37 @@
+{
+  "sqltools.connections": [
+    {
+      "database": "dev",
+      "dialect": "PostgreSQL",
+      "name": "db",
+      "password": "pass",
+      "port": 5432,
+      "server": "db",
+      "username": "dev",
+      "driver": "PostgreSQL"
+    },
+    {
+      "database": "demo",
+      "dialect": "MySQL",
+      "name": "s5_mysql",
+      "password": "pass",
+      "port": 3306,
+      "server": "mysql",
+      "username": "dev",
+      "driver": "MySQL"
+    },
+    {
+      "mysqlOptions": {
+        "authProtocol": "default"
+      },
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 3306,
+      "driver": "MySQL",
+      "name": "poli-link-db",
+      "database": "polilink_database",
+      "username": "root",
+      "password": "password"
+    }
+  ]
+}
