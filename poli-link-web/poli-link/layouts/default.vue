@@ -102,11 +102,14 @@ export default {
           to: '/'
         },
         {
+<<<<<<< HEAD
           icon: 'mdi-apps',
           title: 'memo',
           to: '/memo'
         },
         {
+=======
+>>>>>>> 02bd75dadf5b45d4be8bb00c1be4790c9cf23fae
           icon: 'mdi-chart-bubble',
           title: 'Inspire',
           to: '/inspire'
