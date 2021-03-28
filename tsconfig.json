@@ -1,0 +1,3 @@
+{
+    "extends": "./poli-link-web/poli-link/tsconfig.json"
+  }

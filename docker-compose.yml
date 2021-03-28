@@ -34,4 +34,4 @@ services:
       - /app/node_modules
     tty: true
     working_dir: /app
-    command: sh -c "cd poli-link/ && yarn dev"
+    command: sh -c "cd poli-link/ && yarn install && yarn dev"

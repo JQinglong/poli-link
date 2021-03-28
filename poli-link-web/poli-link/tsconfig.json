@@ -23,12 +23,25 @@
         "./*"
       ]
     },
+    "resolveJsonModule": true,
     "types": [
       "@nuxt/types",
       "@nuxtjs/axios",
       "@types/node"
     ]
   },
+  "files": [
+    "shims-vue.d.ts"
+  ],
+  "include": [
+    "components/**/*.ts",
+    "components/**/*.vue",
+    "layouts/**/*.ts",
+    "layouts/**/*.vue",
+    "store/**/*.ts",
+    "pages/**/*.ts",
+    "pages/**/*.vue"
+  ],
   "exclude": [
     "node_modules",
     ".nuxt",
