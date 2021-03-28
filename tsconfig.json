@@ -1,3 +1,6 @@
 {
-    "extends": "./poli-link-web/poli-link/tsconfig.json"
+  "extends": "./poli-link-web/poli-link/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./poli-link-web/poli-link",
   }
+}
