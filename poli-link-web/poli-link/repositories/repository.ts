@@ -30,9 +30,9 @@ export default (client: NuxtAxiosInstance) => (resource: string) => ({
 const resourcePath = (resource: string, id?: number) => {
   let path
   if (id) {
-    path = `api/${resource}/${id}`
+    path = `http://localhost:8000/api/${resource}/${id}`
   } else {
-    path = `api/${resource}`
+    path = `http://localhost:8000/api/${resource}`
   }
   return path
 }

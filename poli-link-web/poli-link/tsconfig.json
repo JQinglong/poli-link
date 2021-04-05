@@ -27,13 +27,15 @@
     "types": [
       "@nuxt/types",
       "@nuxtjs/axios",
-      "@types/node"
+      "@types/node",
+      "vuetify"
     ]
   },
   "files": [
     "shims-vue.d.ts"
   ],
   "include": [
+    "*.ts",
     "components/**/*.ts",
     "components/**/*.vue",
     "layouts/**/*.ts",

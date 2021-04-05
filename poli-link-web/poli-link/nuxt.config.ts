@@ -1,5 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 import { Configuration } from '@nuxt/types'
+import { NuxtAxiosInstance } from '@nuxtjs/axios'
+import { Repositories } from "@/plugins/repository-factory";
 
 const config: Configuration = {
 
@@ -33,7 +35,8 @@ const config: Configuration = {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/composition-api',
-    '@/plugins/axios-accessor'
+    '@/plugins/axios-accessor',
+    '@/plugins/repository-factory'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -78,6 +81,13 @@ const config: Configuration = {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  }
+}
+declare module 'vue/types/vue' {
+  interface Vue {
+    // $auth: Auth
+    $axios: NuxtAxiosInstance
+    $repositories: Repositories
   }
 }
 
