@@ -4,7 +4,7 @@ export interface Repositories {
   memo: MemoRepository
 }
 
-export default function( { $axios }, inject) {
+export default function( { $axios }: any, inject: any) {
   const memo = new MemoRepository($axios)
   const repositories: Repositories = {
     memo

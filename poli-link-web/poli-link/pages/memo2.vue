@@ -40,7 +40,7 @@ export default defineComponent({
       state.isLoading = false
       console.log('state.isLoading', state.isLoading)
       console.log('data', data)
-      state.memos = data
+      // state.memos = data
     }
 
     onMounted(fetch) 
