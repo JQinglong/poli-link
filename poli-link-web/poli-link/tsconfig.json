@@ -36,13 +36,17 @@
   ],
   "include": [
     "*.ts",
+    "api/**/*.ts",
     "components/**/*.ts",
     "components/**/*.vue",
+    "compositions/**/*.ts",
+    "constants/**/*.ts",
     "layouts/**/*.ts",
     "layouts/**/*.vue",
     "store/**/*.ts",
     "plugins/**/*.ts",
     "utils/**/*.ts",
+    "types/**/*.ts",
     "pages/**/*.ts",
     "pages/**/*.vue"
   ],

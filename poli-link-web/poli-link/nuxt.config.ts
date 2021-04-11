@@ -36,7 +36,8 @@ const config: Configuration = {
   plugins: [
     '@/plugins/composition-api',
     '@/plugins/axios-accessor',
-    '@/plugins/repository-factory'
+    '@/plugins/repository-factory',
+    '@/plugins/repository'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -58,8 +59,9 @@ const config: Configuration = {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
-
+  axios: {
+    baseURL: 'http://localhost:8000/api/',
+  },
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
