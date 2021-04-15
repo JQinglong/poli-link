@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <memo-edit
+    />
+    
     <p>{{ info.text }}</p>
     <button @click="onClicked">ボタン</button>
 
@@ -16,6 +19,7 @@
 <script lang="ts">
 import { defineComponent, reactive, computed } from "@nuxtjs/composition-api"
 import { MemoStore } from "~/store";
+import MemoEdit from "@/components/memo/MemoEdit.vue";
 
 // type Memo = {
 //   id: number

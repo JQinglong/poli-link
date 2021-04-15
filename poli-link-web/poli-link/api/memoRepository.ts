@@ -3,6 +3,7 @@ import {
   Memo,
   ResponseType,
   ResponseTypes,
+  CustomErrors,
 } from '@/types'
 import { LIMIT_LIST_ITEM } from '@/constants'
 
@@ -11,6 +12,15 @@ type Memoid = Memo['id']
 export interface MemoListRequest  {
   limit?: number
   offset?: number
+}
+export type CreateMemoRequest = Pick<
+  Memo,
+  'title' | 'memo'
+>
+export type UpdateMemoPayload = Partial<CreateMemoRequest>
+export type UpdateMemoRequest = {
+  payload: UpdateMemoPayload
+  id: Memoid
 }
 
 type MemoResponse = ResponseType<'memo', Memo>
@@ -37,6 +47,16 @@ export const memoRepository = (axios: NuxtAxiosInstance) => ({
     return axios.$get('/memo/', {
       params: {...defaultParam, limit, offset},
     })
+  },
+  createMemo(payload: CreateMemoRequest): MemoResponse | CustomErrors {
+    console.log('createMemo', payload)
+    return axios.$post('/memo/', payload)
+  },
+  updateMemo(request: UpdateMemoRequest): MemoResponse | CustomErrors {
+    return axios.$put(`/memo/${request.id}`, { article: request.payload })
+  },
+  deleteMemo(memoid: Memoid) {
+    return axios.$delete(`/memo/${memoid}`)
   },
 
 })
