@@ -47,13 +47,15 @@
           dense
         >
           <template v-slot:[`item.actions`]="{ item }">
+
+
             <v-icon
               small
-              class="mr-2"
-              @click="editItem(item)"
+              @click="$router.push(`/memo/${item.id}/edit`)"
             >
               mdi-pencil
             </v-icon>
+
             <v-icon
               small
               @click="deleteItem(item)"
