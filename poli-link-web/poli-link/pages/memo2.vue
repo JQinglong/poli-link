@@ -23,7 +23,7 @@ import {
 } from "@nuxtjs/composition-api"
 import { RepositoryFactory } from "~/repositories/RepositoryFactory";
 import MemoList from "@/components/memo/MemoList.vue";
-import { useMemoList } from "@/compositions";
+import { useMemo } from "@/compositions";
 
 const MemoRepository = RepositoryFactory.get('memo')
 interface StateData {
@@ -60,7 +60,7 @@ export default defineComponent({
     const {
       state: memoListState,
       getMemoList
-    } = useMemoList()
+    } = useMemo()
 
     const fetchData = async (offset = 0) => {
       await getMemoList({ offset })

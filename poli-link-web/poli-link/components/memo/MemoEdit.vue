@@ -41,27 +41,40 @@
     </v-card-subtitle>
 
     <v-card-text>
-      <v-data-table
-        :headers="headers"
-        :items="memoList"
-        dense
-      >
-        <template v-slot:[`item.actions`]="{ item }">
-          <v-icon
-            small
-            class="mr-2"
-            @click="editItem(item)"
-          >
-            mdi-pencil
-          </v-icon>
-          <v-icon
-            small
-            @click="deleteItem(item)"
-          >
-            mdi-delete
-          </v-icon>
-        </template>
-      </v-data-table>
+        <v-data-table
+          :headers="headers"
+          :items="memoList"
+          dense
+        >
+          <template v-slot:[`item.actions`]="{ item }">
+            <v-icon
+              small
+              class="mr-2"
+              @click="editItem(item)"
+            >
+              mdi-pencil
+            </v-icon>
+            <v-icon
+              small
+              @click="deleteItem(item)"
+            >
+              mdi-delete
+            </v-icon>
+          </template>
+        </v-data-table>
+
+        <v-dialog v-model="dialogDelete" max-width="500px">
+          <v-card>
+            <v-card-title class="headline">削除しますか?</v-card-title>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
+              <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
+              <v-spacer></v-spacer>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+
     </v-card-text>
 
   </v-card>
@@ -80,7 +93,7 @@ import {
   onMounted,
 } from "@nuxtjs/composition-api"
 import { RepositoryFactory } from "~/repositories/RepositoryFactory";
-import { useMemoList, useMemo } from "@/compositions";
+import { useMemo } from "@/compositions";
 
 const MemoRepository = RepositoryFactory.get('memo')
 interface StateData {
@@ -96,7 +109,7 @@ import { Memo } from '@/types'
 
 export default defineComponent({
   name: 'MemoEdit',
-  setup() {
+  setup(_, { root })  {
 
     const headers = [
       {text: 'タイトル', value: 'title'},
@@ -104,17 +117,33 @@ export default defineComponent({
       {text: '', value: 'actions', sortable: false},
     ]
 
-    const {
-      state: memoListState,
-      getMemoList,
-    } = useMemoList()
+    const state = reactive<Data>({
+      dialogDelete: false,
+      editedIndex: -1,
+      editedItem: {
+        id: -1,
+        title: '',
+        meeo: '',
+      },
+      defaultItem: {
+        id: -1,
+        title: '',
+        meeo: '',
+      },
+    })
+
+    // const {
+    //   state: memoListState,
+    //   getMemoList,
+    // } = useMemoList()
 
     const {
+      state: memoState,
       createState: createMemoState,
+      createMemo,
+      deleteMemo,
+      getMemoList,
     } = useMemo()
-
-
-    const { createMemo } = useMemo()
 
     const handleCreateMemo = async() => {
       try {
@@ -132,6 +161,29 @@ export default defineComponent({
       }
     }
 
+    const deleteItem = (item: Memo) =>{
+      state.editedIndex = item.id
+      state.editedItem = item
+      console.log('item', state.editedItem)
+      state.dialogDelete = true
+    }
+
+    const closeDelete = () =>{
+      state.dialogDelete = false
+      root.$nextTick(() => {
+        state.editedItem = Object.assign({}, state.defaultItem)
+        state.editedIndex = -1
+      })
+    }
+
+    const deleteItemConfirm = async() =>{
+      console.log('deleteItemConfirm', state.editedItem)
+      const memoid:number = state.editedItem.id
+      deleteMemo(memoid)
+      // fetchData()
+      closeDelete()
+    }
+
     const fetchData = async (offset = 0) => {
       await getMemoList({ offset })
       console.log('fetchData')
@@ -142,12 +194,15 @@ export default defineComponent({
 
     return {
       headers,
-      // state,
+      ...toRefs(state),
       fetchState,
       fetchData,
-      ...toRefs(memoListState),
+      ...toRefs(memoState),
       form: createMemoState,
       handleCreateMemo,
+      deleteItem,
+      closeDelete,
+      deleteItemConfirm,
     }
   }
   
