@@ -6,7 +6,7 @@ import MemoKey from '~/store/memo-key';
 type MemoPayload = Required<CreateMemoRequest>
 type CreateState = MemoPayload
 type State = {
-  memo: Memo
+  memoData: Memo
   memoList: Memo[]
   memoCount: number
 }
@@ -29,7 +29,7 @@ export default function useMemo() {
   const createState = reactive<CreateState>(initCreateState)
   // const state = reactive<State>(initState)
   const state = reactive<State>({
-    memo: {
+    memoData: {
       id: 0,
       title: '',
       memo: '',
@@ -38,9 +38,11 @@ export default function useMemo() {
     memoCount: 0,
   })
   const getMemo = async (memoid: Memo['id']) => {
-    const { memo } = await $repository.memo.getMemo(memoid)
+    const response = await $repository.memo.getMemo(memoid)
+    console.log('memoid', memoid)
+    console.log('getMemo', response)
 
-    state.memo = memo
+    state.memoData = response //型が合っていないと言われてしまうがこれで返る
   }
 
   const getMemoList = async(payload: MemoListRequest = {}) => {
@@ -55,9 +57,9 @@ export default function useMemo() {
   const createMemo = async (payload: CreateMemoRequest) => {
     const response = await $repository.memo.createMemo(payload)
 
-    if ('memo' in response) {
+    if ('memoData' in response) {
       await getMemoList()
-      return response.memo
+      return response.memoData
     }
 
     return false
@@ -66,8 +68,8 @@ export default function useMemo() {
   const updateMemo = async (payload: UpdateMemoRequest) => {
     const response = await $repository.memo.updateMemo(payload)
 
-    if ('memo' in response) {
-      return response.memo
+    if ('memoData' in response) {
+      return response.memoData
     }
 
     return false

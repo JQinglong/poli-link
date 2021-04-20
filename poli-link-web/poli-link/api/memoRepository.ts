@@ -23,7 +23,7 @@ export type UpdateMemoRequest = {
   id: Memoid
 }
 
-type MemoResponse = ResponseType<'memo', Memo>
+type MemoResponse = ResponseType<'memoData', Memo>
 // type MemoListResponse = ResponseTypes<{
 //   memos: Memo[]
 //   memosCount: number
@@ -53,10 +53,10 @@ export const memoRepository = (axios: NuxtAxiosInstance) => ({
     return axios.$post('/memo/', payload)
   },
   updateMemo(request: UpdateMemoRequest): MemoResponse | CustomErrors {
-    return axios.$put(`/memo/${request.id}`, { article: request.payload })
+    return axios.$put(`/memo/${request.id}/`, request.payload )
   },
   deleteMemo(memoid: Memoid) {
-    return axios.$delete(`/memo/${memoid}`)
+    return axios.$delete(`/memo/${memoid}/`)
   },
 
 })
