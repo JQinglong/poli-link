@@ -4,7 +4,8 @@ export interface Memo {
   memo: string
 }
 
-export type ResponseType<K extends string, V> = Promise<{ [P in K]: V }>
+export type ResponseType<V> = Promise<V>
+export type ResponseMapType<K extends string, V> = Promise<{ [P in K]: V }>
 
 export type ResponseTypes<T> = Promise<T>
 

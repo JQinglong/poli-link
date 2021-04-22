@@ -38,11 +38,11 @@ export default function useMemo() {
     memoCount: 0,
   })
   const getMemo = async (memoid: Memo['id']) => {
-    const response = await $repository.memo.getMemo(memoid)
+    const memoData = await $repository.memo.getMemo(memoid)
     console.log('memoid', memoid)
-    console.log('getMemo', response)
+    console.log('getMemo', memoData)
 
-    state.memoData = response //型が合っていないと言われてしまうがこれで返る
+    state.memoData = memoData //型が合っていないと言われてしまうがこれで返る
   }
 
   const getMemoList = async(payload: MemoListRequest = {}) => {

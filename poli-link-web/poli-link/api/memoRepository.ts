@@ -23,7 +23,9 @@ export type UpdateMemoRequest = {
   id: Memoid
 }
 
-type MemoResponse = ResponseType<'memoData', Memo>
+// type MemoResponse = ResponseType<'memoData', Memo>
+type MemoResponse = ResponseType<Memo>
+
 // type MemoListResponse = ResponseTypes<{
 //   memos: Memo[]
 //   memosCount: number
