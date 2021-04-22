@@ -156,9 +156,8 @@ export default defineComponent({
           return
         }
 
-        console.log('Success')
       } catch (error) {
-        console.log('error')
+        console.log('error', error)
         // setError(error)
       }
     }

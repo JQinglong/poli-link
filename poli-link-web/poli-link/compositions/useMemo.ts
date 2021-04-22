@@ -57,9 +57,10 @@ export default function useMemo() {
   const createMemo = async (payload: CreateMemoRequest) => {
     const response = await $repository.memo.createMemo(payload)
 
-    if ('memoData' in response) {
+    console.log('createMemo response', response)
+    if (response) {
       await getMemoList()
-      return response.memoData
+      return response
     }
 
     return false
