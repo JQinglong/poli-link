@@ -83,6 +83,10 @@ const config: Configuration = {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+  typescript: {
+    typeCheck: true,
+    ignoreNotFoundWarnings: true
   }
 }
 declare module 'vue/types/vue' {
