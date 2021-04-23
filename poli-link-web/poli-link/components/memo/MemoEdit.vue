@@ -149,7 +149,7 @@ export default defineComponent({
 
     const handleCreateMemo = async() => {
       try {
-        console.log('createMemoState', createMemoState)
+        // console.log('createMemoState', createMemoState)
         const newMemo = await createMemo(createMemoState) //こことformを結びつける
 
         if (!newMemo) {

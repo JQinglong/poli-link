@@ -21,10 +21,10 @@ export default defineComponent({
     const { app, params, query } = useContext()
     const { slug } = params.value
 
-    console.log('slug', slug)
+    console.log('slug', Number( slug ))
 
     return {
-      slug,
+      slug: Number( slug ),
     }
   },
 })

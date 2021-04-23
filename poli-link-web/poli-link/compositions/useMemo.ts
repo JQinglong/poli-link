@@ -67,10 +67,10 @@ export default function useMemo() {
   }
 
   const updateMemo = async (payload: UpdateMemoRequest) => {
-    const response = await $repository.memo.updateMemo(payload)
+    const memoData = await $repository.memo.updateMemo(payload)
 
-    if ('memoData' in response) {
-      return response.memoData
+    if (memoData) {
+      return memoData
     }
 
     return false

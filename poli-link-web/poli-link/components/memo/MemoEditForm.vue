@@ -59,7 +59,7 @@ export default defineComponent({
 
     const handleUpdateMemo = async() => {
       try {
-        console.log('createMemoState', memoState)
+        console.log('handleUpdateMemo', memoState)
         await updateMemo({id: memoState.memoData.id, payload: {"title": memoState.memoData.title, "memo": memoState.memoData.memo}}) 
 
         return
