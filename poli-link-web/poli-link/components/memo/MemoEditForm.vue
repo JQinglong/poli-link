@@ -46,7 +46,7 @@ export default defineComponent({
   name: 'MemoEditForm',
   props: {
     memoId: {
-      type: Number,
+      type: String,
       required: true,
     },
   },
@@ -71,7 +71,7 @@ export default defineComponent({
     }
 
     const fetchData = async () => {
-      await getMemo(props.memoId)
+      await getMemo(Number(props.memoId))
     }
 
     const { fetchState } = useFetch(() => fetchData())

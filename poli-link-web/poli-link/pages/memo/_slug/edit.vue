@@ -21,10 +21,8 @@ export default defineComponent({
     const { app, params, query } = useContext()
     const { slug } = params.value
 
-    console.log('slug', Number( slug ))
-
     return {
-      slug: Number( slug ),
+      slug,
     }
   },
 })

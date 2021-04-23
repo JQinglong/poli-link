@@ -119,19 +119,16 @@ export default defineComponent({
       {text: '', value: 'actions', sortable: false},
     ]
 
-    const state = reactive<Data>({
+    const defaultItem:Memo = {
+        id: -1,
+        title: '',
+        memo: ''
+      }
+
+    const state = reactive({
       dialogDelete: false,
       editedIndex: -1,
-      editedItem: {
-        id: -1,
-        title: '',
-        meeo: '',
-      },
-      defaultItem: {
-        id: -1,
-        title: '',
-        meeo: '',
-      },
+      editedItem: defaultItem,
     })
 
     // const {
@@ -172,7 +169,7 @@ export default defineComponent({
     const closeDelete = () =>{
       state.dialogDelete = false
       root.$nextTick(() => {
-        state.editedItem = Object.assign({}, state.defaultItem)
+        state.editedItem = Object.assign({}, defaultItem)
         state.editedIndex = -1
       })
     }
