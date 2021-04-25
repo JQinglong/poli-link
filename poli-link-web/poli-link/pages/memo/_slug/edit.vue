@@ -17,6 +17,9 @@ import MemoList from '~/components/memo/MemoList.vue';
 import MemoEditForm from '~/components/memo/MemoEditForm.vue';
 
 export default defineComponent({
+  head: {
+    title: "Memo Edit"
+  },
   setup() {
     const { app, params, query } = useContext()
     const { slug } = params.value

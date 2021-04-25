@@ -3,6 +3,16 @@ import { Configuration } from '@nuxt/types'
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
 import { Repositories } from "@/plugins/repository-factory";
 
+const { FIREBASE_PROJECT_ID,
+  FIREBASE_API_KEY,
+  FIREBASE_AUTH_DOMAIN,
+  FIREBASE_DATABASE_URL,
+  FIREBASE_STORAGE_BUCKET,
+  FIREBASE_MESSAGING_SENDER_ID,
+  FIREBASE_APP_ID,
+  FIREBASE_MEASUREMENT_ID
+  } = process.env
+
 const config: Configuration = {
 
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -55,7 +65,8 @@ const config: Configuration = {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/dotenv',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
