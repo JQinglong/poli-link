@@ -5,12 +5,12 @@
         <v-row align="center" justify="center">
           <v-col class="text-center" cols="12">
             <h1 class="text-h3 font-weight-black mb-4 text-left white--text">
-              VIEW Note
+              Poli Link
             </h1>
             <p
               class="base-body text-body-1 grey--text text--lighten-1 text-left mb-10"
             >
-              動画で学んで、ノートをとる。<br />
+              政策がどう決まっていくのか、記録を残す。<br />
             </p>
             <div>
               <v-btn depressed color="primary" to="/">サービスを利用する</v-btn>
@@ -24,17 +24,19 @@
             <v-card-title class="purple lighten-2">
               <v-icon dark size="42" class="mr-4"> mdi-magnify </v-icon>
               <h3 class="white--text font-weight-light">
-                目次で動画の全体像を把握
+                どんな会議体があるのか
               </h3>
             </v-card-title>
             <v-container>
               <v-row>
-                <v-col cols="12" md="10">
-                  目次を見ることで動画全体の概要が把握できます。<br />
-                  気になるところにジャンプしたり、繰り返し見たりが、簡単にできます。
-                </v-col>
                 <v-col class="hidden-sm-and-down text-right" md="2">
                   <v-icon size="64"> mdi-calendar-text </v-icon>
+                </v-col>
+                <v-col cols="12" md="10">
+                  政府は、政策決定そのた行政運営のための様々な会議体を開催しています。<br />
+                  審議会、懇談会、専門家会議、などなど、様々な会議体が存在します。<br />
+                  そして、これらは省庁ごとに組織されているため、網羅的にみることはできないと思います。<br />
+                  本サイトは、どんな会議体がどんな活動をしているのかを見やすく提示することを目的としています。
                 </v-col>
               </v-row>
             </v-container>
@@ -45,17 +47,19 @@
           <v-card>
             <v-card-title class="amber darken-1 justify-end">
               <h3 class="mr-4 white--text font-weight-light">
-                既存の動画に目次を付けられる
+                会議体にはどんな立場の人が参加しているのか
               </h3>
               <v-icon dark size="42"> mdi-home-outline </v-icon>
             </v-card-title>
             <v-container>
               <v-row>
-                <v-col cols="12" md="8">
-                  （登録者向け機能）動画の時間位置が自動表示されるので、目次作りが簡単にできます。
+                <v-col cols="12" md="10">
+                  多様な意見を収集するために、会議体には様々な立場の人が参加していると思います。<br />
+                  どの人が、どんな立場で参加し、意見を出しているのか、確認できるように参加者リストを提供します。<br />
+                  参加者の公開情報もリンクし、立場、背景を理解できるようにします。
                 </v-col>
-                <v-col cols="12" md="4">
-                  Lorem ipsum dolor sit amet, no nam oblique veritus.
+                <v-col class="hidden-sm-and-down text-right" md="2">
+                  <v-icon size="64"> mdi-calendar-text </v-icon>
                 </v-col>
               </v-row>
             </v-container>
@@ -66,12 +70,18 @@
           <v-card>
             <v-card-title class="cyan lighten-1">
               <v-icon class="mr-4" dark size="42"> mdi-email-outline </v-icon>
-              <h3 class="white--text font-weight-light">動画を見ながらノートをとる</h3>
+              <h3 class="white--text font-weight-light">
+                この人は、どの会議に参加しているのか
+              </h3>
             </v-card-title>
             <v-container>
               <v-row>
-                <v-col v-for="n in 3" :key="n" cols="12" md="4">
-                  時間位置と連動しているので、動画のどの部分についてのノートなのかが、後から見返しやすくなります。
+                <v-col class="hidden-sm-and-down text-right" md="2">
+                  <v-icon size="64"> mdi-calendar-text </v-icon>
+                </v-col>
+                <v-col cols="12" md="10">
+                  参加者の中には、複数の様々な会議体に参加している人もいます。<br />
+                  参加者と会議体のリンクを作ることで、人に着目した活動の追跡もできるようにします。
                 </v-col>
               </v-row>
             </v-container>
@@ -82,17 +92,18 @@
           <v-card>
             <v-card-title class="green lighten-1 justify-end">
               <h3 class="mr-4 white--text font-weight-light">
-                シリーズ講座を作れる！
+                議事録リンク
               </h3>
               <v-icon dark size="42"> mdi-account-multiple-outline </v-icon>
             </v-card-title>
             <v-container>
               <v-row>
+                <v-col cols="12" md="10">
+                  議事の発言ごとにパーマリンクを提供します。<br />
+                  発言に着目して、さらに議論を深めることができ、その議論から本来の発言の文脈に戻ってくることができるようになります。
+                </v-col>
                 <v-col class="hidden-sm-and-down" md="2">
                   <v-icon size="64"> mdi-server-network </v-icon>
-                </v-col>
-                <v-col cols="12" md="10">
-                  （登録者向け機能）一つのVIEWに複数動画を登録できますので、複数回の講座を一つのシリーズとしてまとめることができます。
                 </v-col>
               </v-row>
             </v-container>
@@ -103,13 +114,15 @@
           <v-card>
             <v-card-title class="indigo lighten-1">
               <v-icon class="mr-4" dark size="42"> mdi-phone-in-talk </v-icon>
-              <h3 class="white--text font-weight-light">みんなのノートも覗き見…</h3>
+              <h3 class="white--text font-weight-light">市民による行政活動への参加のために</h3>
             </v-card-title>
             <v-container>
               <v-row>
                 <v-col>
-                  公開されているノートを見ることができます。
-                  みんなのノートも時間位置と連動しているので、「この場面でみんなこんなこと考えているんだ」という共有ができます。
+                  結局のところこれは、市民による、行政の議論への参加のためのツールです。<br />
+                  会議体において、本当に多様な意見が反映されているのか、これを監視するところからでも行政活動への参加は始められます。
+                  さらに、会議体への議論について討論をすることで、参加者への働きかけもできるようになるでしょう。
+                  できることは色々あるはずです。
                 </v-col>
               </v-row>
             </v-container>
