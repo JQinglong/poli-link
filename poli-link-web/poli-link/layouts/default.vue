@@ -1,9 +1,10 @@
 <template>
-  <v-app dark>
+  <v-app>
     <v-navigation-drawer
       v-model="drawer"
       app
       clipped
+      dark
     >
       <v-list dense>
         <v-list-item
@@ -45,8 +46,9 @@
     <v-app-bar
       app
       clipped-left
-      color="indigo darken-2"
+      color="teal darken-2"
       dense
+      dark
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-btn
@@ -179,14 +181,19 @@ export default defineComponent({
       },
       {
         icon: 'mdi-apps',
+        title: '会議検索',
+        to: '/council'
+      },
+      {
+        icon: 'mdi-apps',
         title: 'todolist',
         to: '/todolist'
       },
       {
-        icon: 'mdi-chart-bubble',
-        title: 'Inspire',
-        to: '/inspire'
-      }
+        icon: 'mdi-bookmark',
+        title: '後で見る',
+        to: '/later'
+      },
     ])
     const adminitems = ref<Item[]>([
       {
