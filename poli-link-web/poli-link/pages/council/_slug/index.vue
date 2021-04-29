@@ -4,11 +4,9 @@
   >
     <v-card
       dark
-      flat
     >
 
-      <v-card-title class="pa-2 blue-grey darken-1
-">
+      <v-card-title class="pa-2 blue-grey darken-1">
         <h3 class="title grow">
           新型コロナウイルス感染症対策分科会
         </h3>

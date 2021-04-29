@@ -3,10 +3,10 @@
     :headers="headers"
     :items="members"
     class="elevation-1"
-    hide-default-header=true
-    hide-default-footer=true
+    hide-default-header
+    hide-default-footer
   >
-    <template v-slot:item.position="{ item }">
+    <template v-slot:[`item.position`]="{ item }">
       <v-chip
         v-if="item.position"
         dark
@@ -15,15 +15,45 @@
       </v-chip>
     </template>
 
-    <template v-slot:item.actions="{ item }">
+    <template v-slot:[`item.actions`]="{ item }">
       <v-icon color="grey lighten-1" @click="editItem(item)">mdi-information</v-icon>
+    </template>
+
+    <template v-slot:top>
+      
+        <v-dialog
+          v-model="dialog"
+          max-width="500px"
+        >
+          <v-card>
+            <v-card-title>
+              <span class="headline">尾身 茂</span>
+            </v-card-title>
+
+            <person-info />
+
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                @click="close"
+              >
+                閉じる
+              </v-btn>
+
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+
     </template>
 
   </v-data-table>
 </template>
 
 <script>
+  import PersonInfo from '../person/PersonInfo.vue'
   export default {
+  components: { PersonInfo },
     data: () => ({
       dialog: false,
       editedIndex: -1,
@@ -57,21 +87,20 @@
           position: '分科会長',
         },
       ],
-
-      methods: {
-        editItem (item) {
-          console.log('item', item)
-          this.editedIndex = this.members.indexOf(item)
-          this.dialog = true
-        },
-        close () {
-          this.dialog = false
-          this.$nextTick(() => {
-            this.editedIndex = -1
-          })
-        },
-
-      }
     }),
+    methods: {
+      editItem (item) {
+        console.log('item', item)
+        this.editedIndex = this.members.indexOf(item)
+        this.dialog = true
+      },
+      close () {
+        this.dialog = false
+        this.$nextTick(() => {
+          this.editedIndex = -1
+        })
+      },
+    }
+
   }
 </script>

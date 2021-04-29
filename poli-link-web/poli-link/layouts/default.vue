@@ -181,8 +181,13 @@ export default defineComponent({
       },
       {
         icon: 'mdi-apps',
-        title: '会議検索',
+        title: '会議体検索',
         to: '/council'
+      },
+      {
+        icon: 'mdi-apps',
+        title:'構成員検索',
+        to: '/person'
       },
       {
         icon: 'mdi-apps',

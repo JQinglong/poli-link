@@ -36,7 +36,7 @@
 <script>
   export default {
     data: () => ({
-      card: { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', flex: 12 }
+      card: { title: '新型コロナウイルス感染症対策分科会', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', flex: 12 }
     }),
   }
 </script>
