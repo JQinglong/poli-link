@@ -26,90 +26,18 @@
       <council-member-list />
 
       <v-card-title>開催状況</v-card-title>
+      <council-meeeting-list />
       
-      <v-timeline
-        align-top
-        dense
-      >
-        <v-timeline-item
-          color="teal lighten-3"
-          small
-        >
-          <v-row class="pt-1">
-            <v-col>
-              <strong>2020/7/6</strong>
-            </v-col>
-            <v-col>
-              <strong>第1回</strong>
-            </v-col>
-            <v-col>
-              <v-btn
-                class="ma-2"
-                outlined
-                color="indigo"
-              >
-                議事
-              </v-btn>
-            </v-col>
-          </v-row>
-        </v-timeline-item>
 
-        <v-timeline-item
-          color="teal lighten-3"
-          small
-        >
-          <v-row class="pt-1">
-            <v-col cols="3">
-              <strong>3-4pm</strong>
-            </v-col>
-            <v-col>
-              <strong>Design Stand Up</strong>
-              <div class="caption mb-2">
-                Hangouts
-              </div>
-            </v-col>
-          </v-row>
-        </v-timeline-item>
-
-        <v-timeline-item
-          color="pink"
-          small
-        >
-          <v-row class="pt-1">
-            <v-col cols="3">
-              <strong>12pm</strong>
-            </v-col>
-            <v-col>
-              <strong>Lunch break</strong>
-            </v-col>
-          </v-row>
-        </v-timeline-item>
-
-        <v-timeline-item
-          color="teal lighten-3"
-          small
-        >
-          <v-row class="pt-1">
-            <v-col cols="3">
-              <strong>9-11am</strong>
-            </v-col>
-            <v-col>
-              <strong>Finish Home Screen</strong>
-              <div class="caption">
-                Web App
-              </div>
-            </v-col>
-          </v-row>
-        </v-timeline-item>
-      </v-timeline>
     </v-card-text>
   </v-card>
 </template>
 
 <script>
+import CouncilMeeetingList from '~/components/council/CouncilMeeetingList.vue'
 import CouncilMemberList from '~/components/council/CouncilMemberList.vue'
   export default {
-  components: { CouncilMemberList },
+  components: { CouncilMemberList, CouncilMeeetingList },
     data: () => ({
 
     }),

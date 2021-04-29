@@ -22,6 +22,10 @@
       参画している会議体
     </v-card-title>
     <person-counscil-list />
+    <v-card-title>
+      発言集
+    </v-card-title>
+    <person-speech-list />
   </v-card>
 </div>
 </template>
@@ -29,8 +33,9 @@
 <script>
 import PersonCareerList from './PersonCareerList.vue'
 import PersonCounscilList from './PersonCounscilList.vue'
+import PersonSpeechList from './PersonSpeechList.vue'
 export default {
-  components: { PersonCareerList },
+  components: { PersonCareerList, PersonSpeechList },
 
 }
 </script>

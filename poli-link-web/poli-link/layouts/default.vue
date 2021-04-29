@@ -180,12 +180,12 @@ export default defineComponent({
         to: '/memo'
       },
       {
-        icon: 'mdi-apps',
+        icon: 'mdi-forum',
         title: '会議体検索',
         to: '/council'
       },
       {
-        icon: 'mdi-apps',
+        icon: 'mdi-tooltip-account',
         title:'構成員検索',
         to: '/person'
       },

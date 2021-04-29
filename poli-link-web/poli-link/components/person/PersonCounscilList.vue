@@ -12,7 +12,7 @@
         <v-icon
           @click="$router.push(`/council/${item.id}/`)"
         >
-          mdi-information
+          mdi-forum
         </v-icon>
       </template>
     </v-data-table>

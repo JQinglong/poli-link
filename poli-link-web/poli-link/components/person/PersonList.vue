@@ -15,7 +15,7 @@
       <v-icon
         @click="$router.push(`/person/${item.id}/`)"
       >
-        mdi-information
+        mdi-tooltip-account
       </v-icon>
     </template>
 

@@ -12,6 +12,7 @@
       <template v-slot:top>
         <v-toolbar
           dark
+          dense
           color="blue-grey darken-4"
         >
           今話題の会議体
@@ -21,6 +22,7 @@
             v-model="search"
             clearable
             flat
+            dense
             solo-inverted
             hide-details
             prepend-inner-icon="mdi-magnify"
@@ -31,6 +33,7 @@
             <v-select
               v-model="sortBy"
               flat
+              dense
               solo-inverted
               hide-details
               :items="keys"
@@ -44,6 +47,7 @@
             >
               <v-btn
                 depressed
+                small
                 color="teal"
                 :value="false"
               >
@@ -51,6 +55,7 @@
               </v-btn>
               <v-btn
                 depressed
+                small
                 color="teal"
                 :value="true"
               >

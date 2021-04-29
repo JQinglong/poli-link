@@ -1,10 +1,11 @@
 <template>
 <div>
-  <v-card>
+  <v-card dense>
     <v-text-field
       v-model="search"
       clearable
       flat
+      dense
       solo-inverted
       hide-details
       prepend-inner-icon="mdi-magnify"
@@ -29,6 +30,8 @@
     >
       <template v-slot:top>
         <v-toolbar
+        dense
+        flat
         >
           <v-spacer></v-spacer>
 
@@ -36,6 +39,7 @@
             v-model="search"
             clearable
             flat
+            dense
             solo-inverted
             hide-details
             prepend-inner-icon="mdi-magnify"
@@ -46,6 +50,7 @@
             <v-select
               v-model="sortBy"
               flat
+              dense
               solo-inverted
               hide-details
               :items="keys"
@@ -56,9 +61,11 @@
             <v-btn-toggle
               v-model="sortDesc"
               mandatory
+              small
             >
               <v-btn
                 depressed
+                small
                 color="teal"
                 :value="false"
               >
@@ -66,6 +73,7 @@
               </v-btn>
               <v-btn
                 depressed
+                small
                 color="teal"
                 :value="true"
               >

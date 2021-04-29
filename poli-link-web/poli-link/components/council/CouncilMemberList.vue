@@ -28,10 +28,15 @@
           <v-card>
             <v-card-title>
               <span class="headline">尾身 茂</span>
+              <v-spacer></v-spacer>
+              <v-icon
+                @click="$router.push(`/person/3/`)"
+              >
+                mdi-tooltip-account
+              </v-icon>
             </v-card-title>
 
             <person-info />
-
 
             <v-card-actions>
               <v-spacer></v-spacer>

@@ -5,6 +5,7 @@
         <h3 class="title grow">構成員検索</h3>
       </v-card-title>
     </v-card>
+    <!-- 構成員リスト -->
     <person-list />
   </div>
 </template>
@@ -15,14 +16,6 @@ import {
   defineComponent,
 } from '@nuxtjs/composition-api'
 import PersonList from '~/components/person/PersonList.vue'
-
-type Item = {
-  id: string
-  name: string
-  name_e: string
-  abbreviation: string
-  url: string
-}
 
 export default defineComponent({
   components: { PersonList },
