@@ -6,3 +6,4 @@ export const ErrorType = {
 }
 
 export const LIMIT_LIST_ITEM = 20
+export const LIMIT_LIST_ITEM_LARGE = 60

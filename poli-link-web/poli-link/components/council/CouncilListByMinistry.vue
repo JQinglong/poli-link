@@ -17,9 +17,8 @@
       show-arrows
     >
       <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
-
-      <v-tab v-for="ministriy in ministries" :key="ministriy.name">
-        {{ ministriy.name }}
+      <v-tab v-for="ministry in ministryList" :key="ministry.name">
+        {{ ministry.name }}
       </v-tab>
     </v-tabs>
     <v-data-table
@@ -84,7 +83,7 @@
         </v-toolbar>
       
       </template>
-      <template v-slot:item="{ item }">
+      <template v-slot:item>
           <council-list-item />
         
       </template>
@@ -96,17 +95,13 @@
 <script lang="ts">
 import {
   ref,
+  toRefs,
+  useFetch,
   defineComponent,
 } from '@nuxtjs/composition-api'
 import CouncilListItem from '~/components/council/CouncilListItem.vue';
+import { useMinistry } from "@/compositions";
 
-type MinistryItem = {
-  id: string
-  name: string
-  name_e: string
-  abbreviation: string
-  url: string
-}
 
 type CounsilItem = {
   id: string
@@ -116,10 +111,22 @@ type CounsilItem = {
   action: string
 }
 export default defineComponent({
+  name: 'CouncilListByMinistry',
   setup() {
     const search = ref<String>('')
-
     const selected = ref<Number[]>([2])
+
+    const {
+      state: ministryState,
+      getMinistryList,
+    } = useMinistry()
+
+    const fetchData = async (offset = 0) => {
+      await getMinistryList({ offset })
+      // console.log('ministryState', ministryState)
+    }
+
+    const { fetchState } = useFetch(() => fetchData())
 
     const councils = ref<CounsilItem[]>([
       {
@@ -145,36 +152,12 @@ export default defineComponent({
       }
     ])
 
-    const ministries = ref<MinistryItem[]>([
-      {
-        id: '1',
-        name: '内閣府',
-        name_e: 'Cabinet Office',
-        abbreviation: 'CAO',
-        url: 'https://www.cao.go.jp/'
-      },
-      {
-        id: '2',
-        name: '復興庁',
-        name_e: 'Cabinet Office',
-        abbreviation: 'CAO',
-        url: 'https://www.cao.go.jp/'
-      },
-      {
-        id: '3',
-        name: '総務省',
-        name_e: 'Cabinet Office',
-        abbreviation: 'CAO',
-        url: 'https://www.cao.go.jp/'
-      },
-
-    ])
-
     return {
       search,
       selected,
       councils,
-      ministries
+      ...toRefs(ministryState),
+      fetchState,
     }
   }
 })
