@@ -10,3 +10,4 @@ urlpatterns = [
 router = routers.DefaultRouter()
 router.register(r'memo', views.MemoViewSet)
 router.register(r'ministry', views.MinistryViewSet)
+router.register(r'council', views.CouncilViewSet)
