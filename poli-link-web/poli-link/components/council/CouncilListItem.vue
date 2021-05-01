@@ -7,7 +7,6 @@
       <v-card-actions>
         <v-btn class="ml-2 mt-5" outlined rounded small @click="$router.push(`/council/${council.id}/`)"> 詳細を見る </v-btn>
         <v-spacer></v-spacer>
-
         <v-btn icon>
           <v-icon>mdi-bookmark</v-icon>
         </v-btn>

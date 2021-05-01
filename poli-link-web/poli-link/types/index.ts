@@ -34,3 +34,16 @@ export interface MinistryType {
   abbreviation: string
   url: string
 }
+
+export interface PersonType {
+  id: string
+  name: string
+  name_kana: string
+  name_e: string
+  url_official: string
+  url_wikipedia: string
+  url_twitter: string
+  url_facebook: string
+  url_youtube: string
+  career_summary: string
+}

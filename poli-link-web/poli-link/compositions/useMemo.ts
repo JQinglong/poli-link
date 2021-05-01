@@ -42,7 +42,7 @@ export default function useMemo() {
     console.log('memoid', memoid)
     console.log('getMemo', memoData)
 
-    state.memoData = memoData //型が合っていないと言われてしまうがこれで返る
+    state.memoData = memoData
   }
 
   const getMemoList = async(payload: MemoListRequest = {}) => {

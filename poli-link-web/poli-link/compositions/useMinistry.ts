@@ -47,7 +47,7 @@ export default function useMinistry() {
     console.log('ministryid', ministryid)
     console.log('getMinistry', ministryData)
 
-    state.ministryData = ministryData //型が合っていないと言われてしまうがこれで返る
+    state.ministryData = ministryData
   }
 
   const getMinistryList = async(payload: ListRequestType = {}) => {

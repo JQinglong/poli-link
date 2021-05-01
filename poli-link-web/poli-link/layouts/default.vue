@@ -190,11 +190,6 @@ export default defineComponent({
         to: '/person'
       },
       {
-        icon: 'mdi-apps',
-        title: 'todolist',
-        to: '/todolist'
-      },
-      {
         icon: 'mdi-bookmark',
         title: '後で見る',
         to: '/later'
@@ -204,7 +199,7 @@ export default defineComponent({
       {
         icon: 'mdi-help',
         title: 'help',
-        to: '/help'
+        to: '/lp'
       },
       // {
       //   icon: 'mdi-cogs',

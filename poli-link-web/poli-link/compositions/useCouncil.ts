@@ -47,7 +47,7 @@ export default function useCouncil() {
     console.log('councilid', councilid)
     console.log('getCouncil', councilData)
 
-    state.councilData = councilData //型が合っていないと言われてしまうがこれで返る
+    state.councilData = councilData
   }
 
   const getCouncilList = async(payload: ListRequestType = {}) => {

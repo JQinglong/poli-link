@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import Memo
 from .models import Ministry
 from .models import Council
+from .models import Person
 
 class MemoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,4 +17,9 @@ class MinistrySerializer(serializers.ModelSerializer):
 class CouncilSerializer(serializers.ModelSerializer):
     class Meta:
         model = Council
+        fields = '__all__'
+
+class PersonSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Person
         fields = '__all__'
