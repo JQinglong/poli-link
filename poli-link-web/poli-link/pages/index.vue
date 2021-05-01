@@ -67,7 +67,7 @@
       
       </template>
       <template v-slot:item="{ item }">
-          <council-list-item />
+          <council-list-item :council="item" />
         
       </template>
     </v-data-table>

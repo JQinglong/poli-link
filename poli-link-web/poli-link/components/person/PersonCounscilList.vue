@@ -21,6 +21,8 @@
 </template>
 
 <script lang="ts">
+// 参画会議体リスト
+import { PropType } from 'vue'
 import {
   ref,
   defineComponent,
@@ -28,7 +30,14 @@ import {
 import { CouncilType } from '~/types'
 
 export default defineComponent({
-  setup() {
+  name: 'PersonCounscilList',
+  props: {
+    personId: {
+      type: String,
+      required: true,
+    },
+  },
+  setup(props, { root }) {
     const headers = [
       {text: '名称', value: 'name'},
       {text: '', value: 'actions', sortable: false},

@@ -21,8 +21,23 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+// 個人キャリアリスト
+import { PropType } from 'vue'
+import { ref, toRefs, useFetch, defineComponent } from '@nuxtjs/composition-api';
 
-}
+export default defineComponent({
+  name: 'PersonCareerList',
+  props: {
+    personId: {
+      type: String,
+      required: true,
+    },
+  },
+  setup(props, { root }) {
+    console.log('personId', props.personId)
+    return {
+    };
+  },
+});
 </script>

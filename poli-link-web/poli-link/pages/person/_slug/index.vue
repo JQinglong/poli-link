@@ -1,22 +1,26 @@
 <template>
-  <v-card class="mx-auto">
-    <v-card dark flat>
-      <v-card-title class="pa-2 blue-grey darken-1">
-        <h3 class="title grow">尾身 茂</h3>
-        <v-btn icon>
-          <v-icon>mdi-share-variant</v-icon>
-        </v-btn>
-      </v-card-title>
-    </v-card>
-
-    <person-info />
-  </v-card>
+  <div>
+    <person-info :personId="slug" />
+  </div>
 </template>
 
-<script>
+<script lang="ts">
+import {
+  defineComponent,
+  useContext,
+} from '@nuxtjs/composition-api'
+
 import PersonInfo from '~/components/person/PersonInfo.vue';
-export default {
+
+export default defineComponent({
   components: { PersonInfo },
-  data: () => ({}),
-};
+  setup() {
+    const { app, params, query } = useContext()
+    const { slug } = params.value
+
+    return {
+      slug,
+    }
+  },
+})
 </script>
