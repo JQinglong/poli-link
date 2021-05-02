@@ -23,7 +23,7 @@
     </v-card>
     <v-card-text class="py-0">
       <v-card-title>構成員</v-card-title>
-      <council-member-list />
+      <council-member-list :councilId="slug" />
 
       <v-card-title>開催状況</v-card-title>
       <council-meeeting-list />
@@ -33,13 +33,24 @@
   </v-card>
 </template>
 
-<script>
+<script lang="ts">
+import {
+  defineComponent,
+  useContext,
+} from '@nuxtjs/composition-api'
+
 import CouncilMeeetingList from '~/components/council/CouncilMeeetingList.vue'
 import CouncilMemberList from '~/components/council/CouncilMemberList.vue'
-  export default {
-  components: { CouncilMemberList, CouncilMeeetingList },
-    data: () => ({
 
-    }),
-  }
+export default defineComponent({
+  components: { CouncilMemberList, CouncilMeeetingList },
+  setup() {
+    const { app, params, query } = useContext()
+    const { slug } = params.value
+
+    return {
+      slug,
+    }
+  },
+})
 </script>

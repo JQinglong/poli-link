@@ -4,13 +4,15 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework import viewsets, filters
 from .models import Memo
-from .models import Ministry
-from .models import Council
-from .models import Person
 from .serializer import MemoSerializer
+from .models import Ministry
 from .serializer import MinistrySerializer
+from .models import Council
 from .serializer import CouncilSerializer
+from .models import Person
 from .serializer import PersonSerializer
+from .models import CouncilMember
+from .serializer import CouncilMemberSerializer
 
 def index(request):
     return HttpResponse("Hello, world.")
@@ -30,3 +32,7 @@ class CouncilViewSet(viewsets.ModelViewSet):
 class PersonViewSet(viewsets.ModelViewSet):
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
+
+class CouncilMemberViewSet(viewsets.ModelViewSet):
+    queryset = CouncilMember.objects.all()
+    serializer_class = CouncilMemberSerializer

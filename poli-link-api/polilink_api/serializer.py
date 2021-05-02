@@ -3,6 +3,7 @@ from .models import Memo
 from .models import Ministry
 from .models import Council
 from .models import Person
+from .models import CouncilMember
 
 class MemoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -22,4 +23,9 @@ class CouncilSerializer(serializers.ModelSerializer):
 class PersonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Person
+        fields = '__all__'
+
+class CouncilMemberSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CouncilMember
         fields = '__all__'

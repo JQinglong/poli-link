@@ -47,3 +47,12 @@ export interface PersonType {
   url_youtube: string
   career_summary: string
 }
+
+export interface CouncilMemberType {
+  id: string
+  name: string
+  occupation: string
+  position: string
+  council: string
+  person: string
+}
