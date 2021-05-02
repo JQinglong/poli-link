@@ -87,11 +87,12 @@ export default defineComponent({
     //   })
     // }
 
-    const fetchData = async (offset = 0) => {
-      await getCouncilMemberList({ offset });
+    const fetchData = async (offset = 0, council = '') => {
+      console.log('council', council)
+      await getCouncilMemberList({ offset: offset, council: council  });
     };
 
-    const { fetchState } = useFetch(() => fetchData());
+    const { fetchState } = useFetch(() => fetchData(0, props.councilId));
     return {
       ...toRefs(state),
       ...toRefs(councilMemberState),

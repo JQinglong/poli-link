@@ -16,6 +16,11 @@ type CouncilMemberId = CouncilMemberType['id']
 //   limit?: number
 //   offset?: number
 // }
+export interface CouncilMemberListRequest  {
+  limit?: number
+  offset?: number
+  council?: string
+}
 
 // Pick 第1引数から第2引数以降で指定したkey値とその値で構成されたObjectを返す。
 // 逆にId以外だよね
@@ -41,12 +46,13 @@ export const councilMemberRepository = (axios: NuxtAxiosInstance) => ({
   getCouncilMemberList({
     limit = LIMIT_LIST_ITEM,
     offset = 0,
-  }: ListRequestType = {}): CouncilMemberListResponse {
+    council=''
+  }: CouncilMemberListRequest = {}): CouncilMemberListResponse {
     const defaultParam = {
     }
 
     return axios.$get('/council_member/', {
-      params: {...defaultParam, limit, offset},
+      params: {...defaultParam, limit, offset, council},
     })
   },
   createCouncilMember(payload: CreateCouncilMemberRequest): CouncilMemberResponse | CustomErrors {
