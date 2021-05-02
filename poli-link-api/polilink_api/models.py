@@ -46,3 +46,13 @@ class CouncilMember(models.Model):
     person = models.ForeignKey(Person, on_delete=models.SET_NULL, blank=True, null=True)
     def __str__(self):
         return self.name
+
+class CouncilMeeting(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    council = models.ForeignKey(Council, on_delete=models.PROTECT)
+    name = models.CharField(max_length=64)
+    place = models.CharField(max_length=256, blank=True, null=True)
+    order = models.IntegerField()
+    meeting_date = models.DateField(blank=True, null=True)
+    def __str__(self):
+        return self.name

@@ -26,7 +26,7 @@
       <council-member-list :councilId="slug" />
 
       <v-card-title>開催状況</v-card-title>
-      <council-meeeting-list />
+      <council-meeting-list :councilId="slug" />
       
 
     </v-card-text>
@@ -39,11 +39,11 @@ import {
   useContext,
 } from '@nuxtjs/composition-api'
 
-import CouncilMeeetingList from '~/components/council/CouncilMeeetingList.vue'
+import CouncilMeetingList from '~/components/council/CouncilMeetingList.vue'
 import CouncilMemberList from '~/components/council/CouncilMemberList.vue'
 
 export default defineComponent({
-  components: { CouncilMemberList, CouncilMeeetingList },
+  components: { CouncilMemberList, CouncilMeetingList },
   setup() {
     const { app, params, query } = useContext()
     const { slug } = params.value

@@ -10,6 +10,8 @@ import {
   PersonRepository,
   councilMemberRepository,
   CouncilMemberRepository,
+  councilMeetingRepository,
+  CouncilMeetingRepository,
 } from '@/api'
 import { ErrorType } from '@/constants'
 
@@ -19,6 +21,7 @@ export type Repository = {
   council: CouncilRepository
   person: PersonRepository
   councilMember: CouncilMemberRepository
+  councilMeeting: CouncilMeetingRepository
 }
 
 /**
@@ -62,6 +65,7 @@ const createRepository = ({ app, $axios, redirect }: Context): Repository => {
     council: councilRepository($axios),
     person: personRepository($axios),
     councilMember: councilMemberRepository($axios),
+    councilMeeting: councilMeetingRepository($axios),
   }
 }
 

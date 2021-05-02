@@ -56,3 +56,12 @@ export interface CouncilMemberType {
   council: string
   person: string
 }
+
+export interface CouncilMeetingType {
+  id: string
+  name: string
+  place: string
+  order: number
+  meeting_date: Date
+  council: string
+}
