@@ -1,9 +1,9 @@
 <template>
   <v-card class="mx-auto">
     <v-card dark>
-      {{ councilData }}
+      {{ councilMeetingData }}
       <v-card-title class="pa-2 blue-grey darken-1">
-        <h3 class="title grow">新型コロナウイルス感染症対策分科会　第1回会議</h3>
+        <h3 class="title grow">{{ councilMeetingData.name }}</h3>
         <v-btn icon>
           <v-icon>mdi-web</v-icon>
         </v-btn>
@@ -13,8 +13,8 @@
       </v-card-title>
     </v-card>
     <v-card-text class="py-0">
-      <v-card-title>日時</v-card-title>
-      <v-card-title>場所</v-card-title>
+      <v-card-title>日時</v-card-title>{{ councilMeetingData.meeting_date }}
+      <v-card-title>場所</v-card-title>{{ councilMeetingData.place }}
       <v-card-title>出席者</v-card-title>
       <council-member-list />
 
@@ -28,7 +28,7 @@
 <script lang="ts">
 // 議事情報表示
 import { ref, toRefs, useFetch, defineComponent, reactive } from '@nuxtjs/composition-api';
-import { useCouncil } from '@/compositions';
+import { useCouncil, useCouncilMeeting } from '@/compositions';
 import { CouncilType } from "@/types";
 
 import CouncilMemberList from '~/components/council/CouncilMemberList.vue';
@@ -43,9 +43,13 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    councilMeetingId: {
+      type: String,
+      required: true,
+    },
   },
   setup(props, { root }) {
-    const { state: councilState, getCouncil } = useCouncil();
+    const { state: councilMeetingState, getCouncilMeeting } = useCouncilMeeting();
 
     // const state = reactive({
     //   people: [] as any[]
@@ -57,15 +61,14 @@ export default defineComponent({
       }
     }
 
-
     const fetchData = async () => {
-      await getCouncil(props.councilId)
+      await getCouncilMeeting(props.councilMeetingId)
     }
     const { fetchState } = useFetch(() => fetchData());
 
     return {
       externalLink,
-      ...toRefs(councilState),
+      ...toRefs(councilMeetingState),
     };
   },
 });

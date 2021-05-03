@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts">
-// 会議情報表示
+// 会議体情報表示
 import { ref, toRefs, useFetch, defineComponent, reactive } from '@nuxtjs/composition-api';
 import { useCouncil } from '@/compositions';
 import { CouncilType } from '@/types';

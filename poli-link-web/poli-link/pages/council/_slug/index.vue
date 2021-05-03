@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 会議体情報 -->
     <council-info :councilId="slug" />
   </div>
 </template>
