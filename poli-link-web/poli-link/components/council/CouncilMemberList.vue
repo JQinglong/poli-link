@@ -51,6 +51,7 @@ export default defineComponent({
     },
   },
   setup(props, { root }) {
+    console.log('props', props)
     console.log('props.councilId', props.councilId)
     const headers = [
       { text: 'name', value: 'name' },

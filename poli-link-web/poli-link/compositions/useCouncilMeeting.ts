@@ -13,7 +13,7 @@ type State = {
 const initCreateState = {
   name: '',
   place: '',
-  order: '',
+  order: 0,
   meeting_date: new Date(),
   council: '',
 }
@@ -22,7 +22,7 @@ const initState = {
     id: '',
     name: '',
     place: '',
-    order: '',
+    order: 0,
     meeting_date: new Date(),
     council: '',
       },

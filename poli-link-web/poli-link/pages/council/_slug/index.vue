@@ -1,56 +1,24 @@
 <template>
-  <v-card
-    class="mx-auto"
-  >
-    <v-card
-      dark
-    >
-
-      <v-card-title class="pa-2 blue-grey darken-1">
-        <h3 class="title grow">
-          新型コロナウイルス感染症対策分科会
-        </h3>
-      <v-btn icon>
-        <v-icon>mdi-web</v-icon>
-      </v-btn>
-      <v-btn icon>
-        <v-icon>mdi-bookmark</v-icon>
-      </v-btn>
-      <v-btn icon>
-        <v-icon>mdi-share-variant</v-icon>
-      </v-btn>
-      </v-card-title>
-    </v-card>
-    <v-card-text class="py-0">
-      <v-card-title>構成員</v-card-title>
-      <council-member-list :councilId="slug" />
-
-      <v-card-title>開催状況</v-card-title>
-      <council-meeting-list :councilId="slug" />
-      
-
-    </v-card-text>
-  </v-card>
+  <div>
+    <council-info :councilId="slug" />
+  </div>
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  useContext,
-} from '@nuxtjs/composition-api'
+import { defineComponent, useContext } from '@nuxtjs/composition-api';
 
-import CouncilMeetingList from '~/components/council/CouncilMeetingList.vue'
-import CouncilMemberList from '~/components/council/CouncilMemberList.vue'
+import CouncilInfo from '~/components/council/CouncilInfo.vue';
 
 export default defineComponent({
-  components: { CouncilMemberList, CouncilMeetingList },
+  components: { CouncilInfo },
   setup() {
-    const { app, params, query } = useContext()
+    const { app, params, query, route } = useContext()
+    console.log('params.value', params.value)
     const { slug } = params.value
 
     return {
       slug,
-    }
+    };
   },
-})
+});
 </script>
