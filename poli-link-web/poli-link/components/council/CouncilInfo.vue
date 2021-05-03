@@ -4,7 +4,7 @@
       <v-card-title class="pa-2 blue-grey darken-1">
         <h3 class="title grow">{{ councilData.name }}</h3>
         <v-chip v-if="councilData.ministry">
-          {{ councilData.ministry }}
+          {{ councilData.ministry.name }}
         </v-chip>
         <v-btn icon>
           <v-icon @click="externalLink(councilData.url)">mdi-web</v-icon>

@@ -18,6 +18,7 @@ class MinistrySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class CouncilSerializer(serializers.ModelSerializer):
+    ministry = MinistrySerializer()
     class Meta:
         model = Council
         fields = '__all__'
