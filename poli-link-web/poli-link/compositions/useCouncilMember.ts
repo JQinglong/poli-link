@@ -55,7 +55,7 @@ export default function useCouncilMember() {
   const getCouncilMemberList = async(payload: CouncilMemberListRequest = {}) => {
     const councilMembers= await $repository.councilMember.getCouncilMemberList(payload)
 
-    console.log('councilMembers', councilMembers)
+    // console.log('councilMembers', councilMembers)
     
     state.councilMemberList = councilMembers
     state.councilMemberCount = councilMembers.length

@@ -23,7 +23,7 @@
       <council-member-list :councilId="councilId" />
 
       <v-card-title>開催状況</v-card-title>
-      <council-meeting-list :councilId="councilId" />
+      <council-meeting-list :councilId="councilId " />
     </v-card-text>
   </v-card>
 </template>
@@ -61,7 +61,6 @@ export default defineComponent({
     const { fetchState } = useFetch(() => fetchData());
 
     return {
-      councilId: props.councilId,
       externalLink,
       ...toRefs(councilState),
     };

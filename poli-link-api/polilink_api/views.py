@@ -15,6 +15,8 @@ from .models import CouncilMember
 from .serializer import CouncilMemberSerializer
 from .models import CouncilMeeting
 from .serializer import CouncilMeetingSerializer
+from .models import MeetingSpeech
+from .serializer import MeetingSpeechSerializer
 
 def index(request):
     return HttpResponse("Hello, world.")
@@ -44,3 +46,8 @@ class CouncilMeetingViewSet(viewsets.ModelViewSet):
     queryset = CouncilMeeting.objects.all()
     serializer_class = CouncilMeetingSerializer
     filter_fields = ('council', )
+
+class MeetingSpeechViewSet(viewsets.ModelViewSet):
+    queryset = MeetingSpeech.objects.all()
+    serializer_class = MeetingSpeechSerializer
+    filter_fields = ('council', 'council_meeting', 'person')

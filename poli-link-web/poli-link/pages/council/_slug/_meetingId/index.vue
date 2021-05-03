@@ -16,7 +16,7 @@ export default defineComponent({
     const {  params } = useContext();
     const { meetingId, slug } = params.value;
     // console.log('slug', slug) // slug がcouncilId
-    console.log('params.value', params.value)
+    // console.log('params.value', params.value)
 
     return {
       councilId: slug,

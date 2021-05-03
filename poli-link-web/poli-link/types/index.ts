@@ -65,3 +65,14 @@ export interface CouncilMeetingType {
   meeting_date: Date
   council: string
 }
+
+export interface MeetingSpeechType {
+  id: string
+  council: string
+  council_meeting: string
+  order: number
+  speaker: string
+  person: string
+  speech: string
+  description: string
+}

@@ -1,7 +1,6 @@
 <template>
   <v-card class="mx-auto">
     <v-card dark>
-      {{ councilMeetingData }}
       <v-card-title class="pa-2 blue-grey darken-1">
         <h3 class="title grow">{{ councilMeetingData.name }}</h3>
         <v-btn icon>
@@ -16,11 +15,11 @@
       <v-card-title>日時</v-card-title>{{ councilMeetingData.meeting_date }}
       <v-card-title>場所</v-card-title>{{ councilMeetingData.place }}
       <v-card-title>出席者</v-card-title>
-      <council-member-list />
+      <council-member-list :councilId="councilId" />
 
       <v-card-title>議事</v-card-title>
-
-      <minute-list />
+      <meeting-speeche-list :councilId="councilId" :councilMeetingId="councilMeetingId" />
+      
     </v-card-text>
   </v-card>
 </template>
@@ -32,12 +31,12 @@ import { useCouncil, useCouncilMeeting } from '@/compositions';
 import { CouncilType } from "@/types";
 
 import CouncilMemberList from '~/components/council/CouncilMemberList.vue';
-import MinuteList from '~/components/council/MinuteList.vue';
+import MeetingSpeecheList from '~/components/council/MeetingSpeecheList.vue';
 
 
 export default defineComponent({
   name: 'MeetingInfo',
-  components: { CouncilMemberList, MinuteList },
+  components: { CouncilMemberList, MeetingSpeecheList },
   props: {
     councilId: {
       type: String,

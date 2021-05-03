@@ -14,7 +14,7 @@ export default defineComponent({
   components: { CouncilInfo },
   setup() {
     const { app, params, query, route } = useContext()
-    console.log('params.value', params.value)
+    // console.log('params.value', params.value)
     const { slug } = params.value
 
     return {

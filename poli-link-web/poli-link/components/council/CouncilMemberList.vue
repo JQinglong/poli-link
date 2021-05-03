@@ -51,8 +51,8 @@ export default defineComponent({
     },
   },
   setup(props, { root }) {
-    console.log('props', props)
-    console.log('props.councilId', props.councilId)
+    // console.log('props', props)
+    // console.log('props.councilId', props.councilId)
     const headers = [
       { text: 'name', value: 'name' },
       { text: 'position', value: 'position' },
@@ -69,10 +69,6 @@ export default defineComponent({
         council: '',
         person: '',
       }
-    const state = reactive({
-      dialog: false,
-      editedItem: defaultItem,
-    })
     // 順次クリックに対応できていないので一旦保留
     // const dispItem = (item: CouncilMemberType) =>{
     //   console.log(item)
@@ -89,13 +85,12 @@ export default defineComponent({
     // }
 
     const fetchData = async (offset = 0, council = '') => {
-      console.log('council', council)
+      // console.log('council', council)
       await getCouncilMemberList({ offset: offset, council: council  });
     };
 
     const { fetchState } = useFetch(() => fetchData(0, props.councilId));
     return {
-      ...toRefs(state),
       ...toRefs(councilMemberState),
       headers,
       // dispItem,

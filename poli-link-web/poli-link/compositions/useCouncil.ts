@@ -44,8 +44,8 @@ export default function useCouncil() {
   // })
   const getCouncil = async (councilid: CouncilType['id']) => {
     const councilData = await $repository.council.getCouncil(councilid)
-    console.log('councilid', councilid)
-    console.log('getCouncil', councilData)
+    // console.log('councilid', councilid)
+    // console.log('getCouncil', councilData)
 
     state.councilData = councilData
   }

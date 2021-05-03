@@ -5,6 +5,7 @@ from .models import Council
 from .models import Person
 from .models import CouncilMember
 from .models import CouncilMeeting
+from .models import MeetingSpeech
 
 @admin.register(Memo)
 class MemoAdmin(admin.ModelAdmin):
@@ -28,4 +29,8 @@ class CouncilMemberAdmin(admin.ModelAdmin):
 
 @admin.register(CouncilMeeting)
 class CouncilMeetingAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(MeetingSpeech)
+class MeetingSpeechAdmin(admin.ModelAdmin):
     pass

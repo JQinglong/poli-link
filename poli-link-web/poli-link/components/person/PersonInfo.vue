@@ -9,7 +9,6 @@
     </v-card-title>
   </v-card>
   <v-card>
-    {{personData}}
       <v-btn icon>
         <v-icon @click="externalLink(personData.url_official)">mdi-web</v-icon>
       </v-btn>

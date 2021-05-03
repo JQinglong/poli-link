@@ -5,6 +5,7 @@ from .models import Council
 from .models import Person
 from .models import CouncilMember
 from .models import CouncilMeeting
+from .models import MeetingSpeech
 
 class MemoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -34,4 +35,9 @@ class CouncilMemberSerializer(serializers.ModelSerializer):
 class CouncilMeetingSerializer(serializers.ModelSerializer):
     class Meta:
         model = CouncilMeeting
+        fields = '__all__'
+
+class MeetingSpeechSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MeetingSpeech
         fields = '__all__'

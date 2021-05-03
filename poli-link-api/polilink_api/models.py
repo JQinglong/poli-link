@@ -56,3 +56,15 @@ class CouncilMeeting(models.Model):
     meeting_date = models.DateField(blank=True, null=True)
     def __str__(self):
         return self.name
+
+class MeetingSpeech(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    council = models.ForeignKey(Council, on_delete=models.PROTECT)
+    council_meeting = models.ForeignKey(CouncilMeeting, on_delete=models.PROTECT)
+    order = models.IntegerField()
+    speaker = models.CharField(max_length=64)
+    person = models.ForeignKey(Person, on_delete=models.SET_NULL, blank=True, null=True)
+    speech = models.TextField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    def __str__(self):
+        return f'{self.council} {self.council_meeting} {self.order} {self.speaker}'

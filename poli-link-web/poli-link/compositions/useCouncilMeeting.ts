@@ -25,12 +25,12 @@ const initState = {
     order: 0,
     meeting_date: new Date(),
     council: '',
-      },
+  },
   councilMeetingList: [],
   councilMeetingCount: 0,
 }
 
-export default function useCouncilMeeting() {
+export default function useCouncilMeeting () {
   const { $repository } = useContext()
 
   const createState = reactive<CreateState>(initCreateState)
@@ -52,11 +52,12 @@ export default function useCouncilMeeting() {
     state.councilMeetingData = councilMeetingData
   }
 
-  const getCouncilMeetingList = async(payload: CouncilMeetingListRequest = {}) => {
-    const councilMeetings= await $repository.councilMeeting.getCouncilMeetingList(payload)
+  const getCouncilMeetingList = async (payload: CouncilMeetingListRequest = {}) => {
+    // console.log('getCouncilMeetingList', payload)
+    const councilMeetings = await $repository.councilMeeting.getCouncilMeetingList(payload)
 
-    console.log('councilMeetings', councilMeetings)
-    
+    // console.log('councilMeetings', councilMeetings)
+
     state.councilMeetingList = councilMeetings
     state.councilMeetingCount = councilMeetings.length
   }

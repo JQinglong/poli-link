@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-// 会議一覧
+// 議事一覧
 import { ref, toRefs, useFetch, defineComponent, reactive } from '@nuxtjs/composition-api';
 import PersonInfo from '../person/PersonInfo.vue';
 import { CouncilMeetingType } from '@/types';
@@ -33,7 +33,6 @@ export default defineComponent({
   },
   setup(props, { root }) {
     const { state: councilMeetingState, getCouncilMeetingList } = useCouncilMeeting();
-
     const defaultItem: CouncilMeetingType = {
       id: '',
       name: '',
@@ -42,19 +41,14 @@ export default defineComponent({
       meeting_date: new Date(),
       council: '',
     };
-    const state = reactive({
-      dialog: false,
-      editedItem: defaultItem,
-    });
-
     const fetchData = async (offset = 0, council = '') => {
-      console.log('council', council);
+      // console.log('fetchData_council', council);
       await getCouncilMeetingList({ offset: offset, council: council });
+      // console.log('councilMeetingState', councilMeetingState);
     };
 
     const { fetchState } = useFetch(() => fetchData(0, props.councilId));
     return {
-      ...toRefs(state),
       ...toRefs(councilMeetingState),
       // dispItem,
       // close,
