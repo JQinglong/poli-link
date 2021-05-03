@@ -17,7 +17,7 @@
         </v-btn>
       </v-card-title>
     </v-card>
-    <v-card-text class="py-0">
+    <v-card-text class="py-0" style="white-space: pre-line;">
       {{ councilData.description }}
       <v-card-title>構成員</v-card-title>
       <council-member-list :councilId="councilId" />

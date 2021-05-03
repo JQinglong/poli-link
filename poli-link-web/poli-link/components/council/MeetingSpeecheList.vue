@@ -10,7 +10,7 @@
           <v-list-item-content>
             <v-list-item-title v-text="item.speaker"></v-list-item-title>
 
-            <v-list-item-subtitle class="text--primary" v-text="item.speech"></v-list-item-subtitle>
+            <v-list-item style="white-space: pre-line;" v-text="item.speech"></v-list-item>
 
             <v-list-item-subtitle v-text="item.description"></v-list-item-subtitle>
           </v-list-item-content>

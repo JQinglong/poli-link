@@ -81,6 +81,9 @@ export default defineComponent({
   setup() {
     const search = ref<String>('');
     const selected = ref<Number[]>([2]);
+    const sortDesc = ref<Boolean>(false);
+    const sortBy = ref<String>('Name');
+    const keys = ref<String[]>(['Name']);
 
     const { state: ministryState, getMinistryList } = useMinistry();
 
@@ -97,6 +100,9 @@ export default defineComponent({
     return {
       search,
       selected,
+      sortDesc,
+      keys,
+      sortBy,
       ...toRefs(ministryState),
       ...toRefs(councilState),
       fetchState,
