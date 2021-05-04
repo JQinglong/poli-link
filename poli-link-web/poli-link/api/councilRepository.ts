@@ -4,11 +4,12 @@ import {
   ResponseType,
   ResponseTypes,
   CustomErrors,
-  ListRequestType
+  // ListRequestType
 } from '@/types'
 import { LIMIT_LIST_ITEM } from '@/constants'
 
 type CouncilId = CouncilType['id']
+
 
 // これは個別に定義する必要があるのかは若干疑問なので、Indexの方に持っていく
 // ListRequestType　を使う
@@ -16,6 +17,12 @@ type CouncilId = CouncilType['id']
 //   limit?: number
 //   offset?: number
 // }
+export interface CouncilListRequest  {
+  limit?: number
+  offset?: number
+  ministry?: string
+  person?: string
+}
 
 // Pick 第1引数から第2引数以降で指定したkey値とその値で構成されたObjectを返す。
 // 逆にId以外だよね
@@ -41,7 +48,9 @@ export const councilRepository = (axios: NuxtAxiosInstance) => ({
   getCouncilList({
     limit = LIMIT_LIST_ITEM,
     offset = 0,
-  }: ListRequestType = {}): CouncilListResponse {
+    ministry='',
+    person='',
+  }: CouncilListRequest = {}): CouncilListResponse {
     const defaultParam = {
     }
 

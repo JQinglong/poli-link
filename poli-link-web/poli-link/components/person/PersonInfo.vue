@@ -25,14 +25,26 @@
         <v-icon @click="externalLink(personData.url_youtube)">mdi-youtube</v-icon>
       </v-btn>
 
-    <v-card-title>
-      キャリア
-    </v-card-title>
-    <person-career-list :personId="personData.id" />
-    <v-card-title>
-      参画している会議体
-    </v-card-title>
-    <person-counscil-list :personId="personData.id" />
+
+      <v-expansion-panels>
+        <v-expansion-panel>
+          <v-expansion-panel-header>
+            キャリア
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <person-career-list :personId="personData.id" />
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+        <v-expansion-panel>
+          <v-expansion-panel-header>
+            参画している会議体
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <person-counscil-list :personId="personData.id" />
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels>
+  
     <v-card-title>
       発言集
     </v-card-title>

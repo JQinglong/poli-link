@@ -29,6 +29,7 @@ class PersonSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class CouncilMemberSerializer(serializers.ModelSerializer):
+    council = CouncilSerializer()
     class Meta:
         model = CouncilMember
         fields = '__all__'

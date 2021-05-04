@@ -32,6 +32,7 @@ class MinistryViewSet(viewsets.ModelViewSet):
 class CouncilViewSet(viewsets.ModelViewSet):
     queryset = Council.objects.all()
     serializer_class = CouncilSerializer
+    filter_fields = ('ministry', )
 
 class PersonViewSet(viewsets.ModelViewSet):
     queryset = Person.objects.all()
@@ -40,7 +41,7 @@ class PersonViewSet(viewsets.ModelViewSet):
 class CouncilMemberViewSet(viewsets.ModelViewSet):
     queryset = CouncilMember.objects.all()
     serializer_class = CouncilMemberSerializer
-    filter_fields = ('council', 'person')
+    filter_fields = ('council', 'person', )
 
 class CouncilMeetingViewSet(viewsets.ModelViewSet):
     queryset = CouncilMeeting.objects.order_by('order')

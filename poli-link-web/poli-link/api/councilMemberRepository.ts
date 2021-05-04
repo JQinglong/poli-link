@@ -20,6 +20,7 @@ export interface CouncilMemberListRequest  {
   limit?: number
   offset?: number
   council?: string
+  person?: string
 }
 
 // Pick 第1引数から第2引数以降で指定したkey値とその値で構成されたObjectを返す。
@@ -46,13 +47,14 @@ export const councilMemberRepository = (axios: NuxtAxiosInstance) => ({
   getCouncilMemberList({
     limit = LIMIT_LIST_ITEM,
     offset = 0,
-    council=''
+    council='',
+    person='',
   }: CouncilMemberListRequest = {}): CouncilMemberListResponse {
     const defaultParam = {
     }
-
+    // console.log('councilMemberRepository person', person)
     return axios.$get('/council_member/', {
-      params: {...defaultParam, limit, offset, council},
+      params: {...defaultParam, limit, offset, council, person},
     })
   },
   createCouncilMember(payload: CreateCouncilMemberRequest): CouncilMemberResponse | CustomErrors {

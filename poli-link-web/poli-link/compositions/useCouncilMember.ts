@@ -1,6 +1,6 @@
 import { reactive, useContext } from '@nuxtjs/composition-api'
 import { CreateCouncilMemberRequest, UpdateCouncilMemberRequest, CouncilMemberListRequest } from "@/api/councilMemberRepository";
-import { ListRequestType, CouncilMemberType } from "@/types";
+import { CouncilMemberType } from "@/types";
 
 type CouncilMemberPayload = Required<CreateCouncilMemberRequest>
 type CreateState = CouncilMemberPayload
@@ -56,6 +56,7 @@ export default function useCouncilMember() {
     const councilMembers= await $repository.councilMember.getCouncilMemberList(payload)
 
     // console.log('councilMembers', councilMembers)
+    console.log('getCouncilMemberList payload', payload)
     
     state.councilMemberList = councilMembers
     state.councilMemberCount = councilMembers.length
