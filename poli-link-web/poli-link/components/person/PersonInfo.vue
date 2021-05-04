@@ -31,8 +31,9 @@
           <v-expansion-panel-header>
             キャリア
           </v-expansion-panel-header>
-          <v-expansion-panel-content>
-            <person-career-list :personId="personData.id" />
+          <v-expansion-panel-content style="white-space: pre-line;">
+            <!-- <person-career-list :personId="personData.id" /> -->
+            {{personData.career_summary}}
           </v-expansion-panel-content>
         </v-expansion-panel>
         <v-expansion-panel>

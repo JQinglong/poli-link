@@ -41,6 +41,8 @@ class CouncilMeetingSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class MeetingSpeechSerializer(serializers.ModelSerializer):
+    council = CouncilSerializer()
+    council_meeting = CouncilMeetingSerializer()
     class Meta:
         model = MeetingSpeech
         fields = '__all__'

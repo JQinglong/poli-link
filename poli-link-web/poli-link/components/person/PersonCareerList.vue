@@ -23,6 +23,7 @@
 
 <script lang="ts">
 // 個人キャリアリスト
+// 未作成
 import { PropType } from 'vue'
 import { ref, toRefs, useFetch, defineComponent } from '@nuxtjs/composition-api';
 

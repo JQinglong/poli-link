@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-data-iterator
-      :items="items"
+      :items="meetingSpeechList"
       :items-per-page.sync="itemsPerPage"
       :page.sync="page"
       :search="search"
@@ -74,24 +74,17 @@
             lg="4"
           >
             <v-card>
-              <v-list dense>
-                <v-list-item
-                  v-for="(key, index) in filteredKeys"
-                  :key="index"
-                >
-                  <v-list-item-content
-                    class="align-end"
-                    :class="{ 'blue--text': sortBy === key }"
-                  >
-                    {{ item[key.toLowerCase()] }}
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-
-              <v-divider></v-divider>
+              <v-card-title class="subheading font-weight-bold">
+                {{ item.council.name }}
+              </v-card-title>
+              <v-card-subtitle class="subheading font-weight-bold">
+                {{ item.council_meeting.name }}
+              </v-card-subtitle>
+              <v-card-text>
               {{ item.speech }}
+              </v-card-text>
               <v-divider></v-divider>
-              <v-icon @click="$router.push(`/council/1/2/#1234`)">mdi-information</v-icon>
+              <v-icon @click="$router.push(`/council/${item.council}/${item.council_meeting}/#${item.id}`)">mdi-information</v-icon>
               <v-btn icon>
                 <v-icon>mdi-share-variant</v-icon>
               </v-btn>
@@ -106,10 +99,12 @@
 <script lang="ts">
 // 個人発言リスト
 import { PropType } from 'vue'
-import { ref, toRefs, useFetch, defineComponent } from '@nuxtjs/composition-api';
+import { computed, toRefs, useFetch, defineComponent } from '@nuxtjs/composition-api';
+
+import { useMeetingSpeech } from '@/compositions';
 
 export default defineComponent({
-  name: 'PersonCareerList',
+  name: 'PersonSpeechList',
   props: {
     personId: {
       type: String,
@@ -118,6 +113,8 @@ export default defineComponent({
   },
   setup(props, { root }) {
     console.log('personId', props.personId)
+    const { state: meetingSpeechState, getMeetingSpeechList } = useMeetingSpeech();
+
     const     itemsPerPageArray= [4, 8, 12]
     const     search= ''
     const    filter= {}
@@ -130,37 +127,19 @@ export default defineComponent({
           'Date',
           'Name',
         ]
-    const items = [
-          {
-            id: 'a',
-            name: '新型コロナウイルス感染症対策分科会　堕1回会議',
-            date: '2021/1/4',
-            speech: `本日は、構成員の皆様方におかれましては、大変御多忙の中こうしてお集まり
-をいただきまして、誠にありがとうございます。御承知のように、５月25日に緊
-急事態宣言が全国的に解除されてから１か月少々経過しているわけであります。
-3
-この間、厚労省としては、再び新型コロナウイルス感染症の感染が拡大する局面
-も見据え、検査体制、医療提供体制、保健所体制に対する体制整備の在り方につ
-いて考え方をお示しした上で、都道府県に対応をお願いしているところでありま
-す。引き続き都道府県とも連携の上、これらの体制整備に努めてまいります。
-また、検査や感染拡大防止に向けた取組として、唾液を用いたPCR検査の保険適用、
-30分程度でPCR検査同様の対象に使用できる抗原定量検査の承認、さらには、７月
-５日時点で570万人の方にダウンロードしていただいておりますが、陽性者と接触
-した可能性がある場合に通知を受け取ることができる接触確認アプリ（COCOA）の
-リリースなどにも取り組んでまいりました。引き続き、こうした検査体制の拡充
-やアプリの利用拡大などにも努めてまいります。`,
-          },
-          {
-            id: 'a',
-            name: '新型コロナウイルス感染症対策分科会　堕1回会議',
-            date: '2021/1/4',
-            speech: `本日は、構成員の皆様方におかれましては、大変御多忙の中こうしてお集まり`
-          },
-      ]
+    const filteredKeys = computed(() => {
+      return keys.filter(key => key !== 'Name')
 
+    })
+
+    const fetchData = async (offset = 0, personId = '') => {
+      console.log('personId', personId)
+      await getMeetingSpeechList({ offset: offset, person: personId });
+    };
+
+    const { fetchState } = useFetch(() => fetchData(0, props.personId));
 
     return {
-      items,
         itemsPerPageArray,
         search,
         filter,
@@ -169,7 +148,9 @@ export default defineComponent({
         itemsPerPage,
         sortBy,
         keys,
-    };
+        filteredKeys,
+      ...toRefs(meetingSpeechState),
+    }
   },
 });
 //     data () {
