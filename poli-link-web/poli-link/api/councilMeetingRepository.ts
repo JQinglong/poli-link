@@ -26,7 +26,7 @@ export interface CouncilMeetingListRequest  {
 // 逆にId以外だよね
 export type CreateCouncilMeetingRequest = Pick<
 CouncilMeetingType,
-  'name' | 'place' | 'order' | 'meeting_date' | 'council'
+  'name' | 'place' | 'order' | 'meeting_date' | 'url_minute' | 'url_document' | 'council'
 >
 export type UpdateCouncilMeetingPayload = Partial<CreateCouncilMeetingRequest>
 export type UpdateCouncilMeetingRequest = {

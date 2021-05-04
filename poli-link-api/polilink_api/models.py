@@ -54,6 +54,8 @@ class CouncilMeeting(models.Model):
     place = models.CharField(max_length=256, blank=True, null=True)
     order = models.IntegerField()
     meeting_date = models.DateField(blank=True, null=True)
+    url_minute = models.CharField(max_length=256, blank=True, null=True, default=None)
+    url_document = models.CharField(max_length=256, blank=True, null=True, default=None)
     def __str__(self):
         return self.name
 

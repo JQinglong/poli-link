@@ -15,6 +15,8 @@ const initCreateState = {
   place: '',
   order: 0,
   meeting_date: new Date(),
+  url_minute: '',
+  url_document: '',
   council: '',
 }
 const initState = {
@@ -24,6 +26,8 @@ const initState = {
     place: '',
     order: 0,
     meeting_date: new Date(),
+    url_minute: '',
+    url_document: '',
     council: '',
   },
   councilMeetingList: [],

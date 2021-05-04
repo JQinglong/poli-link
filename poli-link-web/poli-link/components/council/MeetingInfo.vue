@@ -4,7 +4,10 @@
       <v-card-title class="pa-2 blue-grey darken-1">
         <h3 class="title grow">{{ councilMeetingData.name }}</h3>
         <v-btn icon>
-          <v-icon>mdi-web</v-icon>
+          <v-icon @click="externalLink(councilMeetingData.url_minute)">mdi-file-document-edit-outline</v-icon>
+        </v-btn>
+        <v-btn icon>
+          <v-icon @click="externalLink(councilMeetingData.url_document)">mdi-file-chart-outline</v-icon>
         </v-btn>
         <v-btn icon>
           <v-icon>mdi-share-variant</v-icon>

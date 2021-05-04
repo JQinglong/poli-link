@@ -11,12 +11,13 @@
         prepend-inner-icon="mdi-magnify"
         label="Search"
       ></v-text-field>
-      <v-tabs dark background-color="blue-grey darken-4" show-arrows>
+      <!-- タブはやめる -->
+      <!-- <v-tabs dark background-color="blue-grey darken-4" show-arrows v-model="tabModel">
         <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
-        <v-tab v-for="ministry in ministryList" :key="ministry.name">
+        <v-tab v-for="ministry in ministryList" :key="ministry.id" :href="`#tab-${ministry.id}`">
           {{ ministry.name }}
         </v-tab>
-      </v-tabs>
+      </v-tabs> -->
       <v-data-table :items="councilList" :search="search" hide-default-footer dense>
         <template v-slot:top>
           <v-toolbar dense flat>
@@ -84,6 +85,7 @@ export default defineComponent({
     const sortDesc = ref<Boolean>(false);
     const sortBy = ref<String>('Name');
     const keys = ref<String[]>(['Name']);
+    // const tabModel = 'tab-0'; //tab制御が効かないので中止
 
     const { state: ministryState, getMinistryList } = useMinistry();
 
@@ -91,6 +93,7 @@ export default defineComponent({
 
     const fetchData = async (offset = 0) => {
       await getMinistryList({ offset });
+      await ministryState.ministryList.unshift({id:'0', name: '全て', name_e: '', abbreviation: '', url: ''})
       await getCouncilList({ offset });
       // console.log('ministryState', ministryState)
     };
@@ -103,6 +106,7 @@ export default defineComponent({
       sortDesc,
       keys,
       sortBy,
+      // tabModel,
       ...toRefs(ministryState),
       ...toRefs(councilState),
       fetchState,

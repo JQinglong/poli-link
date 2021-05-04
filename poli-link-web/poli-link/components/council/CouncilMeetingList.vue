@@ -39,6 +39,8 @@ export default defineComponent({
       place: '',
       order: 0,
       meeting_date: new Date(),
+      url_minute: '',
+      url_document: '',
       council: '',
     };
     const fetchData = async (offset = 0, council = '') => {

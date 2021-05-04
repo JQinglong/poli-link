@@ -63,6 +63,8 @@ export interface CouncilMeetingType {
   place: string
   order: number
   meeting_date: Date
+  url_minute: string
+  url_document: string
   council: string
 }
 

@@ -43,11 +43,11 @@ class CouncilMemberViewSet(viewsets.ModelViewSet):
     filter_fields = ('council', 'person')
 
 class CouncilMeetingViewSet(viewsets.ModelViewSet):
-    queryset = CouncilMeeting.objects.all()
+    queryset = CouncilMeeting.objects.order_by('order')
     serializer_class = CouncilMeetingSerializer
     filter_fields = ('council', )
 
 class MeetingSpeechViewSet(viewsets.ModelViewSet):
-    queryset = MeetingSpeech.objects.all()
+    queryset = MeetingSpeech.objects.order_by('order')
     serializer_class = MeetingSpeechSerializer
     filter_fields = ('council', 'council_meeting', 'person')
