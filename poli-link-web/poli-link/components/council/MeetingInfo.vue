@@ -1,6 +1,7 @@
 <template>
   <v-card class="mx-auto">
     <v-card dark>
+      {{ councilMeetingData.council.name }}
       <v-card-title class="pa-2 blue-grey darken-1">
         <h3 class="title grow">{{ councilMeetingData.name }}</h3>
         <v-btn icon>
@@ -17,9 +18,7 @@
     <v-card-text class="py-0">
       <v-card-title>日時</v-card-title>{{ councilMeetingData.meeting_date }}
       <v-card-title>場所</v-card-title>{{ councilMeetingData.place }}
-      <v-card-title>出席者</v-card-title>
-      <council-member-list :councilId="councilId" />
-
+      <!-- <v-card-title>出席者</v-card-title> -->
       <v-card-title>議事</v-card-title>
       <meeting-speeche-list :councilId="councilId" :councilMeetingId="councilMeetingId" />
       
@@ -62,6 +61,8 @@ export default defineComponent({
         window.open(url, '_blank')
       }
     }
+
+    console.log('MeetingInfo props', props);
 
     const fetchData = async () => {
       await getCouncilMeeting(props.councilMeetingId)

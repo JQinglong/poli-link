@@ -7,7 +7,7 @@
             <strong>{{ item.meeting_date }}</strong>
 
             <strong>{{ item.name }}</strong>
-            <v-btn class="ma-2" outlined color="indigo" @click="$router.push(`/council/${item.council}/${item.id}/`)"> 議事 </v-btn>
+            <v-btn class="ma-2" outlined color="indigo" @click="$router.push(`/council/${item.council.id}/${item.id}/`)"> 議事 </v-btn>
           </v-col>
         </v-row>
       </v-timeline-item>

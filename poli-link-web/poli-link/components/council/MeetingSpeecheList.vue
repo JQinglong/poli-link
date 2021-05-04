@@ -58,13 +58,14 @@ export default defineComponent({
       speech: '',
       description: '',
     };
-    const fetchData = async (offset = 0, council = '') => {
-      // console.log('fetchData_council', council);
-      await getMeetingSpeechList({ offset: offset, council: council });
+    const fetchData = async (offset = 0, councilMeetingId = '') => {
+      // console.log('fetchData_council', councilMeetingId);
+      await getMeetingSpeechList({ offset: offset, council_meeting: councilMeetingId });
       // console.log('councilMeetingState', councilMeetingState);
     };
 
-    const { fetchState } = useFetch(() => fetchData(0, props.councilId));
+    // console.log('props.councilId', props.councilMeetingId);
+    const { fetchState } = useFetch(() => fetchData(0, props.councilMeetingId));
     return {
       ...toRefs(meetingSpeechState),
       // dispItem,

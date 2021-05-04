@@ -19,6 +19,8 @@ export interface MeetingSpeechListRequest  {
   limit?: number
   offset?: number
   council?: string
+  council_meeting?: string
+  person?: string
 }
 
 // Pick 第1引数から第2引数以降で指定したkey値とその値で構成されたObjectを返す。
@@ -45,13 +47,15 @@ export const meetingSpeechRepository = (axios: NuxtAxiosInstance) => ({
   getMeetingSpeechList({
     limit = LIMIT_LIST_ITEM,
     offset = 0,
-    council=''
+    council='',
+    council_meeting='',
+    person='',
   }: MeetingSpeechListRequest = {}): MeetingSpeechListResponse {
     const defaultParam = {
     }
 
     return axios.$get('/meeting_speech/', {
-      params: {...defaultParam, limit, offset, council},
+      params: {...defaultParam, limit, offset, council, council_meeting, person},
     })
   },
   createMeetingSpeech(payload: CreateMeetingSpeechRequest): MeetingSpeechResponse | CustomErrors {
