@@ -24,11 +24,45 @@ DB
 　（必要なら）Pythonのmigrationツールのalembicを動かしてみた
 　https://qiita.com/penpenta/items/c993243c4ceee3840f30
 
+サンプルデータのバックアップ
+```sh
+$ docker exec -it poli-link-db mysqldump --all-databases > poli-link-db/mysql/dmp/sample.dmp
+$ docker exec -i poli-link-db mysql < poli-link-db/mysql/dmp/sample.dmp
+
+
+$ docker exec -it poli-link-db sh
+# mysqldump --all-databases > /var/lib/mysql/dmp/20210505.dmp
+```
+
 
 構成複雑なので、Docker使う
 
 Django + REST framework + Swagger + JWT + docker-compose で開発環境構築
 https://qiita.com/mykysyk@github/items/fef6fb298393a029a5d4
+
+
+MYSQL_USER="root", MYSQL_PASSWORD cannot be used for the root user Use・・・
+で動かない場合は
+docker-compose.yml
+    image: mysql:5.7
+を
+    image: mysql:5.7.32
+に変更
+
+Firebase
+poli-link-web/poli-link/.env
+```
+FIREBASE_PROJECT_ID = "polilink-xxx"
+FIREBASE_API_KEY = "xxx"
+FIREBASE_AUTH_DOMAIN = "polilink-xxx.firebaseapp.com"
+FIREBASE_DATABASE_URL = ""
+FIREBASE_STORAGE_BUCKET = "polilink-xxx.appspot.com"
+FIREBASE_MESSAGING_SENDER_ID = "xxx"
+FIREBASE_APP_ID = "1:xxx:web:xxx"
+FIREBASE_MEASUREMENT_ID = ""
+```
+
+
 
 
 大きな構成は下記
