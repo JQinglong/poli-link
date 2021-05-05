@@ -41,7 +41,7 @@
             参画している会議体
           </v-expansion-panel-header>
           <v-expansion-panel-content>
-            <person-counscil-list :personId="personData.id" />
+            <person-counscil-list :personId="personId" />
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>
@@ -49,7 +49,7 @@
     <v-card-title>
       発言集
     </v-card-title>
-    <person-speech-list :personId="personData.id" />
+    <person-speech-list :personId="personId" />
   </v-card>
 </div>
 </template>

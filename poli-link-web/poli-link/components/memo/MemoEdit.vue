@@ -94,17 +94,17 @@ import {
   useFetch,
   onMounted,
 } from "@nuxtjs/composition-api"
-import { RepositoryFactory } from "~/repositories/RepositoryFactory";
+// import { RepositoryFactory } from "~/repositories/RepositoryFactory";
 import { useMemo } from "@/compositions";
 
-const MemoRepository = RepositoryFactory.get('memo')
-interface StateData {
-  id: number
-  title: string
-  memo: string
-  isLoading: boolean,
-  memos: []
-}
+// const MemoRepository = RepositoryFactory.get('memo')
+// interface StateData {
+//   id: number
+//   title: string
+//   memo: string
+//   isLoading: boolean,
+//   memos: []
+// }
 
 
 import { Memo } from '@/types'

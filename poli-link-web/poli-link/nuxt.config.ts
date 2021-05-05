@@ -1,7 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 import { Configuration } from '@nuxt/types'
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
-import { Repositories } from "@/plugins/repository-factory";
+// import { Repositories } from "@/plugins/repository-factory";
 
 const { FIREBASE_PROJECT_ID,
   FIREBASE_API_KEY,
@@ -45,8 +45,8 @@ const config: Configuration = {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/composition-api',
-    '@/plugins/axios-accessor',
-    '@/plugins/repository-factory',
+    // '@/plugins/axios-accessor',
+    // '@/plugins/repository-factory',
     '@/plugins/repository'
   ],
 
@@ -114,7 +114,7 @@ declare module 'vue/types/vue' {
   interface Vue {
     // $auth: Auth
     $axios: NuxtAxiosInstance
-    $repositories: Repositories
+    // $repositories: Repositories
   }
 }
 

@@ -36,11 +36,11 @@ import {
   useFetch,
   onMounted,
 } from "@nuxtjs/composition-api"
-import { RepositoryFactory } from "~/repositories/RepositoryFactory";
+// import { RepositoryFactory } from "~/repositories/RepositoryFactory";
 import { useMemo } from "@/compositions";
 import { Memo } from '@/types'
 
-const MemoRepository = RepositoryFactory.get('memo')
+// const MemoRepository = RepositoryFactory.get('memo')
 
 export default defineComponent({
   name: 'MemoEditForm',

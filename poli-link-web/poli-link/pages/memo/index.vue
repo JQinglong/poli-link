@@ -3,7 +3,7 @@
     <memo-edit
     />
     
-    <p>{{ info.text }}</p>
+    <!-- <p>{{ info.text }}</p>
     <button @click="onClicked">ボタン</button>
 
       <input v-model="state.memo" placeholder="メモを入力してください">
@@ -12,13 +12,13 @@
       <li v-for="(memo, index) in memolist" :key="index">
         {{ memo }}
         <button @click="removeMemo(index)">delete</button>
-      </li>
+      </li> -->
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, computed } from "@nuxtjs/composition-api"
-import { MemoStore } from "~/store";
+// import { MemoStore } from "~/store";
 import MemoEdit from "@/components/memo/MemoEdit.vue";
 
 // type Memo = {
@@ -44,9 +44,9 @@ export default defineComponent({
       memo: 'memo0'
     })
 
-    const memos = MemoStore
+    // const memos = MemoStore
 
-    const memolist = computed(() => memos.getMemos)
+    // const memolist = computed(() => memos.getMemos)
 
     // const store = MemoStore
     // store.actions.getData(context.root.$repositories)
@@ -54,15 +54,15 @@ export default defineComponent({
 
     // const memolist = computed(() => memos.getData)
 
-    const addMemo = () => {
-      console.log(state.title)
-      memos.add(state.memo)
-      state.memo = ''
-    }
+    // const addMemo = () => {
+    //   console.log(state.title)
+    //   memos.add(state.memo)
+    //   state.memo = ''
+    // }
 
-    const removeMemo = (index: number) => {
-      memos.remove(index)
-    }
+    // const removeMemo = (index: number) => {
+    //   memos.remove(index)
+    // }
 
     
     // watch(async () => {
@@ -92,7 +92,9 @@ export default defineComponent({
       info.text = "押されたよ！"
     }
 
-    return { info, onClicked, state, memos, memolist, addMemo, removeMemo }
+    return { info, onClicked, state,
+    //  memos, memolist, addMemo, removeMemo
+      }
   }
 })
 </script>

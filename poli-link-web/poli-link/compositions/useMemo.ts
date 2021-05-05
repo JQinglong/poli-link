@@ -1,7 +1,7 @@
 import { reactive, useContext } from '@nuxtjs/composition-api'
 import { MemoListRequest, CreateMemoRequest, UpdateMemoRequest } from "@/api/memoRepository";
 import { Memo } from "@/types";
-import MemoKey from '~/store/memo-key';
+// import MemoKey from '~/store/memo-key';
 
 type MemoPayload = Required<CreateMemoRequest>
 type CreateState = MemoPayload
