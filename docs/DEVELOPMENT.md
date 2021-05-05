@@ -106,7 +106,9 @@ $ docker exec -it poli-link-web sh
 /app/poli-link # yarn add @nuxtjs/composition-api
 ```
 
-
+起動前に
+docker-compose build
+docker-compose up
 
 起動後は以下で確認
 http://localhost:8000/swagger/
