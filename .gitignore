@@ -4,3 +4,4 @@ PoliLink.md
 poli-link-web/node_modules/
 poli-link-db/mysql/
 diagram
+poli-link-api/config/local_settings.py
