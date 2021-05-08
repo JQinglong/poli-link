@@ -9,8 +9,14 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
+DEBUG = False
 
 import os
+import sys
+try:
+    import urlparse
+except ImportError:
+    import urllib.parse as urlparse
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,9 +28,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.herokuapp.com']
+
 
 
 # Application definition
@@ -78,19 +85,22 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'polilink_database',
-        'USER': 'root',
-        'HOST': 'db',
-        'PORT': 3306,
-        'OPTIONS': {
-            'charset': 'utf8mb4',
-            'sql_mode': 'TRADITIONAL,NO_AUTO_VALUE_ON_ZERO,ONLY_FULL_GROUP_BY',
-        },
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'polilink_database',
+#         'USER': 'root',
+#         'HOST': 'db',
+#         'PORT': 3306,
+#         'OPTIONS': {
+#             'charset': 'utf8mb4',
+#             'sql_mode': 'TRADITIONAL,NO_AUTO_VALUE_ON_ZERO,ONLY_FULL_GROUP_BY',
+#         },
+#     }
+# }
+# Register database schemes in URLs.
+urlparse.uses_netloc.append('mysql')
+
 
 
 # Password validation
@@ -150,5 +160,39 @@ CORS_ORIGIN_WHITELIST = (
 
 try:
     from .local_settings import *
-except ImportError:
+    print('import')
+except ImportError as e:
+    print('ImportError')
+    print(e)
+    if not DEBUG:
+        SECRET_KEY = os.environ['SECRET_KEY']
+
+try:
+
+    # Check to make sure DATABASES is set in settings.py file.
+    # If not default to {}
+
+    if 'DATABASES' not in locals():
+        DATABASES = {}
+
+    if 'DATABASE_URL' in os.environ:
+        url = urlparse.urlparse(os.environ['DATABASE_URL'])
+
+        # Ensure default database exists.
+        DATABASES['default'] = DATABASES.get('default', {})
+
+        # Update with environment configuration.
+        DATABASES['default'].update({
+            'NAME': url.path[1:],
+            'USER': url.username,
+            'PASSWORD': url.password,
+            'HOST': url.hostname,
+            'PORT': url.port,
+        })
+
+
+        if url.scheme == 'mysql':
+            DATABASES['default']['ENGINE'] = 'django.db.backends.mysql'
+except Exception:
+    # print 'Unexpected error:', sys.exc_info()
     pass
