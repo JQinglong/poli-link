@@ -13,7 +13,5 @@ const config = {
   // measurementId: process.env.FIREBASE_MEASUREMENT_ID,
 }
 
-console.log('config.apiKey', config)
-
 const firebase = Firebase.apps.length? Firebase.app():Firebase.initializeApp(config);
 export const auth = firebase.auth();
