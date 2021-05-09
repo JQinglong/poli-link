@@ -27,3 +27,4 @@ sqlparse==0.3.1
 static3==0.7.0
 uritemplate==3.0.1
 urllib3==1.25.9
+whitenoise==5.2.0
