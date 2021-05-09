@@ -176,6 +176,11 @@ except ImportError as e:
     if not DEBUG:
         SECRET_KEY = os.environ['SECRET_KEY']
 
+print('STATIC_ROOT')
+print(STATIC_ROOT)
+print(STATICFILES_DIRS)
+
+
 try:
 
     # Check to make sure DATABASES is set in settings.py file.
