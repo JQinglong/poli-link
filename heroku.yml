@@ -3,4 +3,4 @@ build:
     web: poli-link-api/Dockerfile
 run:
   # web: python3 manage.py runserver 0.0.0.0:$PORT
-  web: gunicorn polilink_api.wsgi:application --bind 0.0.0.0:$PORT
+  web: gunicorn config.wsgi --bind 0.0.0.0:$PORT
