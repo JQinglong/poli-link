@@ -33,7 +33,7 @@ class Person(models.Model):
     url_twitter = models.CharField(max_length=256, blank=True, null=True)
     url_facebook = models.CharField(max_length=256, blank=True, null=True)
     url_youtube = models.CharField(max_length=256, blank=True, null=True)
-    career_summary = models.TextField()
+    career_summary = models.TextField(blank=True, null=True)
     def __str__(self):
         return self.name
 

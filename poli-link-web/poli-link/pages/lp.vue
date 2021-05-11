@@ -10,7 +10,8 @@
             <p
               class="base-body text-body-1 grey--text text--lighten-1 text-left mb-10"
             >
-              政策がどう決まっていくのか、記録を残す。<br />
+              専門家による会議の議事録は貴重な財産です。<br />
+              政策がどう決まっていくのか、見てみましょう。<br />
             </p>
             <div>
               <v-btn depressed color="primary" to="/">サービスを利用する</v-btn>
