@@ -197,6 +197,11 @@ export default defineComponent({
     ])
     const adminitems = ref<Item[]>([
       {
+        icon: 'mdi-database',
+        title: 'データメンテナンス',
+        to: '/admin'
+      },
+      {
         icon: 'mdi-help',
         title: 'help',
         to: '/lp'
@@ -223,7 +228,9 @@ export default defineComponent({
               thumbnail: user && user.photoURL ? user.photoURL : '',
             })
           } else {
-            // root.$router.push('/signin')
+            if (root.$route.path.indexOf('/admin') === 0) {
+              root.$router.push('/login')
+            }
           }
         })
       }

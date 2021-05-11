@@ -27,6 +27,7 @@
     "types": [
       "@nuxt/types",
       "@nuxtjs/axios",
+      "@nuxtjs/firebase",
       "@types/node",
       "vuetify",
       "@types/jest"
