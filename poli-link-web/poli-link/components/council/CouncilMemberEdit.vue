@@ -2,15 +2,18 @@
   <div>
     <v-card>
       <v-card-title> [{{ councilData.name }}] の管理 </v-card-title>
+      {{ councilData.url }}
       <v-card-text>
         <v-container fluid>
           <v-row dense>
             <v-col cols="3">
               人物
+              <!-- 人物登録 -->
               <person-add />
+              <!-- 人物リスト -->
               <v-data-table :headers="personHeaders" :items="personList" class="elevation-1" hide-default-header hide-default-footer>
                 <template v-slot:[`item.actions`]="{ item }">
-                  <v-icon @click="$router.push(`/person/${item.id}/`)"> mdi-account-arrow-right </v-icon>
+                  <v-icon @click="handleAddMember(item)"> mdi-account-arrow-right </v-icon>
                 </template>
               </v-data-table>
             </v-col>
@@ -41,7 +44,7 @@
 import { PropType } from 'vue';
 import { ref, toRefs, useFetch, defineComponent, reactive } from '@nuxtjs/composition-api';
 import PersonInfo from '../person/PersonInfo.vue';
-import { CouncilMemberType } from '@/types';
+import { CouncilType, CouncilMemberType, PersonType } from '@/types';
 import { useCouncil, useCouncilMember, usePerson } from '@/compositions';
 import PersonAdd from '../person/PersonAdd.vue';
 
@@ -68,16 +71,41 @@ export default defineComponent({
       { text: 'occupation', value: 'occupation' },
       { text: 'actions', value: 'actions' },
     ];
-    const { state: councilMemberState, getCouncilMemberList } = useCouncilMember();
+    const { state: councilMemberState,createState: createCouncilMemberState, getCouncilMemberList, createCouncilMember } = useCouncilMember();
     const { state: councilState, getCouncil } = useCouncil();
     const { state: personState, getPersonList } = usePerson();
 
+    const handleAddMember = async(item: PersonType) => {
+      createCouncilMemberState.council = councilState.councilData
+      createCouncilMemberState.name = item.name
+      createCouncilMemberState.person = item.id
+      try {
+        console.log('createCouncilMemberState', createCouncilMemberState)
+        const newCouncilMember = await createCouncilMember(createCouncilMemberState) //こことformを結びつける
+
+        if (!newCouncilMember) {
+          return
+        }
+
+      } catch (error) {
+        console.log('error', error)
+        // setError(error)
+      }
+    }
+
+    const defaultCouncilItem: CouncilType = {
+      id: '',
+      name: '',
+      url: '',
+      description: '',
+      ministry_id: '',
+    };
     const defaultItem: CouncilMemberType = {
       id: '',
       name: '',
       occupation: '',
       position: '',
-      council: '',
+      council: defaultCouncilItem,
       person: '',
     };
 
@@ -95,8 +123,7 @@ export default defineComponent({
       ...toRefs(personState),
       personHeaders,
       headers,
-      // dispItem,
-      // close,
+      handleAddMember,
     };
   },
 });

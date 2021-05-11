@@ -53,7 +53,7 @@ export interface CouncilMemberType {
   name: string
   occupation: string
   position: string
-  council: string
+  council: CouncilType
   person: string
 }
 

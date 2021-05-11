@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from drf_writable_nested import WritableNestedModelSerializer
 from .models import Memo
 from .models import Ministry
 from .models import Council
@@ -17,7 +18,7 @@ class MinistrySerializer(serializers.ModelSerializer):
         model = Ministry
         fields = '__all__'
 
-class CouncilSerializer(serializers.ModelSerializer):
+class CouncilSerializer(WritableNestedModelSerializer):
     ministry = MinistrySerializer()
     class Meta:
         model = Council
@@ -28,7 +29,7 @@ class PersonSerializer(serializers.ModelSerializer):
         model = Person
         fields = '__all__'
 
-class CouncilMemberSerializer(serializers.ModelSerializer):
+class CouncilMemberSerializer(WritableNestedModelSerializer):
     council = CouncilSerializer()
     class Meta:
         model = CouncilMember

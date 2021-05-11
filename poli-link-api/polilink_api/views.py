@@ -35,7 +35,7 @@ class CouncilViewSet(viewsets.ModelViewSet):
     filter_fields = ('ministry', )
 
 class PersonViewSet(viewsets.ModelViewSet):
-    queryset = Person.objects.all()
+    queryset = Person.objects.order_by('name_kana')
     serializer_class = PersonSerializer
 
 class CouncilMemberViewSet(viewsets.ModelViewSet):
