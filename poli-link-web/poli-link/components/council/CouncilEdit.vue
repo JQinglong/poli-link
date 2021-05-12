@@ -2,6 +2,7 @@
   <v-card>
     <v-card-title> 会議体 の管理 </v-card-title>
     <v-card-text>
+      https://polilink-web.herokuapp.com/admin/
       <!-- <v-form lazy-validation>
         <v-text-field label="名前" dense outlined clearable v-model="form.name"> </v-text-field>
         <v-text-field label="url" dense outlined clearable v-model="form.url"> </v-text-field>

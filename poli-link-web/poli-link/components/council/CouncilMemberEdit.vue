@@ -7,7 +7,7 @@
         <v-container fluid>
           <v-row dense>
             <v-col cols="3">
-              人物
+              人物マスタ
               <!-- 人物登録 -->
               <person-add />
               <!-- 人物リスト -->
