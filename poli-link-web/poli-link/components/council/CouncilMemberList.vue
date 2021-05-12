@@ -37,7 +37,7 @@
 import { PropType } from 'vue';
 import { ref, toRefs, useFetch, defineComponent, reactive } from '@nuxtjs/composition-api';
 import PersonInfo from '../person/PersonInfo.vue';
-import { CouncilMemberType } from '@/types'
+import { CouncilType, CouncilMemberType } from '@/types';
 import { useCouncilMember } from '@/compositions';
 
 export default defineComponent({
@@ -58,17 +58,24 @@ export default defineComponent({
       { text: 'position', value: 'position' },
       { text: 'occupation', value: 'occupation' },
       { text: 'actions', value: 'actions' },
-    ]
+    ];
     const { state: councilMemberState, getCouncilMemberList } = useCouncilMember();
 
-    const defaultItem:CouncilMemberType = {
-        id: '',
-        name: '',
-        occupation: '',
-        position: '',
-        council: '',
-        person: '',
-      }
+    const defaultCouncilItem: CouncilType = {
+      id: '',
+      name: '',
+      url: '',
+      description: '',
+      ministry_id: '',
+    };
+    const defaultItem: CouncilMemberType = {
+      id: '',
+      name: '',
+      occupation: '',
+      position: '',
+      council: defaultCouncilItem,
+      person: '',
+    };
     // 順次クリックに対応できていないので一旦保留
     // const dispItem = (item: CouncilMemberType) =>{
     //   console.log(item)
@@ -86,7 +93,7 @@ export default defineComponent({
 
     const fetchData = async (offset = 0, council = '') => {
       // console.log('council', council)
-      await getCouncilMemberList({ offset: offset, council: council  });
+      await getCouncilMemberList({ offset: offset, council: council });
     };
 
     const { fetchState } = useFetch(() => fetchData(0, props.councilId));
