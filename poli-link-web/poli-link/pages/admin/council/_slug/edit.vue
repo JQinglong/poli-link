@@ -1,6 +1,6 @@
 <template>
   <div>
-    <council-member-edit
+    <council-edit
       :councilId="slug"
     />
 
@@ -12,10 +12,10 @@ import {
   defineComponent,
   useContext,
 } from '@nuxtjs/composition-api'
-import CouncilMemberEdit from '~/components/council/CouncilMemberEdit.vue';
+import CouncilEdit from '~/components/council/CouncilEdit.vue';
 
 export default defineComponent({
-  components: { CouncilMemberEdit },
+  components: { CouncilEdit },
   head: {
     title: "Council Edit"
   },

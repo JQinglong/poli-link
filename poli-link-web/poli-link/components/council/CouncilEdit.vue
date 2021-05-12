@@ -1,116 +1,121 @@
 <template>
-  <v-card>
-    <v-card-title> 会議体 の管理 </v-card-title>
-    <v-card-text>
-      https://polilink-web.herokuapp.com/admin/
-      <!-- <v-form lazy-validation>
-        <v-text-field label="名前" dense outlined clearable v-model="form.name"> </v-text-field>
-        <v-text-field label="url" dense outlined clearable v-model="form.url"> </v-text-field>
-        <v-text-field label="ministry_id" dense outlined clearable v-model="form.ministry_id"> </v-text-field>
-        ministryはオブジェクトを渡さないといけなくなってしまったので、登録はDjango管理画面から
-        <v-textarea
-          v-model="form.description"
-          label="説明など"
-          auto-grow
-          outlined
-          rows="3"
-          row-height="25"
-          shaped
-        ></v-textarea>
-
-        <v-btn color="primary" @click="handleCreateCouncil">新規</v-btn>
-      </v-form> -->
-
-      <v-data-table :headers="headers" :items="councilList" dense>
-        <template v-slot:[`item.actions`]="{ item }">
-          <v-icon small @click="$router.push(`/admin/council/${item.id}/edit`)"> mdi-pencil </v-icon>
-        </template>
-      </v-data-table>
-
-    </v-card-text>
-  </v-card>
+  <div>
+    <v-card>
+      <v-card-title> [{{ councilData.name }}] の管理 </v-card-title>
+      {{ councilData.url }}
+      <v-card-text>
+        <v-container fluid>
+          <v-row dense>
+            <v-col cols="3">
+              人物マスタ
+              <!-- 人物登録 -->
+              <person-add />
+              <!-- 人物リスト -->
+              <v-data-table :headers="personHeaders" :items="personList" class="elevation-1" hide-default-header>
+                <template v-slot:[`item.actions`]="{ item }">
+                  <v-icon @click="handleAddMember(item)"> mdi-account-arrow-right </v-icon>
+                </template>
+              </v-data-table>
+            </v-col>
+            <v-col>
+              <council-edit-member :councilId="councilId" />
+              議事
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-card-text>
+    </v-card>
+  </div>
 </template>
 
 <script lang="ts">
+// k会議体情報メンテ
 import { PropType } from 'vue';
-import { Data, defineComponent, reactive, ref, toRef, toRefs, useFetch, onMounted } from '@nuxtjs/composition-api';
-import { useCouncil } from '@/compositions';
-
-// const CouncilRepository = RepositoryFactory.get('council')
-// interface StateData {
-//   id: number
-//   title: string
-//   council: string
-//   isLoading: boolean,
-//   councils: []
-// }
-
-import { CouncilType } from '@/types';
+import { ref, toRefs, useFetch, defineComponent, reactive } from '@nuxtjs/composition-api';
+import PersonInfo from '../person/PersonInfo.vue';
+import { CouncilType, CouncilMemberType, PersonType } from '@/types';
+import { useCouncil, useCouncilMember, usePerson } from '@/compositions';
+import PersonAdd from '../person/PersonAdd.vue';
+import CouncilEditMember from './CouncilEditMember.vue';
 
 export default defineComponent({
   name: 'CouncilEdit',
-  setup(_, { root }) {
-    const headers = [
-      { text: '名前', value: 'name' },
-      { text: '', value: 'actions', sortable: false },
-    ];
+  components: { PersonInfo, PersonAdd, CouncilEditMember },
 
-    const defaultItem: CouncilType = {
+  props: {
+    councilId: {
+      type: String,
+      required: true,
+    },
+  },
+  setup(props, { root }) {
+    // console.log('props', props)
+    // console.log('props.councilId', props.councilId)
+    const personHeaders = [
+      { text: 'name', value: 'name' },
+      { text: 'actions', value: 'actions' },
+    ];
+    const headers = [
+      { text: 'name', value: 'name' },
+      { text: 'position', value: 'position' },
+      { text: 'occupation', value: 'occupation' },
+      { text: 'actions', value: 'actions' },
+    ];
+    const { state: councilMemberState,createState: createCouncilMemberState, getCouncilMemberList, createCouncilMember } = useCouncilMember();
+    const { state: councilState, getCouncil } = useCouncil();
+    const { state: personState, getPersonList } = usePerson();
+
+    const handleAddMember = async(item: PersonType) => {
+      createCouncilMemberState.council = councilState.councilData
+      createCouncilMemberState.name = item.name
+      createCouncilMemberState.person = item.id
+      try {
+        // console.log('createCouncilMemberState', createCouncilMemberState)
+        const newCouncilMember = await createCouncilMember(createCouncilMemberState) //こことformを結びつける
+
+        if (!newCouncilMember) {
+          console.log('!newCouncilMember')
+          return
+        }
+
+      } catch (error) {
+        console.log('error', error)
+        // setError(error)
+      }
+    }
+
+    const defaultCouncilItem: CouncilType = {
       id: '',
       name: '',
       url: '',
       description: '',
       ministry_id: '',
     };
-
-    const state = reactive({
-      dialogDelete: false,
-      editedIndex: -1,
-      editedItem: defaultItem,
-    });
-
-    // const {
-    //   state: councilListState,
-    //   getCouncilList,
-    // } = useCouncilList()
-
-    const { state: councilState, createState: createCouncilState, createCouncil, getCouncilList } = useCouncil();
-
-    const handleCreateCouncil = async () => {
-      try {
-        console.log('createCouncilState', createCouncilState)
-        const newCouncil = await createCouncil(createCouncilState); //こことformを結びつける
-
-        if (!newCouncil) {
-          return;
-        }
-      } catch (error) {
-        console.log('error', error);
-      }
+    const defaultItem: CouncilMemberType = {
+      id: '',
+      name: '',
+      occupation: '',
+      position: '',
+      council: defaultCouncilItem,
+      person: '',
     };
 
-
-    const fetchData = async (offset = 0) => {
-      await getCouncilList({ offset });
-      console.log('fetchData');
+    const fetchData = async (offset = 0, council = '') => {
+      console.log('CouncilEdit　council', council)
+      await getCouncil(props.councilId);
+      await getCouncilMemberList({ offset: offset, council: props.councilId });
+      await getPersonList({ offset });
     };
 
-    const { fetchState } = useFetch(() => fetchData());
-    // console.log('fetchState', fetchState)
-
+    const { fetchState } = useFetch(() => fetchData(0, props.councilId));
     return {
-      headers,
-      ...toRefs(state),
-      fetchState,
-      fetchData,
+      ...toRefs(councilMemberState),
       ...toRefs(councilState),
-      form: createCouncilState,
-      handleCreateCouncil,
+      ...toRefs(personState),
+      personHeaders,
+      headers,
+      handleAddMember,
     };
   },
-
 });
 </script>
-
-<style>
-</style>

@@ -1,15 +1,15 @@
 <template>
   <div class="container">
-    <council-edit/>
+    <council-admin/>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive } from "@nuxtjs/composition-api"
-import CouncilEdit from "~/components/council/CouncilEdit.vue";
+import CouncilAdmin from "~/components/council/CouncilAdmin.vue";
 
 export default defineComponent({
-  components: { CouncilEdit },
+  components: { CouncilAdmin },
   head: {
     title: "会議体登録"
   },
