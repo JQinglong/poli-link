@@ -74,7 +74,7 @@ export default function useCouncilMember() {
 
     // console.log('createCouncilMember response', response)
     if (response) {
-      await getCouncilMemberList()
+      await getCouncilMemberList({ council: payload.council.id })
       return response
     }
 
@@ -93,6 +93,7 @@ export default function useCouncilMember() {
 
   const deleteCouncilMember = async (councilMemberId: CouncilMemberType['id']) => {
     await $repository.councilMember.deleteCouncilMember(councilMemberId)
+    // 本当は引数必要
     await getCouncilMemberList()
   }
   return {

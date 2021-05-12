@@ -80,10 +80,11 @@ export default defineComponent({
       createCouncilMemberState.name = item.name
       createCouncilMemberState.person = item.id
       try {
-        console.log('createCouncilMemberState', createCouncilMemberState)
+        // console.log('createCouncilMemberState', createCouncilMemberState)
         const newCouncilMember = await createCouncilMember(createCouncilMemberState) //こことformを結びつける
 
         if (!newCouncilMember) {
+          console.log('!newCouncilMember')
           return
         }
 
@@ -110,9 +111,9 @@ export default defineComponent({
     };
 
     const fetchData = async (offset = 0, council = '') => {
-      // console.log('council', council)
+      console.log('CouncilMemberEdit　council', council)
       await getCouncil(props.councilId);
-      await getCouncilMemberList({ offset: offset, council: council });
+      await getCouncilMemberList({ offset: offset, council: props.councilId });
       await getPersonList({ offset });
     };
 
