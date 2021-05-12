@@ -1,0 +1,127 @@
+<template>
+  <div>
+    議事情報
+    <v-data-table :headers="headers" :items="councilMeetingList" class="elevation-1" hide-default-header>
+      <template v-slot:[`item.position`]="{ item }">
+        <v-chip v-if="item.position" dark>
+          {{ item.position }}
+        </v-chip>
+      </template>
+
+      <template v-slot:[`item.actions`]="{ item }">
+        <v-icon @click="editItem(item)">mdi-pencil</v-icon>
+        <v-icon @click="$router.push(`/admin/speech/${item.id}/`)"> mdi-text-to-speech </v-icon>
+      </template>
+    </v-data-table>
+
+    <v-dialog v-model="dialogEdit" max-width="500px">
+      <v-card>
+        <v-card-title class="headline">議事情報更新</v-card-title>
+        <v-text-field label="Order" dense outlined clearable v-model="editedItem.order"> </v-text-field>
+        <v-text-field label="日にち" dense outlined clearable v-model="editedItem.meeting_date"> </v-text-field>
+        <v-text-field label="議事名" dense outlined clearable v-model="editedItem.name"> </v-text-field>
+        <v-text-field label="場所" dense outlined clearable v-model="editedItem.place"> </v-text-field>
+        <v-text-field label="議事録URL" dense outlined clearable v-model="editedItem.url_minute"> </v-text-field>
+        <v-text-field label="資料URL" dense outlined clearable v-model="editedItem.url_document"> </v-text-field>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" text @click="updateItem">更新</v-btn>
+          <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
+          <v-spacer></v-spacer>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </div>
+</template>
+
+<script lang="ts">
+// 議事情報メンテ
+import { PropType } from 'vue';
+import { ref, toRefs, useFetch, defineComponent, reactive } from '@nuxtjs/composition-api';
+import { CouncilType, CouncilMeetingType } from '@/types';
+import { useCouncilMeeting } from '@/compositions';
+
+export default defineComponent({
+  name: 'CouncilEditMeeting',
+
+  props: {
+    councilId: {
+      type: String,
+      required: true,
+    },
+  },
+  setup(props, { root }) {
+    // console.log('props', props)
+    // console.log('props.councilId', props.councilId)
+    const headers = [
+      { text: 'order', value: 'order' },
+      { text: '日にち', value: 'meeting_date' },
+      { text: '議事名', value: 'name' },
+      { text: 'actions', value: 'actions' },
+    ];
+    const {
+      state: councilMeetingState,
+      createState: createCouncilMeetingState,
+      getCouncilMeetingList,
+      updateCouncilMeeting,
+    } = useCouncilMeeting();
+
+    const defaultCouncilItem: CouncilType = {
+      id: '',
+      name: '',
+      url: '',
+      description: '',
+      ministry_id: '',
+    };
+    const defaultItem: CouncilMeetingType = {
+      id: '',
+      name: '',
+      place: '',
+      order: 0,
+      meeting_date: new Date(),
+      url_minute: '',
+      url_document: '',
+      council: defaultCouncilItem,
+    };
+    const state = reactive({
+      dialogEdit: false,
+      editedIndex: '',
+      editedItem: defaultItem,
+    });
+
+    const editItem = (item: CouncilMeetingType) => {
+      state.editedIndex = item.id;
+      state.editedItem = item;
+      console.log('item', state.editedItem);
+      state.dialogEdit = true;
+    };
+    const updateItem = async () => {
+      console.log('updateItem', state.editedItem);
+      await updateCouncilMeeting({id: state.editedItem.id, payload: state.editedItem}) 
+      closeDelete();
+    };
+    const closeDelete = () => {
+      state.dialogEdit = false;
+      root.$nextTick(() => {
+        state.editedItem = Object.assign({}, defaultItem);
+        state.editedIndex = '';
+      });
+    };
+
+    const fetchData = async (offset = 0, council = '') => {
+      console.log('CouncilEdit　council', council);
+      await getCouncilMeetingList({ offset: offset, council: council });
+    };
+
+    const { fetchState } = useFetch(() => fetchData(0, props.councilId));
+    return {
+      ...toRefs(councilMeetingState),
+      ...toRefs(state),
+      headers,
+      editItem,
+      updateItem,
+      closeDelete,
+    };
+  },
+});
+</script>

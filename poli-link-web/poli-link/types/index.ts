@@ -65,7 +65,7 @@ export interface CouncilMeetingType {
   meeting_date: Date
   url_minute: string
   url_document: string
-  council: string
+  council: CouncilType
 }
 
 export interface MeetingSpeechType {

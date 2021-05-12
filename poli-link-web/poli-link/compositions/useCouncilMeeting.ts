@@ -1,6 +1,6 @@
 import { reactive, useContext } from '@nuxtjs/composition-api'
 import { CreateCouncilMeetingRequest, UpdateCouncilMeetingRequest, CouncilMeetingListRequest } from "@/api/councilMeetingRepository";
-import { ListRequestType, CouncilMeetingType } from "@/types";
+import { CouncilType, CouncilMeetingType } from "@/types";
 
 type CouncilMeetingPayload = Required<CreateCouncilMeetingRequest>
 type CreateState = CouncilMeetingPayload
@@ -10,6 +10,13 @@ type State = {
   councilMeetingCount: number
 }
 
+const initCreateCouncilState : CouncilType = {
+  id: '',
+  name: '',
+  url: '',
+  description: '',
+  ministry_id: '',
+}
 const initCreateState = {
   name: '',
   place: '',
@@ -17,7 +24,7 @@ const initCreateState = {
   meeting_date: new Date(),
   url_minute: '',
   url_document: '',
-  council: '',
+  council: initCreateCouncilState,
 }
 const initState = {
   councilMeetingData: {
@@ -28,7 +35,7 @@ const initState = {
     meeting_date: new Date(),
     url_minute: '',
     url_document: '',
-    council: '',
+    council: initCreateCouncilState,
   },
   councilMeetingList: [],
   councilMeetingCount: 0,

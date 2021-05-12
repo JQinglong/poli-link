@@ -18,8 +18,10 @@
               </v-data-table>
             </v-col>
             <v-col>
+              <!-- 構成員 -->
               <council-edit-member :councilId="councilId" />
-              議事
+              <!-- 議事 -->
+              <council-edit-meeting :councilId="councilId" />
             </v-col>
           </v-row>
         </v-container>
@@ -37,10 +39,11 @@ import { CouncilType, CouncilMemberType, PersonType } from '@/types';
 import { useCouncil, useCouncilMember, usePerson } from '@/compositions';
 import PersonAdd from '../person/PersonAdd.vue';
 import CouncilEditMember from './CouncilEditMember.vue';
+import CouncilEditMeeting from './CouncilEditMeeting.vue';
 
 export default defineComponent({
   name: 'CouncilEdit',
-  components: { PersonInfo, PersonAdd, CouncilEditMember },
+  components: { PersonInfo, PersonAdd, CouncilEditMember, CouncilEditMeeting },
 
   props: {
     councilId: {
