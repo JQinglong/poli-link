@@ -42,12 +42,14 @@ export default defineComponent({
 
     const selectMember = async(item: CouncilMemberType) => {
       createMeetingSpeechState.speaker = item.name
-      console.log(item.person)
+      console.log('item.person', item.person)
       createMeetingSpeechState.person = item.person
     }
 
-    const selectPerson = async(item: string) => {
-      createMeetingSpeechState.person = item
+    const selectPerson = async(item: PersonType) => {
+      console.log('selectPerson item.id', item.id)
+      createMeetingSpeechState.person = item.id
+      createMeetingSpeechState.speaker = item.name
     }
 
     const handleCreateMeetingSpeech = async () => {
