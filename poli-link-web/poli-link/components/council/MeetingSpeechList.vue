@@ -48,16 +48,7 @@ export default defineComponent({
   },
   setup(props, { root }) {
     const { state: meetingSpeechState, getMeetingSpeechList } = useMeetingSpeech();
-    const defaultItem: MeetingSpeechType = {
-      id: '',
-      council: '',
-      council_meeting: '',
-      order: 0,
-      speaker: '',
-      person: '',
-      speech: '',
-      description: '',
-    };
+
     const fetchData = async (offset = 0, councilMeetingId = '') => {
       // console.log('fetchData_council', councilMeetingId);
       await getMeetingSpeechList({ offset: offset, council_meeting: councilMeetingId });
