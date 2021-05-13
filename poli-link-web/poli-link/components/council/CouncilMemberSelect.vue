@@ -27,7 +27,7 @@ export default defineComponent({
   setup(props, ctx) {
     const { state: councilMemberState, getCouncilMemberList } = useCouncilMember();
     const handleChange = (item: CouncilMemberType) => {
-      console.log('handleChange', item)
+      console.log('CouncilMemberSelect handleChange', item)
       ctx.emit('selectMember', item)
     }
 

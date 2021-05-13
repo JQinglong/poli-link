@@ -5,7 +5,7 @@
       <v-form lazy-validation>
         <v-text-field label="Order" dense outlined clearable v-model="form.order"> </v-text-field>
         <council-member-select :councilId="council.id" @selectMember="selectMember" />
-        personselect
+        <person-select v-model="form.person" @selectPerson="selectPerson" />
         <v-text-field label="発言者" dense outlined clearable v-model="form.speaker"> </v-text-field>
         <v-textarea label="発言" dense outlined clearable v-model="form.speech"> </v-textarea>
         <v-textarea label="備考等" dense outlined clearable v-model="form.description"> </v-textarea>
@@ -17,14 +17,14 @@
 </template>
 
 <script lang="ts">
-import { PropType } from 'vue'
 import { defineComponent } from '@nuxtjs/composition-api';
 import { useMeetingSpeech } from '@/compositions';
-import { CouncilType, CouncilMeetingType, CouncilMemberType } from '@/types';
+import { CouncilType, CouncilMeetingType, CouncilMemberType, PersonType } from '@/types';
 import CouncilMemberSelect from './CouncilMemberSelect.vue';
+import PersonSelect from '../person/PersonSelect.vue';
 
 export default defineComponent({
-  components: { CouncilMemberSelect },
+  components: { CouncilMemberSelect, PersonSelect },
   name: 'MeetingSpeechAdd',
   props: {
     council: {
@@ -42,7 +42,12 @@ export default defineComponent({
 
     const selectMember = async(item: CouncilMemberType) => {
       createMeetingSpeechState.speaker = item.name
+      console.log(item.person)
       createMeetingSpeechState.person = item.person
+    }
+
+    const selectPerson = async(item: string) => {
+      createMeetingSpeechState.person = item
     }
 
     const handleCreateMeetingSpeech = async () => {
@@ -72,6 +77,7 @@ export default defineComponent({
       form: createMeetingSpeechState,
       handleCreateMeetingSpeech,
       selectMember,
+      selectPerson,
     };
   },
 });
