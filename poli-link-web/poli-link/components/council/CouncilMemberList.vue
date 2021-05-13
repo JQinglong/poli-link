@@ -10,25 +10,6 @@
       <!-- <v-icon color="grey lighten-1" @click="dispItem(item)">mdi-information</v-icon> -->
       <v-icon v-if="item.person" @click="$router.push(`/person/${item.person}/`)"> mdi-tooltip-account </v-icon>
     </template>
-
-    <!-- <template v-slot:top>
-      <v-dialog v-model="dialog" max-width="500px">
-        <v-card>
-          <v-card-title>
-            <span class="headline">{{editedItem.name}}</span>
-            <v-spacer></v-spacer>
-            <v-icon @click="$router.push(`/person/3/`)"> mdi-tooltip-account </v-icon>
-          </v-card-title>
-
-          <person-info :personId="editedItem.person" />
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn @click="close"> 閉じる </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </template> -->
   </v-data-table>
 </template>
 
