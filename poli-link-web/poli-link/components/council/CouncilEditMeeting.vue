@@ -10,7 +10,7 @@
 
       <template v-slot:[`item.actions`]="{ item }">
         <v-icon @click="editItem(item)">mdi-pencil</v-icon>
-        <v-icon @click="$router.push(`/admin/speech/${item.id}/`)"> mdi-text-to-speech </v-icon>
+        <v-icon @click="$router.push(`/admin/council/${item.council.id}/${item.id}/edit`)"> mdi-text-to-speech </v-icon>
       </template>
     </v-data-table>
 

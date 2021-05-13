@@ -20,7 +20,7 @@
       <v-card-title>場所</v-card-title>{{ councilMeetingData.place }}
       <!-- <v-card-title>出席者</v-card-title> -->
       <v-card-title>議事</v-card-title>
-      <meeting-speeche-list :councilId="councilId" :councilMeetingId="councilMeetingId" />
+      <meeting-speech-list :councilId="councilId" :councilMeetingId="councilMeetingId" />
       
     </v-card-text>
   </v-card>
@@ -33,12 +33,12 @@ import { useCouncil, useCouncilMeeting } from '@/compositions';
 import { CouncilType } from "@/types";
 
 import CouncilMemberList from '~/components/council/CouncilMemberList.vue';
-import MeetingSpeecheList from '~/components/council/MeetingSpeecheList.vue';
+import MeetingSpeechList from '~/components/council/MeetingSpeechList.vue';
 
 
 export default defineComponent({
   name: 'MeetingInfo',
-  components: { CouncilMemberList, MeetingSpeecheList },
+  components: { CouncilMemberList, MeetingSpeechList },
   props: {
     councilId: {
       type: String,

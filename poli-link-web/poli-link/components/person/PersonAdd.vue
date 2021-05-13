@@ -20,24 +20,12 @@ import { PersonType } from '@/types';
 export default defineComponent({
   name: 'PersonAdd',
   setup(_, { root }) {
-    const defaultItem: PersonType = {
-      id: '',
-      name: '',
-      name_kana: '',
-      name_e: '',
-      url_official: '',
-      url_wikipedia: '',
-      url_twitter: '',
-      url_facebook: '',
-      url_youtube: '',
-      career_summary: '',
-    };
 
-    const { state: councilState, createState: createPersonState, createPerson, getPersonList } = usePerson();
+    const { state: personState, createState: createPersonState, createPerson, getPersonList } = usePerson();
 
     const handleCreatePerson = async () => {
       try {
-        console.log('createPersonState', createPersonState);
+        // console.log('createPersonState', createPersonState);
         const newPerson = await createPerson(createPersonState); //こことformを結びつける
 
         if (!newPerson) {
@@ -48,18 +36,18 @@ export default defineComponent({
       }
     };
 
-    const fetchData = async (offset = 0) => {
-      await getPersonList({ offset });
-      console.log('fetchData');
-    };
+    // const fetchData = async (offset = 0) => {
+    //   await getPersonList({ offset });
+    //   console.log('fetchData');
+    // };
 
-    const { fetchState } = useFetch(() => fetchData());
+    // const { fetchState } = useFetch(() => fetchData());
     // console.log('fetchState', fetchState)
 
     return {
-      fetchState,
-      fetchData,
-      ...toRefs(councilState),
+      // fetchState,
+      // fetchData,
+      // ...toRefs(personState),
       form: createPersonState,
       handleCreatePerson,
     };

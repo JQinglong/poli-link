@@ -41,7 +41,7 @@ class CouncilMeetingSerializer(WritableNestedModelSerializer):
         model = CouncilMeeting
         fields = '__all__'
 
-class MeetingSpeechSerializer(serializers.ModelSerializer):
+class MeetingSpeechSerializer(WritableNestedModelSerializer):
     council = CouncilSerializer()
     council_meeting = CouncilMeetingSerializer()
     class Meta:

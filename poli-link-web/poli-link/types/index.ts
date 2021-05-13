@@ -70,8 +70,8 @@ export interface CouncilMeetingType {
 
 export interface MeetingSpeechType {
   id: string
-  council: string
-  council_meeting: string
+  council: CouncilType
+  council_meeting: CouncilMeetingType
   order: number
   speaker: string
   person: string

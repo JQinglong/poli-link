@@ -35,7 +35,7 @@ import { MeetingSpeechType } from '@/types';
 import { useMeetingSpeech } from '@/compositions';
 
 export default defineComponent({
-  name: 'MeetingSpeecheList',
+  name: 'MeetingSpeechList',
   props: {
     councilId: {
       type: String,

@@ -1,6 +1,6 @@
 import { reactive, useContext } from '@nuxtjs/composition-api'
 import { CreateMeetingSpeechRequest, UpdateMeetingSpeechRequest, MeetingSpeechListRequest } from "@/api/meetingSpeechRepository";
-import { ListRequestType, MeetingSpeechType } from "@/types";
+import { CouncilType, CouncilMeetingType, MeetingSpeechType } from "@/types";
 
 type MeetingSpeechPayload = Required<CreateMeetingSpeechRequest>
 type CreateState = MeetingSpeechPayload
@@ -10,9 +10,26 @@ type State = {
   meetingSpeechCount: number
 }
 
+const initCreateCouncilState : CouncilType = {
+  id: '',
+  name: '',
+  url: '',
+  description: '',
+  ministry_id: '',
+}
+const initCreateCouncilMeetingState : CouncilMeetingType = {
+  id: '',
+  name: '',
+  place: '',
+  order: 0,
+  meeting_date: new Date(),
+  url_minute: '',
+  url_document: '',
+  council: initCreateCouncilState,
+}
 const initCreateState = {
-  council: '',
-  council_meeting: '',
+  council: initCreateCouncilState,
+  council_meeting: initCreateCouncilMeetingState,
   order: 0,
   speaker: '',
   person: '',
@@ -22,9 +39,9 @@ const initCreateState = {
 const initState = {
   meetingSpeechData: {
     id: '',
-    council: '',
-    council_meeting: '',
-    order: 0,
+      council: initCreateCouncilState,
+      council_meeting: initCreateCouncilMeetingState,
+      order: 0,
     speaker: '',
     person: '',
     speech: '',
@@ -68,7 +85,7 @@ export default function useMeetingSpeech () {
   const createMeetingSpeech = async (payload: CreateMeetingSpeechRequest) => {
     const response = await $repository.meetingSpeech.createMeetingSpeech(payload)
 
-    // console.log('createMeetingSpeech response', response)
+    console.log('createMeetingSpeech response', response)
     if (response) {
       await getMeetingSpeechList()
       return response

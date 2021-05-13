@@ -33,7 +33,7 @@ export type Repository = {
  */
 const createRepository = ({ app, $axios, redirect }: Context): Repository => {
   $axios.onError((error) => {
-    console.log('createRepository error', error)
+    console.log('createRepository error', error, error.response?.data)
     if (!error.response) {
       return
     }
