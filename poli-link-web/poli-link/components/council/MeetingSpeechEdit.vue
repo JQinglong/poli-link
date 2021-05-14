@@ -10,7 +10,7 @@
       <!-- 議事発言登録 -->
       {{meetingSpeechList.length}}
       <meeting-speech-add :council="councilMeetingData.council" :councilMeeting="councilMeetingData" :speechCount="meetingSpeechList.length" />
-
+      <!-- リスト -->
       <v-list two-line>
         <template v-for="(item, index) in meetingSpeechList">
           <v-list-item :key="item.title">

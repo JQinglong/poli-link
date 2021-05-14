@@ -87,7 +87,7 @@ export default function useMeetingSpeech () {
 
     console.log('createMeetingSpeech response', response)
     if (response) {
-      await getMeetingSpeechList()
+      await getMeetingSpeechList({ council: payload.council.id, council_meeting: payload.council_meeting.id })
       return response
     }
 
