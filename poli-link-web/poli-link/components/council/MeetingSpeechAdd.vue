@@ -3,7 +3,7 @@
     <v-card-text>
       議事発言登録
       <v-form lazy-validation>
-        <v-text-field label="Order" dense outlined clearable v-model="form.order"> </v-text-field>
+        <v-text-field label="Order" dense outlined clearable v-model="editableSpeechCount"> </v-text-field>
         <council-member-select :councilId="council.id" @selectMember="selectMember" />
         form.person {{form.person}}
         <person-select v-model="form.person" @change="selectPerson" />
@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api';
+import { defineComponent, computed, reactive, watchEffect, toRefs } from '@nuxtjs/composition-api';
 import { useMeetingSpeech } from '@/compositions';
 import { CouncilType, CouncilMeetingType, CouncilMemberType, PersonType } from '@/types';
 import CouncilMemberSelect from './CouncilMemberSelect.vue';
@@ -36,10 +36,27 @@ export default defineComponent({
       type: Object as () => CouncilMeetingType,
       required: true,
     },
+    speechCount: {
+      type: Number,
+      required: false,
+    },
   },
   setup(props, { root }) {
 
     const { createState: createMeetingSpeechState, createMeetingSpeech, } = useMeetingSpeech();
+
+    // createMeetingSpeechState.order = props.speechCount || 0 + 1
+    // 冗長かもしれない
+    const propsSpeechCount = computed(() => props.speechCount || 0)
+    const state = reactive({
+      editableSpeechCount: 0,
+    });
+    watchEffect(() => {
+      // console.log('editableValue', editableValue)
+      state.editableSpeechCount= propsSpeechCount.value + 1
+      createMeetingSpeechState.order = propsSpeechCount.value + 1
+    });
+
 
     const selectMember = async(item: CouncilMemberType) => {
       createMeetingSpeechState.speaker = item.name
@@ -78,6 +95,7 @@ export default defineComponent({
 
     return {
       form: createMeetingSpeechState,
+      ...toRefs(state),
       handleCreateMeetingSpeech,
       selectMember,
       selectPerson,

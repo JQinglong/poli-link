@@ -8,7 +8,8 @@
     </v-card-subtitle>
     <v-card-text>
       <!-- 議事発言登録 -->
-      <meeting-speech-add :council="councilMeetingData.council" :councilMeeting="councilMeetingData" />
+      {{meetingSpeechList.length}}
+      <meeting-speech-add :council="councilMeetingData.council" :councilMeeting="councilMeetingData" :speechCount="meetingSpeechList.length" />
 
       <v-list two-line>
         <template v-for="(item, index) in meetingSpeechList">
