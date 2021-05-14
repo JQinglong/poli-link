@@ -5,7 +5,8 @@
       <v-form lazy-validation>
         <v-text-field label="Order" dense outlined clearable v-model="form.order"> </v-text-field>
         <council-member-select :councilId="council.id" @selectMember="selectMember" />
-        <person-select v-model="form.person" @selectPerson="selectPerson" />
+        form.person {{form.person}}
+        <person-select v-model="form.person" @change="selectPerson" />
         <v-text-field label="発言者" dense outlined clearable v-model="form.speaker"> </v-text-field>
         <v-textarea label="発言" dense outlined clearable v-model="form.speech"> </v-textarea>
         <v-textarea label="備考等" dense outlined clearable v-model="form.description"> </v-textarea>
