@@ -1,5 +1,6 @@
 <template>
   <div>
+    <v-icon small class="mr-2" @click="$router.push(`/admin/council/`)"> mdi-arrow-left-circle </v-icon>
     <council-edit
       :councilId="slug"
     />
