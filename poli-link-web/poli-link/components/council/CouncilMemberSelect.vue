@@ -4,7 +4,20 @@
     @change="handleChange"
     item-text="name"
     return-object
-    label="構成員から選択" dense outlined></v-select>
+    label="構成員から選択" dense outlined>
+      <template v-slot:prepend-item>
+        <v-list-item
+        @change="clear"
+        >
+          <v-list-item-content>
+            <v-list-item-title>
+              (CLEAR)
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider class="mt-2"></v-divider>
+      </template>
+    </v-select>
 </template>
 
 <script lang="ts">
@@ -26,9 +39,14 @@ export default defineComponent({
   },
   setup(props, ctx) {
     const { state: councilMemberState, getCouncilMemberList } = useCouncilMember();
+    
     const handleChange = (item: CouncilMemberType) => {
       console.log('CouncilMemberSelect handleChange', item)
       ctx.emit('selectMember', item)
+    }
+    
+    const clear = () => {
+      ctx.emit('clearMember')
     }
 
     const fetchData = async (offset = 0, council = '') => {
@@ -40,6 +58,7 @@ export default defineComponent({
     return {
       ...toRefs(councilMemberState),
       handleChange,
+      clear,
       // dispItem,
       // close,
     };

@@ -4,8 +4,7 @@
       議事発言登録
       <v-form lazy-validation>
         <v-text-field label="Order" dense outlined clearable v-model="editableSpeechCount"> </v-text-field>
-        <council-member-select :councilId="council.id" @selectMember="selectMember" />
-        form.person {{form.person}}
+        <council-member-select :councilId="council.id" @selectMember="selectMember" @clearMember="clearMember" />
         <person-select v-model="form.person" @change="selectPerson" />
         <v-text-field label="発言者" dense outlined clearable v-model="form.speaker"> </v-text-field>
         <v-textarea label="発言" dense outlined clearable v-model="form.speech"> </v-textarea>
@@ -64,6 +63,11 @@ export default defineComponent({
       createMeetingSpeechState.person = item.person
     }
 
+    const clearMember = async() => {
+      createMeetingSpeechState.speaker = ''
+      createMeetingSpeechState.person = ''
+    }
+
     const selectPerson = async(item: PersonType) => {
       console.log('selectPerson item.id', item.id)
       createMeetingSpeechState.person = item.id
@@ -98,6 +102,7 @@ export default defineComponent({
       ...toRefs(state),
       handleCreateMeetingSpeech,
       selectMember,
+      clearMember,
       selectPerson,
     };
   },

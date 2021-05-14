@@ -1,6 +1,5 @@
 <template>
   <div>
-    state.editableValue {{ editableValue }}
     <v-select
       :items="personList"
       @change="handleChange"
