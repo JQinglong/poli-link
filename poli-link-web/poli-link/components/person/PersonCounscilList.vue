@@ -38,6 +38,8 @@ export default defineComponent({
   setup(props, { root }) {
     const headers = [
       {text: '名称', value: 'council.name'},
+      {text: '所属', value: 'occupation'},
+      {text: '役職', value: 'position'},
       {text: '', value: 'actions', sortable: false},
     ]
 
