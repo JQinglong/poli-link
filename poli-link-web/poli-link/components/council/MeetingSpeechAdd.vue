@@ -10,9 +10,24 @@
         <v-textarea label="発言" dense outlined clearable v-model="form.speech"> </v-textarea>
         <v-textarea label="備考等" dense outlined clearable v-model="form.description"> </v-textarea>
         <v-btn color="primary" @click="handleCreateMeetingSpeech">発言追加</v-btn>
-
       </v-form>
     </v-card-text>
+    <v-snackbar
+      v-model="snackbar"
+    >
+      更新しました。
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="success"
+          outlined
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-card>
 </template>
 
@@ -49,6 +64,7 @@ export default defineComponent({
     const propsSpeechCount = computed(() => props.speechCount || 0)
     const state = reactive({
       editableSpeechCount: 0,
+      snackbar: false,
     });
     watchEffect(() => {
       // console.log('editableValue', editableValue)
@@ -84,6 +100,7 @@ export default defineComponent({
         if (!newMeetingSpeech) {
           return;
         }
+        state.snackbar = true;
       } catch (error) {
         console.log('error', error);
       }
