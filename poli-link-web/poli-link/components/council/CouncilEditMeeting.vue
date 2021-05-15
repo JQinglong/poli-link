@@ -46,7 +46,7 @@
 <script lang="ts">
 // 議事情報メンテ
 import { PropType } from 'vue';
-import { ref, toRefs, useFetch, defineComponent, reactive } from '@nuxtjs/composition-api';
+import { ref, toRefs, useFetch, defineComponent, reactive, watchEffect } from '@nuxtjs/composition-api';
 import { CouncilType, CouncilMeetingType } from '@/types';
 import { useCouncilMeeting } from '@/compositions';
 import CouncilMeetingAdd from './CouncilMeetingAdd.vue';
@@ -122,12 +122,18 @@ export default defineComponent({
       });
     };
 
-    const fetchData = async (offset = 0) => {
-      // console.log('CouncilEdit　council', council);
-      await getCouncilMeetingList({ offset: offset, council: props.council.id });
+    const fetchData = async (offset = 0, councilId: string = '') => {
+      // console.log('CouncilEditMeeting　councilId', councilId);
+      await getCouncilMeetingList({ offset: offset, council: councilId });
     };
 
-    const { fetchState } = useFetch(() => fetchData(0));
+    watchEffect(() => {
+      // console.log('editableValue', editableValue)
+      fetchData(0, props.council.id)
+    });
+
+    const { fetchState } = useFetch(() => fetchData(0, props.council.id));
+
     return {
       ...toRefs(councilMeetingState),
       ...toRefs(state),
