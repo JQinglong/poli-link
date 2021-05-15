@@ -78,7 +78,7 @@ export default function useCouncilMeeting () {
 
     // console.log('createCouncilMeeting response', response)
     if (response) {
-      await getCouncilMeetingList()
+      await getCouncilMeetingList({ council: payload.council.id })
       return response
     }
 

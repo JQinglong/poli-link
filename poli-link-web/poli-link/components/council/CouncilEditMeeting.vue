@@ -1,6 +1,15 @@
 <template>
   <div>
     議事情報
+    <v-expansion-panels>
+      <v-expansion-panel>
+        <v-expansion-panel-header> 情報追加 </v-expansion-panel-header>
+        <v-expansion-panel-content style="white-space: pre-line">
+          <council-meeting-add :council="council" :meetingCount="councilMeetingList.length" />
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-expansion-panels>
+    
     <v-data-table :headers="headers" :items="councilMeetingList" class="elevation-1" hide-default-header>
       <template v-slot:[`item.position`]="{ item }">
         <v-chip v-if="item.position" dark>
@@ -40,13 +49,18 @@ import { PropType } from 'vue';
 import { ref, toRefs, useFetch, defineComponent, reactive } from '@nuxtjs/composition-api';
 import { CouncilType, CouncilMeetingType } from '@/types';
 import { useCouncilMeeting } from '@/compositions';
-
+import CouncilMeetingAdd from './CouncilMeetingAdd.vue';
 export default defineComponent({
   name: 'CouncilEditMeeting',
+  components: { CouncilMeetingAdd },
 
   props: {
-    councilId: {
-      type: String,
+    // councilId: {
+    //   type: String,
+    //   required: true,
+    // },
+    council: {
+      type: Object as () => CouncilType,
       required: true,
     },
   },
@@ -97,7 +111,7 @@ export default defineComponent({
     };
     const updateItem = async () => {
       console.log('updateItem', state.editedItem);
-      await updateCouncilMeeting({id: state.editedItem.id, payload: state.editedItem}) 
+      await updateCouncilMeeting({ id: state.editedItem.id, payload: state.editedItem });
       closeDelete();
     };
     const closeDelete = () => {
@@ -108,12 +122,12 @@ export default defineComponent({
       });
     };
 
-    const fetchData = async (offset = 0, council = '') => {
-      console.log('CouncilEdit　council', council);
-      await getCouncilMeetingList({ offset: offset, council: council });
+    const fetchData = async (offset = 0) => {
+      // console.log('CouncilEdit　council', council);
+      await getCouncilMeetingList({ offset: offset, council: props.council.id });
     };
 
-    const { fetchState } = useFetch(() => fetchData(0, props.councilId));
+    const { fetchState } = useFetch(() => fetchData(0));
     return {
       ...toRefs(councilMeetingState),
       ...toRefs(state),

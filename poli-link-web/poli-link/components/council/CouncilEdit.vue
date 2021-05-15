@@ -21,7 +21,7 @@
               <!-- 構成員 -->
               <council-edit-member :councilId="councilId" />
               <!-- 議事 -->
-              <council-edit-meeting :councilId="councilId" />
+              <council-edit-meeting :council="councilData" />
             </v-col>
           </v-row>
         </v-container>
