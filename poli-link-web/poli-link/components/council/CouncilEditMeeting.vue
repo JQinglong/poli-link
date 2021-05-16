@@ -49,6 +49,8 @@ import { PropType } from 'vue';
 import { ref, toRefs, useFetch, defineComponent, reactive, watchEffect } from '@nuxtjs/composition-api';
 import { CouncilType, CouncilMeetingType } from '@/types';
 import { useCouncilMeeting } from '@/compositions';
+import { defaultCouncilMeetingItem } from '@/compositions/util/const'
+
 import CouncilMeetingAdd from './CouncilMeetingAdd.vue';
 export default defineComponent({
   name: 'CouncilEditMeeting',
@@ -80,27 +82,10 @@ export default defineComponent({
       updateCouncilMeeting,
     } = useCouncilMeeting();
 
-    const defaultCouncilItem: CouncilType = {
-      id: '',
-      name: '',
-      url: '',
-      description: '',
-      ministry_id: '',
-    };
-    const defaultItem: CouncilMeetingType = {
-      id: '',
-      name: '',
-      place: '',
-      order: 0,
-      meeting_date: new Date(),
-      url_minute: '',
-      url_document: '',
-      council: defaultCouncilItem,
-    };
     const state = reactive({
       dialogEdit: false,
       editedIndex: '',
-      editedItem: defaultItem,
+      editedItem: defaultCouncilMeetingItem,
     });
 
     const editItem = (item: CouncilMeetingType) => {
@@ -110,14 +95,14 @@ export default defineComponent({
       state.dialogEdit = true;
     };
     const updateItem = async () => {
-      console.log('updateItem', state.editedItem);
+      console.log('CouncilEditMeeting updateItem', state.editedItem);
       await updateCouncilMeeting({ id: state.editedItem.id, payload: state.editedItem });
       closeDelete();
     };
     const closeDelete = () => {
       state.dialogEdit = false;
       root.$nextTick(() => {
-        state.editedItem = Object.assign({}, defaultItem);
+        state.editedItem = Object.assign({}, defaultCouncilMeetingItem);
         state.editedIndex = '';
       });
     };

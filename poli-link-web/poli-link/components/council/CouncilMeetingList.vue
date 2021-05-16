@@ -19,7 +19,6 @@
 // 議事一覧
 import { ref, toRefs, useFetch, defineComponent, reactive } from '@nuxtjs/composition-api';
 import PersonInfo from '../person/PersonInfo.vue';
-import { CouncilType, CouncilMeetingType } from '@/types';
 import { useCouncilMeeting } from '@/compositions';
 
 export default defineComponent({
@@ -33,25 +32,9 @@ export default defineComponent({
   },
   setup(props, { root }) {
     const { state: councilMeetingState, getCouncilMeetingList } = useCouncilMeeting();
-    const defaultCouncilItem: CouncilType = {
-      id: '',
-      name: '',
-      url: '',
-      description: '',
-      ministry_id: '',
-    };
-    const defaultItem: CouncilMeetingType = {
-      id: '',
-      name: '',
-      place: '',
-      order: 0,
-      meeting_date: new Date(),
-      url_minute: '',
-      url_document: '',
-      council: defaultCouncilItem,
-    };
+
     const fetchData = async (offset = 0, council = '') => {
-      // console.log('fetchData_council', council);
+      console.log('CouncilMeetingList fetchData_council', council);
       await getCouncilMeetingList({ offset: offset, council: council });
       // console.log('councilMeetingState', councilMeetingState);
     };

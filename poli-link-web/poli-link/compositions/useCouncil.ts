@@ -1,6 +1,7 @@
 import { reactive, useContext } from '@nuxtjs/composition-api'
 import { CreateCouncilRequest, UpdateCouncilRequest, CouncilListRequest } from "@/api/councilRepository";
 import { CouncilType } from "@/types";
+import { defaultMinistryItem, defaultCouncilItem } from '@/compositions/util/const'
 
 type CouncilPayload = Required<CreateCouncilRequest>
 type CreateState = CouncilPayload
@@ -14,16 +15,10 @@ const initCreateState = {
   name: '',
   url: '',
   description: '',
-  ministry_id: '',
+  ministry: defaultMinistryItem,
 }
 const initState = {
-  councilData: {
-    id: '',
-    name: '',
-    url: '',
-    description: '',
-    ministry_id: '',
-    },
+  councilData: defaultCouncilItem,
   councilList: [],
   councilCount: 0,
 }

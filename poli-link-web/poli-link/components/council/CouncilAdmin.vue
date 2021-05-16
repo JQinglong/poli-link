@@ -1,25 +1,11 @@
 <template>
   <v-card>
-    <v-card-title> 会議体 の管理 </v-card-title>
+    <v-card-title> 会議体の管理 </v-card-title>
     <v-card-text>
       https://polilink-web.herokuapp.com/admin/
-      <!-- <v-form lazy-validation>
-        <v-text-field label="名前" dense outlined clearable v-model="form.name"> </v-text-field>
-        <v-text-field label="url" dense outlined clearable v-model="form.url"> </v-text-field>
-        <v-text-field label="ministry_id" dense outlined clearable v-model="form.ministry_id"> </v-text-field>
-        ministryはオブジェクトを渡さないといけなくなってしまったので、登録はDjango管理画面から
-        <v-textarea
-          v-model="form.description"
-          label="説明など"
-          auto-grow
-          outlined
-          rows="3"
-          row-height="25"
-          shaped
-        ></v-textarea>
 
-        <v-btn color="primary" @click="handleCreateCouncil">新規</v-btn>
-      </v-form> -->
+    <!-- 会議体追加 -->
+     <council-add />
 
       <v-data-table :headers="headers" :items="councilList" dense>
         <template v-slot:[`item.actions`]="{ item }">
@@ -35,6 +21,7 @@
 import { PropType } from 'vue';
 import { Data, defineComponent, reactive, ref, toRef, toRefs, useFetch, onMounted } from '@nuxtjs/composition-api';
 import { useCouncil } from '@/compositions';
+import { defaultCouncilItem } from '@/compositions/util/const'
 
 // const CouncilRepository = RepositoryFactory.get('council')
 // interface StateData {
@@ -45,9 +32,11 @@ import { useCouncil } from '@/compositions';
 //   councils: []
 // }
 
-import { CouncilType } from '@/types';
+import { CouncilType, MinistryType } from '@/types';
+import CouncilAdd from './CouncilAdd.vue';
 
 export default defineComponent({
+  components: { CouncilAdd },
   name: 'CouncilAdmin',
   setup(_, { root }) {
     const headers = [
@@ -55,18 +44,10 @@ export default defineComponent({
       { text: '', value: 'actions', sortable: false },
     ];
 
-    const defaultItem: CouncilType = {
-      id: '',
-      name: '',
-      url: '',
-      description: '',
-      ministry_id: '',
-    };
-
     const state = reactive({
       dialogDelete: false,
       editedIndex: -1,
-      editedItem: defaultItem,
+      editedItem: defaultCouncilItem,
     });
 
     // const {

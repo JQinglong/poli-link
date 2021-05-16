@@ -37,6 +37,7 @@ import { PropType } from 'vue';
 import { ref, toRefs, useFetch, defineComponent, reactive } from '@nuxtjs/composition-api';
 import { CouncilType, CouncilMemberType } from '@/types';
 import { useCouncilMember } from '@/compositions';
+import { defaultCouncilMemberItem } from '@/compositions/util/const'
 
 export default defineComponent({
   name: 'CouncilEditMember',
@@ -63,26 +64,10 @@ export default defineComponent({
       updateCouncilMember,
     } = useCouncilMember();
 
-    const defaultCouncilItem: CouncilType = {
-      id: '',
-      name: '',
-      url: '',
-      description: '',
-      ministry_id: '',
-    };
-    const defaultItem: CouncilMemberType = {
-      id: '',
-      name: '',
-      occupation: '',
-      position: '',
-      council: defaultCouncilItem,
-      person: '',
-    };
-
     const state = reactive({
       dialogEdit: false,
       editedIndex: '',
-      editedItem: defaultItem,
+      editedItem: defaultCouncilMemberItem,
     });
 
     const editItem = (item: CouncilMemberType) => {
@@ -92,14 +77,14 @@ export default defineComponent({
       state.dialogEdit = true;
     };
     const updateItem = async () => {
-      console.log('updateItem', state.editedItem);
+      console.log('CouncilEditMember updateItem', state.editedItem);
       await updateCouncilMember({id: state.editedItem.id, payload: state.editedItem}) 
       closeDelete();
     };
     const closeDelete = () => {
       state.dialogEdit = false;
       root.$nextTick(() => {
-        state.editedItem = Object.assign({}, defaultItem);
+        state.editedItem = Object.assign({}, defaultCouncilMemberItem);
         state.editedIndex = '';
       });
     };

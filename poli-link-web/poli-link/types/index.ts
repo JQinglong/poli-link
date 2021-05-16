@@ -19,13 +19,6 @@ export interface Memo {
   title: string
   memo: string
 }
-export interface CouncilType {
-  id: string
-  name: string
-  url: string
-  description: string
-  ministry_id: string
-}
 
 export interface MinistryType {
   id: string
@@ -33,6 +26,14 @@ export interface MinistryType {
   name_e: string
   abbreviation: string
   url: string
+}
+
+export interface CouncilType {
+  id: string
+  name: string
+  url: string
+  description: string
+  ministry: MinistryType
 }
 
 export interface PersonType {

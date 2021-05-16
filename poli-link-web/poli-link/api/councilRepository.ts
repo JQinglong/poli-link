@@ -28,7 +28,7 @@ export interface CouncilListRequest  {
 // 逆にId以外だよね
 export type CreateCouncilRequest = Pick<
 CouncilType,
-  'name' | 'url' | 'description' | 'ministry_id'
+  'name' | 'url' | 'description' | 'ministry'
 >
 export type UpdateCouncilPayload = Partial<CreateCouncilRequest>
 export type UpdateCouncilRequest = {

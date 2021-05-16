@@ -31,7 +31,7 @@
 </template>
 
 <script lang="ts">
-// k会議体情報メンテ
+// 会議体情報メンテ
 import { PropType } from 'vue';
 import { ref, toRefs, useFetch, defineComponent, reactive } from '@nuxtjs/composition-api';
 import PersonInfo from '../person/PersonInfo.vue';
@@ -73,7 +73,7 @@ export default defineComponent({
       createCouncilMemberState.name = item.name
       createCouncilMemberState.person = item.id
       try {
-        // console.log('createCouncilMemberState', createCouncilMemberState)
+        console.log('createCouncilMemberState', createCouncilMemberState)
         const newCouncilMember = await createCouncilMember(createCouncilMemberState) //こことformを結びつける
 
         if (!newCouncilMember) {
@@ -87,24 +87,8 @@ export default defineComponent({
       }
     }
 
-    const defaultCouncilItem: CouncilType = {
-      id: '',
-      name: '',
-      url: '',
-      description: '',
-      ministry_id: '',
-    };
-    const defaultItem: CouncilMemberType = {
-      id: '',
-      name: '',
-      occupation: '',
-      position: '',
-      council: defaultCouncilItem,
-      person: '',
-    };
-
     const fetchData = async (offset = 0, council = '') => {
-      console.log('CouncilEdit　council', council)
+      console.log('CouncilEdit council', council)
       await getCouncil(props.councilId);
       await getCouncilMemberList({ offset: offset, council: props.councilId });
       await getPersonList({ offset });

@@ -1,6 +1,7 @@
 import { reactive, useContext } from '@nuxtjs/composition-api'
 import { CreateMeetingSpeechRequest, UpdateMeetingSpeechRequest, MeetingSpeechListRequest } from "@/api/meetingSpeechRepository";
 import { CouncilType, CouncilMeetingType, MeetingSpeechType } from "@/types";
+import { defaultCouncilItem, defaultCouncilMeetingItem } from '@/compositions/util/const'
 
 type MeetingSpeechPayload = Required<CreateMeetingSpeechRequest>
 type CreateState = MeetingSpeechPayload
@@ -10,38 +11,22 @@ type State = {
   meetingSpeechCount: number
 }
 
-const initCreateCouncilState : CouncilType = {
-  id: '',
-  name: '',
-  url: '',
-  description: '',
-  ministry_id: '',
-}
-const initCreateCouncilMeetingState : CouncilMeetingType = {
-  id: '',
-  name: '',
-  place: '',
-  order: 0,
-  meeting_date: new Date(),
-  url_minute: '',
-  url_document: '',
-  council: initCreateCouncilState,
-}
 const initCreateState = {
-  council: initCreateCouncilState,
-  council_meeting: initCreateCouncilMeetingState,
+  council: defaultCouncilItem,
+  council_meeting: defaultCouncilMeetingItem,
   order: 0,
   speaker: '',
   person: '',
   speech: '',
   description: '',
 }
+
 const initState = {
   meetingSpeechData: {
     id: '',
-      council: initCreateCouncilState,
-      council_meeting: initCreateCouncilMeetingState,
-      order: 0,
+    council: defaultCouncilItem,
+    council_meeting: defaultCouncilMeetingItem,
+    order: 0,
     speaker: '',
     person: '',
     speech: '',
@@ -56,15 +41,7 @@ export default function useMeetingSpeech () {
 
   const createState = reactive<CreateState>(initCreateState)
   const state = reactive<State>(initState)
-  // const state = reactive<State>({
-  //   meetingSpeechData: {
-  //     id: 0,
-  //     title: '',
-  //     meetingSpeech: '',
-  //   },
-  //   meetingSpeechList: [],
-  //   meetingSpeechCount: 0,
-  // })
+
   const getMeetingSpeech = async (meetingSpeechId: MeetingSpeechType['id']) => {
     const meetingSpeechData = await $repository.meetingSpeech.getMeetingSpeech(meetingSpeechId)
     // console.log('meetingSpeechId', meetingSpeechId)
@@ -76,7 +53,7 @@ export default function useMeetingSpeech () {
   const getMeetingSpeechList = async (payload: MeetingSpeechListRequest = {}) => {
     const meetingSpeechs = await $repository.meetingSpeech.getMeetingSpeechList(payload)
 
-    // console.log('meetingSpeechs', meetingSpeechs)
+    console.log('meetingSpeechs', meetingSpeechs)
 
     state.meetingSpeechList = meetingSpeechs
     state.meetingSpeechCount = meetingSpeechs.length

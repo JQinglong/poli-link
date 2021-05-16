@@ -1,6 +1,7 @@
 import { reactive, useContext } from '@nuxtjs/composition-api'
 import { CreateCouncilMeetingRequest, UpdateCouncilMeetingRequest, CouncilMeetingListRequest } from "@/api/councilMeetingRepository";
 import { CouncilType, CouncilMeetingType } from "@/types";
+import { defaultCouncilItem, defaultCouncilMeetingItem } from '@/compositions/util/const'
 
 type CouncilMeetingPayload = Required<CreateCouncilMeetingRequest>
 type CreateState = CouncilMeetingPayload
@@ -10,13 +11,6 @@ type State = {
   councilMeetingCount: number
 }
 
-const initCreateCouncilState : CouncilType = {
-  id: '',
-  name: '',
-  url: '',
-  description: '',
-  ministry_id: '',
-}
 const initCreateState = {
   name: '',
   place: '',
@@ -24,19 +18,10 @@ const initCreateState = {
   meeting_date: new Date(),
   url_minute: '',
   url_document: '',
-  council: initCreateCouncilState,
+  council: defaultCouncilItem,
 }
 const initState = {
-  councilMeetingData: {
-    id: '',
-    name: '',
-    place: '',
-    order: 0,
-    meeting_date: new Date(),
-    url_minute: '',
-    url_document: '',
-    council: initCreateCouncilState,
-  },
+  councilMeetingData: defaultCouncilMeetingItem,
   councilMeetingList: [],
   councilMeetingCount: 0,
 }
@@ -67,7 +52,7 @@ export default function useCouncilMeeting () {
     // console.log('getCouncilMeetingList', payload)
     const councilMeetings = await $repository.councilMeeting.getCouncilMeetingList(payload)
 
-    // console.log('councilMeetings', councilMeetings)
+    console.log('getCouncilMeetingList', councilMeetings)
 
     state.councilMeetingList = councilMeetings
     state.councilMeetingCount = councilMeetings.length

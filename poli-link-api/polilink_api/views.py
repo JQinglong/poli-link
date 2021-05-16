@@ -39,7 +39,7 @@ class PersonViewSet(viewsets.ModelViewSet):
     serializer_class = PersonSerializer
 
 class CouncilMemberViewSet(viewsets.ModelViewSet):
-    queryset = CouncilMember.objects.all()
+    queryset = CouncilMember.objects.order_by('name')
     serializer_class = CouncilMemberSerializer
     filter_fields = ('council', 'person', )
 
