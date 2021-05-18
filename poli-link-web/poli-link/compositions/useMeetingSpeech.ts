@@ -53,7 +53,7 @@ export default function useMeetingSpeech () {
   const getMeetingSpeechList = async (payload: MeetingSpeechListRequest = {}) => {
     const meetingSpeechs = await $repository.meetingSpeech.getMeetingSpeechList(payload)
 
-    console.log('meetingSpeechs', meetingSpeechs)
+    // console.log('meetingSpeechs', meetingSpeechs)
 
     state.meetingSpeechList = meetingSpeechs
     state.meetingSpeechCount = meetingSpeechs.length
@@ -62,7 +62,7 @@ export default function useMeetingSpeech () {
   const createMeetingSpeech = async (payload: CreateMeetingSpeechRequest) => {
     const response = await $repository.meetingSpeech.createMeetingSpeech(payload)
 
-    console.log('createMeetingSpeech response', response)
+    // console.log('createMeetingSpeech response', response)
     if (response) {
       await getMeetingSpeechList({ council: payload.council.id, council_meeting: payload.council_meeting.id })
       return response

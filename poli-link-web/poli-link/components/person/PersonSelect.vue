@@ -29,7 +29,7 @@ export default defineComponent({
   props: {
     value: {
       type: String,
-      required: true,
+      required: false,
     },
   },
   setup(props, ctx) {
@@ -43,7 +43,7 @@ export default defineComponent({
     });
     watchEffect(() => {
       // console.log('editableValue', editableValue)
-      state.editableValue= editableValue.value
+      state.editableValue= editableValue.value ?? ''
     });
 
 

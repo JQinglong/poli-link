@@ -9,12 +9,7 @@
       :sort-desc="sortDesc"
     >
       <template v-slot:header>
-        <v-toolbar
-          dense
-          dark
-          color="teal lighten-2"
-          class="mb-1"
-        >
+        <v-toolbar dense dark color="teal lighten-2" class="mb-1">
           <v-text-field
             dense
             v-model="search"
@@ -25,54 +20,12 @@
             prepend-inner-icon="mdi-magnify"
             label="Search"
           ></v-text-field>
-          <template v-if="$vuetify.breakpoint.mdAndUp">
-            <v-spacer></v-spacer>
-            <v-select
-              dense
-              v-model="sortBy"
-              flat
-              solo-inverted
-              hide-details
-              :items="keys"
-              prepend-inner-icon="mdi-magnify"
-              label="Sort by"
-            ></v-select>
-            <v-spacer></v-spacer>
-            <v-btn-toggle
-              v-model="sortDesc"
-              mandatory
-            >
-              <v-btn
-                small
-                depressed
-                color="teal"
-                :value="false"
-              >
-                <v-icon>mdi-arrow-up</v-icon>
-              </v-btn>
-              <v-btn
-                small
-                depressed
-                color="teal"
-                :value="true"
-              >
-                <v-icon>mdi-arrow-down</v-icon>
-              </v-btn>
-            </v-btn-toggle>
-          </template>
         </v-toolbar>
       </template>
 
       <template v-slot:default="props">
         <v-row>
-          <v-col
-            v-for="item in props.items"
-            :key="item.name"
-            cols="12"
-            sm="6"
-            md="4"
-            lg="4"
-          >
+          <v-col v-for="item in props.items" :key="item.name" cols="12" sm="6" md="4" lg="4">
             <v-card>
               <v-card-title class="subheading font-weight-bold">
                 {{ item.council.name }}
@@ -81,7 +34,7 @@
                 {{ item.council_meeting.name }}
               </v-card-subtitle>
               <v-card-text>
-              {{ item.speech }}
+                {{ item.speech }}
               </v-card-text>
               <v-divider></v-divider>
               <v-icon @click="$router.push(`/council/${item.council}/${item.council_meeting}/#${item.id}`)">mdi-information</v-icon>
@@ -92,14 +45,12 @@
           </v-col>
         </v-row>
       </template>
-
     </v-data-iterator>
   </v-container>
 </template>
 <script lang="ts">
 // 個人発言リスト
-import { PropType } from 'vue'
-import { computed, toRefs, useFetch, defineComponent } from '@nuxtjs/composition-api';
+import { reactive, computed, toRefs, useFetch, defineComponent } from '@nuxtjs/composition-api';
 
 import { useMeetingSpeech } from '@/compositions';
 
@@ -112,45 +63,36 @@ export default defineComponent({
     },
   },
   setup(props, { root }) {
-    console.log('personId', props.personId)
+    console.log('personId', props.personId);
     const { state: meetingSpeechState, getMeetingSpeechList } = useMeetingSpeech();
 
-    const     itemsPerPageArray= [4, 8, 12]
-    const     search= ''
-    const    filter= {}
-    const    sortDesc= false
-    const    page= 1
-    const    itemsPerPage= 60
-    const    sortBy= 'name'
-    const    keys= [
-          'Id',
-          'Date',
-          'Name',
-        ]
-    const filteredKeys = computed(() => {
-      return keys.filter(key => key !== 'Name')
-
-    })
+    const itemsPerPageArray = [4, 8, 12];
+    const state = reactive({
+      search: '',
+      filter: {},
+      sortDesc: false,
+    });
+    const page = 1;
+    const itemsPerPage = 60;
+    const sortBy = 'name';
+    const keys = [ 'meeting_date', 'name'];
 
     const fetchData = async (offset = 0, personId = '') => {
-      console.log('personId', personId)
+      console.log('personId', personId);
       await getMeetingSpeechList({ offset: offset, person: personId });
     };
 
     const { fetchState } = useFetch(() => fetchData(0, props.personId));
 
     return {
-        itemsPerPageArray,
-        search,
-        filter,
-        sortDesc,
-        page,
-        itemsPerPage,
-        sortBy,
-        keys,
-        filteredKeys,
+      itemsPerPageArray,
+      ...toRefs(state),
+      page,
+      itemsPerPage,
+      sortBy,
+      keys,
       ...toRefs(meetingSpeechState),
-    }
+    };
   },
 });
 //     data () {
