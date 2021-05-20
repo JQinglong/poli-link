@@ -1,8 +1,28 @@
 <template>
   <div>
     <v-card>
-      あかさたな
-      <v-data-table :headers="headers" :items="state.people" item-key="id" group-by="group" class="elevation-1" dense>
+      <v-data-table
+        :headers="headers"
+        :items="people"
+        :search="search"
+        item-key="id" group-by="group" class="elevation-1" dense>
+
+        <template v-slot:top>
+          <v-toolbar dense dark color="teal lighten-2" class="mb-1">
+            あかさたなはまやらわ
+            <v-text-field
+              dense
+              v-model="search"
+              clearable
+              flat
+              solo-inverted
+              hide-details
+              prepend-inner-icon="mdi-magnify"
+              label="Search"
+            ></v-text-field>
+          </v-toolbar>
+        </template>
+      
         <template v-slot:[`item.actions`]="{ item }">
           <v-icon @click="$router.push(`/person/${item.id}/`)"> mdi-tooltip-account </v-icon>
         </template>
@@ -27,6 +47,7 @@ export default defineComponent({
     const { state: personState, getPersonList } = usePerson();
 
     const state = reactive({
+      search: '',
       people: [] as any[]
     })
 
@@ -48,8 +69,8 @@ export default defineComponent({
     return {
       headers,
       ...toRefs(personState),
+      ...toRefs(state),
       fetchState,
-      state,
     };
   },
 });

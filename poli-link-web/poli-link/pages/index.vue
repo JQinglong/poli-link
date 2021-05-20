@@ -1,43 +1,5 @@
 <template>
   <v-card color="indigo lighten-4">
-    <v-toolbar dark dense color="blue-grey darken-4">
-      今話題の会議体
-      <v-spacer></v-spacer>
-
-      <v-text-field
-        v-model="search"
-        clearable
-        flat
-        dense
-        solo-inverted
-        hide-details
-        prepend-inner-icon="mdi-magnify"
-        label="Search"
-      ></v-text-field>
-      <template v-if="$vuetify.breakpoint.mdAndUp">
-        <v-spacer></v-spacer>
-        <v-select
-          v-model="sortBy"
-          flat
-          dense
-          solo-inverted
-          hide-details
-          :items="keys"
-          prepend-inner-icon="mdi-magnify"
-          label="Sort by"
-        ></v-select>
-        <v-spacer></v-spacer>
-        <v-btn-toggle v-model="sortDesc" mandatory>
-          <v-btn depressed small color="teal" :value="false">
-            <v-icon>mdi-arrow-up</v-icon>
-          </v-btn>
-          <v-btn depressed small color="teal" :value="true">
-            <v-icon>mdi-arrow-down</v-icon>
-          </v-btn>
-        </v-btn-toggle>
-      </template>
-    </v-toolbar>
-
     <council-list-hot />
   </v-card>
 </template>

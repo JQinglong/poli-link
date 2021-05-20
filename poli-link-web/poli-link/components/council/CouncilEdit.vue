@@ -11,7 +11,23 @@
               <!-- 人物登録 -->
               <person-add />
               <!-- 人物リスト -->
-              <v-data-table :headers="personHeaders" :items="personList" class="elevation-1" hide-default-header>
+              <v-data-table
+                :headers="personHeaders"
+                :items="personList"
+                :search="search"
+                class="elevation-1" hide-default-header>
+                <template v-slot:top>
+                    <v-text-field
+                      dense
+                      v-model="search"
+                      clearable
+                      flat
+                      solo-inverted
+                      hide-details
+                      prepend-inner-icon="mdi-magnify"
+                      label="Search"
+                    ></v-text-field>
+                </template>
                 <template v-slot:[`item.actions`]="{ item }">
                   <v-icon @click="handleAddMember(item)"> mdi-account-arrow-right </v-icon>
                 </template>
@@ -56,6 +72,7 @@ export default defineComponent({
     // console.log('props.councilId', props.councilId)
     const personHeaders = [
       { text: 'name', value: 'name' },
+      { text: 'name_kana', value: 'name_kana' },
       { text: 'actions', value: 'actions' },
     ];
     const headers = [
@@ -68,6 +85,9 @@ export default defineComponent({
     const { state: councilState, getCouncil } = useCouncil();
     const { state: personState, getPersonList } = usePerson();
 
+    const state = reactive({
+      search: '',
+    })
     const handleAddMember = async(item: PersonType) => {
       createCouncilMemberState.council = councilState.councilData
       createCouncilMemberState.name = item.name
@@ -96,6 +116,7 @@ export default defineComponent({
 
     const { fetchState } = useFetch(() => fetchData(0, props.councilId));
     return {
+      ...toRefs(state),
       ...toRefs(councilMemberState),
       ...toRefs(councilState),
       ...toRefs(personState),

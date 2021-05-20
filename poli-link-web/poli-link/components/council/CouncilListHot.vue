@@ -1,7 +1,52 @@
 <template>
   <div>
     <v-card dense>
-      <v-data-table :items="councilList" :search="search" hide-default-footer dense>
+      <v-data-table
+        :headers="headers"
+        :items="councilList"
+        :search="search"
+        hide-default-header
+        hide-default-footer
+        dense>
+
+        <template v-slot:top>
+          <v-toolbar dark dense color="blue-grey darken-4">
+            今話題の会議体 
+            <v-text-field
+              v-model="search"
+              clearable
+              flat
+              dense
+              solo-inverted
+              hide-details
+              prepend-inner-icon="mdi-magnify"
+              label="Search"
+            ></v-text-field>
+            <!-- <template v-if="$vuetify.breakpoint.mdAndUp">
+              <v-spacer></v-spacer>
+              <v-select
+                v-model="sortBy"
+                flat
+                dense
+                solo-inverted
+                hide-details
+                :items="keys"
+                prepend-inner-icon="mdi-magnify"
+                label="Sort by"
+              ></v-select>
+              <v-spacer></v-spacer>
+              <v-btn-toggle v-model="sortDesc" mandatory>
+                <v-btn depressed small color="teal" :value="false">
+                  <v-icon>mdi-arrow-up</v-icon>
+                </v-btn>
+                <v-btn depressed small color="teal" :value="true">
+                  <v-icon>mdi-arrow-down</v-icon>
+                </v-btn>
+              </v-btn-toggle>
+            </template> -->
+          </v-toolbar>
+        </template>
+
         <template v-slot:item="{ item }">
           <council-list-item :council="item" />
         </template>
@@ -11,7 +56,7 @@
 </template>
 
 <script lang="ts">
-import { ref, toRefs, useFetch, defineComponent } from '@nuxtjs/composition-api';
+import { ref, reactive, toRefs, useFetch, defineComponent } from '@nuxtjs/composition-api';
 import CouncilListItem from '~/components/council/CouncilListItem.vue';
 import { useMinistry, useCouncil } from '@/compositions';
 
@@ -25,9 +70,17 @@ import { useMinistry, useCouncil } from '@/compositions';
 export default defineComponent({
   name: 'CouncilListHot',
   setup() {
-    const search = ref<String>('');
-    const selected = ref<Number[]>([2]);
-
+    // const search = ref<String>('');
+    const headers = [
+      { text: '名前', value: 'name' },
+      { text: '説明', value: 'description' },
+      { text: '', value: 'actions', sortable: false },
+    ];
+    const state = reactive({
+      search: '',
+      filter: {},
+      sortDesc: false,
+    });
     const { state: ministryState, getMinistryList } = useMinistry();
 
     const { state: councilState, getCouncilList } = useCouncil();
@@ -42,8 +95,8 @@ export default defineComponent({
     const { fetchState } = useFetch(() => fetchData());
 
     return {
-      search,
-      selected,
+      headers,
+      ...toRefs(state),
       ...toRefs(ministryState),
       ...toRefs(councilState),
       fetchState,

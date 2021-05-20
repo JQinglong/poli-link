@@ -174,11 +174,11 @@ export default defineComponent({
         title: 'ホーム',
         to: '/'
       },
-      {
-        icon: 'mdi-apps',
-        title: 'memo',
-        to: '/memo'
-      },
+      // {
+      //   icon: 'mdi-apps',
+      //   title: 'memo',
+      //   to: '/memo'
+      // },
       {
         icon: 'mdi-forum',
         title: '会議体検索',
