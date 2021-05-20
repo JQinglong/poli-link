@@ -58,7 +58,8 @@ const config: Configuration = {
     '@/plugins/composition-api',
     // '@/plugins/axios-accessor',
     // '@/plugins/repository-factory',
-    '@/plugins/repository'
+    '@/plugins/repository',
+    '@/plugins/vue-scrollto'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -78,6 +79,7 @@ const config: Configuration = {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/dotenv',
+    'vue-scrollto/nuxt',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

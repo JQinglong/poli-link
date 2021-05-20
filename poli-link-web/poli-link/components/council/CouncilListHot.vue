@@ -35,6 +35,7 @@ export default defineComponent({
     const fetchData = async (offset = 0) => {
       await getMinistryList({ offset });
       await getCouncilList({ offset });
+      console.log('councilState', councilState)
       // console.log('ministryState', ministryState)
     };
 

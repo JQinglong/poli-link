@@ -30,7 +30,8 @@
       "@nuxtjs/firebase",
       "@types/node",
       "vuetify",
-      "@types/jest"
+      "@types/jest",
+      "vue-scrollto"
     ]
   },
   "files": [

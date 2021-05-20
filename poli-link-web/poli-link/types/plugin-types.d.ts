@@ -14,3 +14,9 @@ declare module '@nuxt/types' {
     $repository: Repository
   }
 }
+
+declare module 'vue/types/vue' {
+  interface Vue {
+    $scrollTo: any
+  }
+}
