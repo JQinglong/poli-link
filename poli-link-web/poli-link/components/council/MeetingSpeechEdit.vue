@@ -42,7 +42,7 @@
           <v-card-title class="headline">発言更新</v-card-title>
 
           <v-text-field label="Order" dense outlined clearable v-model="editedItem.order"> </v-text-field>
-          <person-select v-model="editedItem.person" @change="selectPerson" />
+          <council-member-select v-model="editedItem.person" :councilId="editedItem.council.id" @selectMember="selectMember" />
           <v-text-field label="発言者" dense outlined clearable v-model="editedItem.speaker"> </v-text-field>
           <v-textarea label="発言" dense outlined clearable v-model="editedItem.speech"> </v-textarea>
           <v-textarea label="備考等" dense outlined clearable v-model="editedItem.description"> </v-textarea>
@@ -64,11 +64,12 @@ import { ref, toRefs, useFetch, defineComponent, reactive } from '@nuxtjs/compos
 import { useCouncilMeeting, useMeetingSpeech } from '@/compositions';
 import MeetingSpeechAdd from './MeetingSpeechAdd.vue';
 import { defaultMeetingSpeechItem } from '@/compositions/util/const'
-import { MeetingSpeechType, PersonType } from '@/types';
-import PersonSelect from '../person/PersonSelect.vue';
+import { MeetingSpeechType, PersonType, CouncilMemberType } from '@/types';
+// import PersonSelect from '../person/PersonSelect.vue';
+import CouncilMemberSelect from '../council/CouncilMemberSelect.vue';
 
 export default defineComponent({
-  components: { MeetingSpeechAdd, PersonSelect },
+  components: { MeetingSpeechAdd, CouncilMemberSelect },
   name: 'MeetingSpeechEdit',
   props: {
     councilId: {
@@ -108,9 +109,9 @@ export default defineComponent({
       });
     };
 
-    const selectPerson = async(item: PersonType) => {
-      console.log('selectPerson item.id', item.id)
-      state.editedItem.person = item.id
+    const selectMember = async(item: CouncilMemberType) => {
+      console.log('selectMember item.id', item.id)
+      state.editedItem.person = item.person
       state.editedItem.speaker = item.name
     }
 
@@ -129,7 +130,7 @@ export default defineComponent({
       editItem,
       updateItem,
       closeDelete,
-      selectPerson,
+      selectMember,
     };
   },
 });

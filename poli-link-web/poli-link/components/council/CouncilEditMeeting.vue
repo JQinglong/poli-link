@@ -108,7 +108,7 @@ export default defineComponent({
     };
 
     const fetchData = async (offset = 0, councilId: string = '') => {
-      // console.log('CouncilEditMeeting　councilId', councilId);
+      console.log('CouncilEditMeeting　councilId', councilId);
       await getCouncilMeetingList({ offset: offset, council: councilId });
     };
 
