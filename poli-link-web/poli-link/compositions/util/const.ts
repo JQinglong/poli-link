@@ -1,4 +1,4 @@
-import { MinistryType, CouncilType, CouncilMemberType, CouncilMeetingType, MeetingSpeechType } from "@/types";
+import { MinistryType, CouncilType, CouncilMemberType, CouncilMeetingType, MeetingSpeechType, PersonType } from "@/types";
 
 export const defaultMinistryItem: MinistryType = {
   id: '',
@@ -45,4 +45,17 @@ export const defaultMeetingSpeechItem: MeetingSpeechType = {
   person: '',
   speech: '',
   description: '',
+};
+
+export const defaultPersonItem: PersonType = {
+  id: '',
+  name: '',
+  name_kana: '',
+  name_e: '',
+  career_summary: '',
+  url_official: '',
+  url_wikipedia: '',
+  url_twitter: '',
+  url_facebook: '',
+  url_youtube: '',
 };
