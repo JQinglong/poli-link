@@ -3,9 +3,7 @@
   <v-card dark flat>
     <v-card-title class="pa-2 blue-grey darken-1">
       <h3 class="title grow">{{personData.name}}</h3>
-      <v-btn icon>
-        <v-icon>mdi-share-variant</v-icon>
-      </v-btn>
+      <v-icon @click="editItem" color="grey lighten-1"> mdi-share-variant </v-icon>
     </v-card-title>
   </v-card>
   <v-card>
@@ -50,6 +48,19 @@
       発言集
     </v-card-title>
     <person-speech-list :personId="personId" />
+
+    <v-dialog v-model="dialogEdit" max-width="500px">
+      <v-card>
+        <v-card-title class="headline">この人物へのリンク</v-card-title>
+        <v-text-field v-model="editedItemUrl" append-icon="mdi-link-variant" filled type="text" @click:append="copyText(editedItemUrl)" onfocus="this.select();"></v-text-field>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" text @click="closeDelete">閉じる</v-btn>
+          <v-spacer></v-spacer>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
   </v-card>
 </div>
 </template>
@@ -62,7 +73,7 @@ import PersonCareerList from './PersonCareerList.vue'
 import PersonCounscilList from './PersonCounscilList.vue'
 import PersonSpeechList from './PersonSpeechList.vue'
 
-import { ref, toRefs, useFetch, defineComponent, reactive } from '@nuxtjs/composition-api';
+import { ref, toRefs, useFetch, defineComponent, reactive, useContext } from '@nuxtjs/composition-api';
 import { usePerson } from '@/compositions';
 import { PersonType } from "@/types";
 
@@ -77,10 +88,31 @@ export default defineComponent({
   },
   setup(props, { root }) {
     const { state: personState, getPerson } = usePerson();
+    const { route } = useContext();
+
 
     const state = reactive({
-      people: [] as any[]
+      people: [] as any[],
+      dialogEdit: false,
+      editedItemUrl: '',
     })
+
+    const editItem = () => {
+      state.editedItemUrl = `${process.env.WEB_URL}${route.value.path}`;
+      state.dialogEdit = true;
+    };
+    const closeDelete = () => {
+      state.dialogEdit = false;
+      root.$nextTick(() => {
+        state.editedItemUrl = '';
+      });
+    };
+    const copyText = (text: string) => {
+      console.log('copy text', text)
+      if(navigator.clipboard){
+          navigator.clipboard.writeText(text);
+      }
+    };
 
     const externalLink = (url: string) =>{
       if (url) {
@@ -97,6 +129,10 @@ export default defineComponent({
     return {
       externalLink,
       ...toRefs(personState),
+      ...toRefs(state),
+      editItem,
+      closeDelete,
+      copyText,
     };
   },
 });

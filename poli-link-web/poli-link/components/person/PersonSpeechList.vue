@@ -37,10 +37,7 @@
                 {{ item.speech }}
               </v-card-text>
               <v-divider></v-divider>
-              <v-icon @click="$router.push(`/council/${item.council}/${item.council_meeting}/#${item.id}`)">mdi-information</v-icon>
-              <v-btn icon>
-                <v-icon>mdi-share-variant</v-icon>
-              </v-btn>
+              <v-icon @click="$router.push(`/council/${item.council.id}/${item.council_meeting.id}/#${item.id}`)">mdi-information</v-icon>
             </v-card>
           </v-col>
         </v-row>

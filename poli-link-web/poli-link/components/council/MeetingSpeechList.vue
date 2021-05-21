@@ -17,7 +17,6 @@
 
           <v-list-item-action>
             <v-list-item-action-text v-text="item.action"></v-list-item-action-text>
-
             <v-icon @click="editItem(item)" color="grey lighten-1"> mdi-share-variant </v-icon>
           </v-list-item-action>
         </v-list-item>
@@ -25,8 +24,6 @@
         <v-divider v-if="index < meetingSpeechList.length - 1" :key="index"></v-divider>
       </template>
     </v-list>
-
-    <div id="anchor" style="margin-top: 2000px">到着！</div>
 
     <v-dialog v-model="dialogEdit" max-width="500px">
       <v-card>
@@ -39,6 +36,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    
   </v-card>
 </template>
 <script lang="ts">
