@@ -71,6 +71,7 @@
 import { ref, toRefs, useFetch, defineComponent, reactive, useContext } from '@nuxtjs/composition-api';
 import { useCouncil, useCouncilTree } from '@/compositions';
 import { defaultCouncilTreeItem } from '@/compositions/util/const'
+import { CouncilTreeType } from '@/types'
 
 import CouncilMeetingList from '~/components/council/CouncilMeetingList.vue';
 import CouncilMemberList from '~/components/council/CouncilMemberList.vue';
@@ -92,8 +93,8 @@ export default defineComponent({
     const state = reactive({
       dialogEdit: false,
       editedItemUrl: '',
-      childTree: [],
-      parentTree: [],
+      childTree: [] as CouncilTreeType[],
+      parentTree: [] as CouncilTreeType[],
     });
     const editItem = () => {
       state.editedItemUrl = `${process.env.WEB_URL}${route.value.path}`;
