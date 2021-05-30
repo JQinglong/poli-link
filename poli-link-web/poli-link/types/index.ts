@@ -79,3 +79,11 @@ export interface MeetingSpeechType {
   speech: string
   description: string
 }
+
+export interface CouncilTreeType {
+  id: string
+  council: CouncilType
+  parent: CouncilType
+  level: number
+  order: number
+}

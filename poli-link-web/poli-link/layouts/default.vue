@@ -80,7 +80,6 @@
           hide-details
         /> -->
         <v-spacer></v-spacer>
-
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
             <v-btn
@@ -89,40 +88,40 @@
               v-on="on"
             >
               <v-avatar
-                v-if="stateGlobal.user"
+                v-if="stateGlobal.user && stateGlobal.user.photoURL"
                 size="36"
               >
                 <img :src="stateGlobal.user.photoURL" :alt="stateGlobal.user.displayName" />
               </v-avatar>
               <v-icon
-                v-if="!stateGlobal.user"
+                v-else
               >mdi-account
               </v-icon>
             </v-btn>
           </template>
           <v-list>
             <v-list-item
-              v-if="stateGlobal.user"
+              v-if="stateGlobal.user.value.id"
               :to="'/settings'"
              >
               <v-list-item-avatar>
-                <v-icon>mdi-account</v-icon>
-              </v-list-item-avatar>
-              <v-list-item-title>Profile</v-list-item-title>
-            </v-list-item>
-            <v-list-item :to="'/settings'">
-              <v-list-item-avatar>
                 <v-icon>mdi-cog</v-icon>
               </v-list-item-avatar>
-              <v-list-item-title>Settings</v-list-item-title>
+              <v-list-item-title>設定</v-list-item-title>
             </v-list-item>
-            <v-list-item :to="'/login'">
+            <v-list-item
+              v-if="!stateGlobal.user.value.id"
+              :to="'/login'"
+             >
               <v-list-item-avatar>
                 <v-icon>mdi-login</v-icon>
               </v-list-item-avatar>
               <v-list-item-title>Login</v-list-item-title>
             </v-list-item>
-            <v-list-item @click="signOut">
+            <v-list-item
+              v-if="stateGlobal.user.value.id"
+              @click="signOut"
+            >
               <v-list-item-avatar>
                 <v-icon>mdi-logout</v-icon>
               </v-list-item-avatar>

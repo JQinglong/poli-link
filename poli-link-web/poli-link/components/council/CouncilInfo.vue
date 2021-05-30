@@ -17,6 +17,30 @@
         </v-btn>
       </v-card-title>
     </v-card>
+    <v-card color="teal lighten-2" v-if="true">
+      <v-row dense v-if="parentTree.length>0">
+        <v-col>
+          <v-list color="teal lighten-2">
+            <v-list-item v-for="(item, i) in parentTree" :key="i">
+          ┌
+                {{item.parent.name}}
+          <v-btn class="ml-2 mt-5" outlined rounded small @click="$router.push(`/council/${item.parent.id}/`)"> 詳細を見る </v-btn>
+            </v-list-item>
+          </v-list>
+        </v-col>
+      </v-row>
+      <v-row dense v-if="childTree.length>0">
+        <v-col>
+          <v-list color="teal lighten-2">
+            <v-list-item v-for="(item, i) in childTree" :key="i">
+          └
+                {{item.council.name}}
+          <v-btn class="ml-2 mt-5" outlined rounded small @click="$router.push(`/council/${item.council.id}/`)"> 詳細を見る </v-btn>
+            </v-list-item>
+          </v-list>
+        </v-col>
+      </v-row>
+    </v-card>
     <v-card-text class="py-0" style="white-space: pre-line;">
       {{ councilData.description }}
       <v-card-title>構成員</v-card-title>
@@ -45,8 +69,8 @@
 <script lang="ts">
 // 会議体情報表示
 import { ref, toRefs, useFetch, defineComponent, reactive, useContext } from '@nuxtjs/composition-api';
-import { useCouncil } from '@/compositions';
-import { CouncilType } from '@/types';
+import { useCouncil, useCouncilTree } from '@/compositions';
+import { defaultCouncilTreeItem } from '@/compositions/util/const'
 
 import CouncilMeetingList from '~/components/council/CouncilMeetingList.vue';
 import CouncilMemberList from '~/components/council/CouncilMemberList.vue';
@@ -63,10 +87,13 @@ export default defineComponent({
   setup(props, { root }) {
     const { route } = useContext();
     const { state: councilState, getCouncil } = useCouncil();
+    const { state: councilTreeState, getCouncilTreeList } = useCouncilTree();
 
     const state = reactive({
       dialogEdit: false,
       editedItemUrl: '',
+      childTree: [],
+      parentTree: [],
     });
     const editItem = () => {
       state.editedItemUrl = `${process.env.WEB_URL}${route.value.path}`;
@@ -92,7 +119,16 @@ export default defineComponent({
     };
 
     const fetchData = async () => {
+      // console.log('CouncilInfo fetchData', council)
       await getCouncil(props.councilId);
+      await getCouncilTreeList({ council: props.councilId });
+      state.parentTree = councilTreeState.councilTreeList.filter(
+        (item) => {
+          return item.parent
+        }
+      )
+      await getCouncilTreeList({ parent: props.councilId });
+      state.childTree = councilTreeState.councilTreeList
     };
     const { fetchState } = useFetch(() => fetchData());
 

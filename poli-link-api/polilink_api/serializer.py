@@ -7,6 +7,7 @@ from .models import Person
 from .models import CouncilMember
 from .models import CouncilMeeting
 from .models import MeetingSpeech
+from .models import CouncilTree
 
 class MemoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -46,4 +47,11 @@ class MeetingSpeechSerializer(WritableNestedModelSerializer):
     council_meeting = CouncilMeetingSerializer()
     class Meta:
         model = MeetingSpeech
+        fields = '__all__'
+
+class CouncilTreeSerializer(WritableNestedModelSerializer):
+    council = CouncilSerializer()
+    parent = CouncilSerializer()
+    class Meta:
+        model = CouncilTree
         fields = '__all__'

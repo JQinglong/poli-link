@@ -70,3 +70,12 @@ class MeetingSpeech(models.Model):
     description = models.TextField(blank=True, null=True)
     def __str__(self):
         return f'{self.council} {self.council_meeting} {self.order} {self.speaker}'
+
+class CouncilTree(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    council = models.ForeignKey(Council, on_delete=models.PROTECT, related_name='council')
+    parent = models.ForeignKey(Council, on_delete=models.SET_NULL, blank=True, null=True, related_name='parent_council')
+    level = models.IntegerField()
+    order = models.IntegerField()
+    def __str__(self):
+        return f'{self.council}'

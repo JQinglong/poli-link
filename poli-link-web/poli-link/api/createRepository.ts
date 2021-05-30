@@ -12,10 +12,12 @@ import {
   CouncilMemberRepository,
   councilMeetingRepository,
   CouncilMeetingRepository,
+  meetingSpeechRepository,
   MeetingSpeechRepository,
+  councilTreeRepository,
+  CouncilTreeRepository,
 } from '@/api'
 import { ErrorType } from '@/constants'
-import { meetingSpeechRepository } from './meetingSpeechRepository'
 
 export type Repository = {
   memo: MemoRepository
@@ -25,6 +27,7 @@ export type Repository = {
   councilMember: CouncilMemberRepository
   councilMeeting: CouncilMeetingRepository
   meetingSpeech: MeetingSpeechRepository
+  councilTree: CouncilTreeRepository
 }
 
 /**
@@ -70,6 +73,7 @@ const createRepository = ({ app, $axios, redirect }: Context): Repository => {
     councilMember: councilMemberRepository($axios),
     councilMeeting: councilMeetingRepository($axios),
     meetingSpeech: meetingSpeechRepository($axios),
+    councilTree: councilTreeRepository($axios),
   }
 }
 
