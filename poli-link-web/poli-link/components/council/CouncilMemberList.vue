@@ -1,5 +1,5 @@
 <template>
-  <v-data-table :headers="headers" :items="councilMemberList" class="elevation-1" hide-default-header hide-default-footer>
+  <v-data-table :headers="headers" :items="councilMemberList" class="elevation-1" hide-default-header>
     <template v-slot:[`item.position`]="{ item }">
       <v-chip v-if="item.position" dark>
         {{ item.position }}
