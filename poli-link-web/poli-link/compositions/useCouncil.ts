@@ -50,8 +50,8 @@ export default function useCouncil() {
 
     console.log('councils', councils)
     
-    state.councilList = councils
-    state.councilCount = councils.length
+    state.councilList = councils.results
+    state.councilCount = councils.count
   }
 
   const createCouncil = async (payload: CreateCouncilRequest) => {

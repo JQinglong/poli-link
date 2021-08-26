@@ -31,7 +31,7 @@ export type UpdateMinistryRequest = {
 
 // 以下ほとんど文字置換だけなので、本当はもう少しうまくできるはず
 type MinistryResponse = ResponseType<MinistryType>
-type MinistryListResponse = ResponseTypes<MinistryType[]>
+type MinistryListResponse = ResponseTypes<{count: number, next: string,previous: string, results: MinistryType[]}>
 
 export const ministryRepository = (axios: NuxtAxiosInstance) => ({
   getMinistry(ministryid: MinistryId): MinistryResponse {

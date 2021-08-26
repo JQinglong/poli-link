@@ -19,6 +19,7 @@ type CouncilMeetingId = CouncilMeetingType['id']
 export interface CouncilMeetingListRequest  {
   limit?: number
   offset?: number
+  ordering?: string
   council?: string
 }
 
@@ -36,7 +37,7 @@ export type UpdateCouncilMeetingRequest = {
 
 // 以下ほとんど文字置換だけなので、本当はもう少しうまくできるはず
 type CouncilMeetingResponse = ResponseType<CouncilMeetingType>
-type CouncilMeetingListResponse = ResponseTypes<CouncilMeetingType[]>
+type CouncilMeetingListResponse = ResponseTypes<{count: number, next: string,previous: string, results: CouncilMeetingType[]}>
 
 export const councilMeetingRepository = (axios: NuxtAxiosInstance) => ({
   getCouncilMeeting(councilMeetingId: CouncilMeetingId): CouncilMeetingResponse {
@@ -46,13 +47,14 @@ export const councilMeetingRepository = (axios: NuxtAxiosInstance) => ({
   getCouncilMeetingList({
     limit = LIMIT_LIST_ITEM,
     offset = 0,
+    ordering='order',
     council=''
   }: CouncilMeetingListRequest = {}): CouncilMeetingListResponse {
     const defaultParam = {
     }
 
     return axios.$get('/council_meeting/', {
-      params: {...defaultParam, limit, offset, council},
+      params: {...defaultParam, limit, offset, council, ordering},
     })
   },
   createCouncilMeeting(payload: CreateCouncilMeetingRequest): CouncilMeetingResponse | CustomErrors {

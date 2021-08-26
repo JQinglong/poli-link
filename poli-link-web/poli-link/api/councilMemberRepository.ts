@@ -37,7 +37,7 @@ export type UpdateCouncilMemberRequest = {
 
 // 以下ほとんど文字置換だけなので、本当はもう少しうまくできるはず
 type CouncilMemberResponse = ResponseType<CouncilMemberType>
-type CouncilMemberListResponse = ResponseTypes<CouncilMemberType[]>
+type CouncilMemberListResponse = ResponseTypes<{count: number, next: string,previous: string, results: CouncilMemberType[]}>
 
 export const councilMemberRepository = (axios: NuxtAxiosInstance) => ({
   getCouncilMember(councilMemberId: CouncilMemberId): CouncilMemberResponse {

@@ -5,5 +5,5 @@ export const ErrorType = {
   Unprocessable: 422,
 }
 
-export const LIMIT_LIST_ITEM = 20
-export const LIMIT_LIST_ITEM_LARGE = 60
+export const LIMIT_LIST_ITEM = 1000
+export const LIMIT_LIST_ITEM_SMALL = 20

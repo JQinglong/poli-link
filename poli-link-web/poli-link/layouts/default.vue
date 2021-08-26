@@ -63,7 +63,7 @@
         </v-icon>
       </v-btn>
       <v-toolbar-title class="mr-12 align-center">
-        <span class="title">Poli Link （絶賛開発中）</span>
+        <span class="title">Poli Link - 政府会議体議事録検索システム（絶賛開発中）</span>
       </v-toolbar-title> 
 
       <v-spacer />

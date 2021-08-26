@@ -30,7 +30,7 @@ export type UpdateCouncilTreeRequest = {
 
 // 以下ほとんど文字置換だけなので、本当はもう少しうまくできるはず
 type CouncilTreeResponse = ResponseType<CouncilTreeType>
-type CouncilTreeListResponse = ResponseTypes<CouncilTreeType[]>
+type CouncilTreeListResponse = ResponseTypes<{count: number, next: string,previous: string, results: CouncilTreeType[]}>
 
 export const councilTreeRepository = (axios: NuxtAxiosInstance) => ({
   getCouncilTree(councilTreeId: CouncilTreeId): CouncilTreeResponse {

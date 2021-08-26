@@ -31,7 +31,7 @@ export type UpdatePersonRequest = {
 
 // 以下ほとんど文字置換だけなので、本当はもう少しうまくできるはず
 type PersonResponse = ResponseType<PersonType>
-type PersonListResponse = ResponseTypes<PersonType[]>
+type PersonListResponse = ResponseTypes<{count: number, next: string,previous: string, results: PersonType[]}>
 
 export const personRepository = (axios: NuxtAxiosInstance) => ({
   getPerson(personid: PersonId): PersonResponse {

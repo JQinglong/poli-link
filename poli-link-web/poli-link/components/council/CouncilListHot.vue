@@ -10,8 +10,7 @@
         dense>
 
         <template v-slot:top>
-          <v-toolbar dark dense color="blue-grey darken-4">
-            今話題の会議体 
+          <v-toolbar dense dark color="teal lighten-2" class="mb-1">
             <v-text-field
               v-model="search"
               clearable
@@ -20,7 +19,7 @@
               solo-inverted
               hide-details
               prepend-inner-icon="mdi-magnify"
-              label="Search"
+              label="キーワード"
             ></v-text-field>
             <!-- <template v-if="$vuetify.breakpoint.mdAndUp">
               <v-spacer></v-spacer>

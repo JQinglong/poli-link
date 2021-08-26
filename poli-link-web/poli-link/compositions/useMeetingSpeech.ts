@@ -55,8 +55,8 @@ export default function useMeetingSpeech () {
 
     // console.log('meetingSpeechs', meetingSpeechs)
 
-    state.meetingSpeechList = meetingSpeechs
-    state.meetingSpeechCount = meetingSpeechs.length
+    state.meetingSpeechList = meetingSpeechs.results
+    state.meetingSpeechCount = meetingSpeechs.count
   }
 
   const createMeetingSpeech = async (payload: CreateMeetingSpeechRequest) => {

@@ -65,8 +65,8 @@ export default function usePerson() {
 
     // console.log('persons', persons)
     
-    state.personList = persons
-    state.personCount = persons.length
+    state.personList = persons.results
+    state.personCount = persons.count
   }
 
   const createPerson = async (payload: CreatePersonRequest) => {

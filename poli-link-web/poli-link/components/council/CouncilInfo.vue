@@ -43,10 +43,23 @@
     </v-card>
     <v-card-text class="py-0" style="white-space: pre-line;">
       {{ councilData.description }}
-      <v-card-title>構成員</v-card-title>
+      <br />
+      <v-alert
+        border="left"
+        colored-border
+        color="teal"
+        elevation="1"
+        dense
+      >構成員</v-alert>
       <council-member-list :councilId="councilId" />
-
-      <v-card-title>開催状況</v-card-title>
+      <br />
+      <v-alert
+        border="left"
+        colored-border
+        color="teal"
+        elevation="1"
+        dense
+      >開催状況</v-alert>
       <council-meeting-list :councilId="councilId " />
     </v-card-text>
 

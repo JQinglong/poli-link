@@ -51,8 +51,8 @@ export default function useCouncilTree () {
 
     console.log('getCouncilTreeList', councilTrees)
 
-    state.councilTreeList = councilTrees
-    state.councilTreeCount = councilTrees.length
+    state.councilTreeList = councilTrees.results
+    state.councilTreeCount = councilTrees.count
   }
 
   const createCouncilTree = async (payload: CreateCouncilTreeRequest) => {

@@ -1,61 +1,40 @@
 <template>
-  <v-card color="indigo lighten-4">
-    <council-list-hot />
-  </v-card>
+  <v-row justify="center" align="start">
+    <v-col cols="12" sm="6" md="8">
+      <council-list-hot />
+    </v-col>
+    <v-col cols="6" md="4">
+      <v-card>
+        <v-alert
+          border="left"
+          colored-border
+          color="teal"
+          elevation="1"
+          dense
+        >
+          最新情報
+        </v-alert>
+        <CouncilMeetingListYM />
+      </v-card>
+      <br>
+      <v-card>
+        <v-alert
+          border="left"
+          colored-border
+          color="teal"
+          elevation="1"
+          dense
+        >
+          開発者からのお知らせ
+        </v-alert>
+        <v-img
+          height="250"
+          src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+        />
+        <v-card-title class="headline">
+          Welcome to the Vuetify + Nuxt.js template
+        </v-card-title>
+      </v-card>
+    </v-col>
+  </v-row>
 </template>
-
-<script lang="ts">
-import { ref, defineComponent } from '@nuxtjs/composition-api';
-import CouncilListItem from '~/components/council/CouncilListItem.vue';
-type Item = {
-  id: string;
-  title: string;
-  subtitle: string;
-  headline: string;
-  action: string;
-};
-
-export default defineComponent({
-  components: { CouncilListItem },
-  setup() {
-    const search = ref<String>('');
-    const selected = ref<Number[]>([2]);
-    const sortDesc = ref<Boolean>(false);
-    const sortBy = ref<String>('Name');
-    const keys = ref<String[]>(['Name']);
-
-    const councils = ref<Item[]>([
-      {
-        id: '1',
-        action: '15 min',
-        headline: 'Brunch this weekend?',
-        subtitle: `I'll be in your neighborhood doing errands this weekend. Do you want to hang out?`,
-        title: 'オリンピック組織委員会',
-      },
-      {
-        id: '2',
-        action: '15 min',
-        headline: 'Brunch this weekend?',
-        subtitle: `I'll be in your neighborhood doing errands this weekend. Do you want to hang out?`,
-        title: '「スーパーシティ」構想の実現に向けた有識者懇談会',
-      },
-      {
-        id: '3',
-        action: '15 min',
-        headline: 'Brunch this weekend?',
-        subtitle: `I'll be in your neighborhood doing errands this weekend. Do you want to hang out?`,
-        title: '新型コロナウイルス感染症対策分科会',
-      },
-    ]);
-
-    return {
-      search,
-      selected,
-      sortDesc,
-      keys,
-      sortBy,
-      councils,
-    };
-  },
-});
-</script>

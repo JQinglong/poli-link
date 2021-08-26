@@ -1,4 +1,6 @@
 import django_filters
+from rest_framework.filters import SearchFilter, OrderingFilter
+from django_filters.rest_framework import DjangoFilterBackend
 
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -46,9 +48,12 @@ class CouncilMemberViewSet(viewsets.ModelViewSet):
     filter_fields = ('council', 'person', )
 
 class CouncilMeetingViewSet(viewsets.ModelViewSet):
-    queryset = CouncilMeeting.objects.order_by('order')
+    queryset = CouncilMeeting.objects.all()
+    filter_backends = (SearchFilter, OrderingFilter, DjangoFilterBackend)
     serializer_class = CouncilMeetingSerializer
     filter_fields = ('council', )
+    ordering_fields = ['order', 'meeting_date']
+    ordering = ['order']
 
 class MeetingSpeechViewSet(viewsets.ModelViewSet):
     queryset = MeetingSpeech.objects.order_by('order')

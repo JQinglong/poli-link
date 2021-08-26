@@ -37,7 +37,7 @@ export type UpdateMeetingSpeechRequest = {
 
 // 以下ほとんど文字置換だけなので、本当はもう少しうまくできるはず
 type MeetingSpeechResponse = ResponseType<MeetingSpeechType>
-type MeetingSpeechListResponse = ResponseTypes<MeetingSpeechType[]>
+type MeetingSpeechListResponse = ResponseTypes<{count: number, next: string,previous: string, results: MeetingSpeechType[]}>
 
 export const meetingSpeechRepository = (axios: NuxtAxiosInstance) => ({
   getMeetingSpeech(meetingSpeechId: MeetingSpeechId): MeetingSpeechResponse {

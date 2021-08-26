@@ -52,8 +52,8 @@ export default function useCouncilMember() {
     // console.log('getCouncilMemberList', councilMembers)
     // console.log('getCouncilMemberList payload', payload)
     
-    state.councilMemberList = councilMembers
-    state.councilMemberCount = councilMembers.length
+    state.councilMemberList = councilMembers.results
+    state.councilMemberCount = councilMembers.count
   }
 
   const createCouncilMember = async (payload: CreateCouncilMemberRequest) => {

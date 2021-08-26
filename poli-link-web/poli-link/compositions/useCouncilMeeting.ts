@@ -49,13 +49,13 @@ export default function useCouncilMeeting () {
   }
 
   const getCouncilMeetingList = async (payload: CouncilMeetingListRequest = {}) => {
-    // console.log('getCouncilMeetingList', payload)
+    console.log('getCouncilMeetingList payload', payload)
     const councilMeetings = await $repository.councilMeeting.getCouncilMeetingList(payload)
 
     console.log('getCouncilMeetingList', councilMeetings)
 
-    state.councilMeetingList = councilMeetings
-    state.councilMeetingCount = councilMeetings.length
+    state.councilMeetingList = councilMeetings.results
+    state.councilMeetingCount = councilMeetings.count
   }
 
   const createCouncilMeeting = async (payload: CreateCouncilMeetingRequest) => {
