@@ -121,6 +121,9 @@ const config: Configuration = {
   typescript: {
     typeCheck: true,
     ignoreNotFoundWarnings: true
+  },
+  generate: {
+    fallback: true
   }
 }
 declare module 'vue/types/vue' {
