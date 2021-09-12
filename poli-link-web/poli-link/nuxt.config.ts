@@ -59,6 +59,7 @@ const config: Configuration = {
     // '@/plugins/axios-accessor',
     // '@/plugins/repository-factory',
     '@/plugins/repository',
+    '@/plugins/wordcloud',
     '@/plugins/vue-scrollto'
   ],
 

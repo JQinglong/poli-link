@@ -1,5 +1,13 @@
 <template>
   <v-container fluid>
+    <v-card-text>
+      <wordcloud
+        :data="words"
+        name-key="name"
+        value-key="value"
+        :show-tooltip="false"
+      />
+    </v-card-text>
     <v-data-iterator
       :items="meetingSpeechList"
       :items-per-page.sync="itemsPerPage"
@@ -47,12 +55,16 @@
 </template>
 <script lang="ts">
 // 個人発言リスト
-import { reactive, computed, toRefs, useFetch, defineComponent } from '@nuxtjs/composition-api';
+import { reactive, computed, toRefs, useFetch, useContext, defineComponent } from '@nuxtjs/composition-api';
 
 import { useMeetingSpeech } from '@/compositions';
 
+// import jsonData from '@/assets/wordcloud/1e987981-415a-4e50-ab5f-2a9e35243056.json'
+// import jsonData from `@/assets/wordcloud/${props.personId}.json`
+
 export default defineComponent({
   name: 'PersonSpeechList',
+
   props: {
     personId: {
       type: String,
@@ -68,15 +80,40 @@ export default defineComponent({
       search: '',
       filter: {},
       sortDesc: false,
+      words: [
+        { name: "発言", value: "100" },
+        { name: "Wordcloud", value: "20" },
+        { name: "議事録", value: "30" },
+        { name: "政府会議体", value: "40" },
+      ],
     });
     const page = 1;
     const itemsPerPage = 60;
     const sortBy = 'name';
     const keys = [ 'meeting_date', 'name'];
 
+    try {
+      const jsondata = require(`~/assets/wordcloud/${props.personId}.json`)
+      // console.log('jsondata', jsondata);
+      if (jsondata) {
+        state.words = jsondata
+      }
+    } catch {
+      console.log('no jsondata');
+    }
+
     const fetchData = async (offset = 0, personId = '') => {
       console.log('personId', personId);
       await getMeetingSpeechList({ offset: offset, person: personId });
+
+      // const jsondata = await import(`~/assets/wordcloud/${props.personId}.json`)
+      // const jsondata = await fetch(`/wordcloud/${props.personId}.json`).then(res =>
+      //   res.json()
+      // )
+      // console.log('jsondata', jsondata);
+
+      // state.words = jsondata
+
     };
 
     const { fetchState } = useFetch(() => fetchData(0, props.personId));
