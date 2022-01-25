@@ -8,6 +8,7 @@ from .models import CouncilMember
 from .models import CouncilMeeting
 from .models import MeetingSpeech
 from .models import CouncilTree
+from .models import CouncilNews
 
 class MemoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,8 +20,15 @@ class MinistrySerializer(serializers.ModelSerializer):
         model = Ministry
         fields = '__all__'
 
+class CouncilNewsSerializer(WritableNestedModelSerializer):
+    # council = CouncilSerializer()
+    class Meta:
+        model = CouncilNews
+        fields = '__all__'
+
 class CouncilSerializer(WritableNestedModelSerializer):
     ministry = MinistrySerializer()
+    news = CouncilNewsSerializer(many=True)
     class Meta:
         model = Council
         fields = '__all__'

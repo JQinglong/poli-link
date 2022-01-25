@@ -6,6 +6,7 @@ import useCouncilMember from "./useCouncilMember";
 import useCouncilMeeting from "./useCouncilMeeting";
 import useMeetingSpeech from "./useMeetingSpeech";
 import useCouncilTree from "./useCouncilTree";
+import useCouncilNews from "./useCouncilNews";
 
 export {
   useMemo,
@@ -16,4 +17,5 @@ export {
   useCouncilMeeting,
   useMeetingSpeech,
   useCouncilTree,
+  useCouncilNews,
 }

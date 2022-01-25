@@ -1,4 +1,4 @@
-import { MinistryType, CouncilType, CouncilMemberType, CouncilMeetingType, MeetingSpeechType, PersonType, CouncilTreeType } from "@/types";
+import { MinistryType, CouncilType, CouncilMemberType, CouncilMeetingType, MeetingSpeechType, PersonType, CouncilTreeType, CouncilNewsType } from "@/types";
 
 export const defaultMinistryItem: MinistryType = {
   id: '',
@@ -66,4 +66,10 @@ export const defaultCouncilTreeItem: CouncilTreeType = {
   parent: defaultCouncilItem,
   level: 0,
   order: 0,
+};
+
+export const defaultCouncilNewsItem: CouncilNewsType = {
+  id: '',
+  url: '',
+  council: defaultCouncilItem,
 };

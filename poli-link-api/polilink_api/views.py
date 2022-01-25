@@ -21,6 +21,8 @@ from .models import MeetingSpeech
 from .serializer import MeetingSpeechSerializer
 from .models import CouncilTree
 from .serializer import CouncilTreeSerializer
+from .models import CouncilNews
+from .serializer import CouncilNewsSerializer
 
 def index(request):
     return HttpResponse("Hello, world.")
@@ -64,3 +66,8 @@ class CouncilTreeViewSet(viewsets.ModelViewSet):
     queryset = CouncilTree.objects.order_by('order')
     serializer_class = CouncilTreeSerializer
     filter_fields = ('council', 'parent')
+
+class CouncilNewsViewSet(viewsets.ModelViewSet):
+    queryset = CouncilNews.objects.order_by('id')
+    serializer_class = CouncilNewsSerializer
+    filter_fields = ('council', )

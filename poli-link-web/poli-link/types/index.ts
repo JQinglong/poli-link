@@ -87,3 +87,9 @@ export interface CouncilTreeType {
   level: number
   order: number
 }
+
+export interface CouncilNewsType {
+  id: string
+  url: string
+  council: CouncilType
+}

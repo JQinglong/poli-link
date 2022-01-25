@@ -79,3 +79,14 @@ class CouncilTree(models.Model):
     order = models.IntegerField()
     def __str__(self):
         return f'{self.council}'
+
+class CouncilNews(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    council = models.ForeignKey(Council, related_name='news', on_delete=models.PROTECT)
+    url = models.CharField(max_length=256, blank=True, null=True)
+    site_name = models.CharField(max_length=256, blank=True, null=True)
+    title = models.CharField(max_length=256, blank=True, null=True)
+    description = models.CharField(max_length=256, blank=True, null=True)
+    image = models.CharField(max_length=256, blank=True, null=True)
+    def __str__(self):
+        return self.url
