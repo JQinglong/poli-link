@@ -42,7 +42,12 @@ const config: Configuration = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      { hid: 'description', name: 'description', content: '' },
+      { hid: 'og:type', property: 'og:type', content: 'website' },
+      { hid: 'og:url', property: 'og:url', content: 'https://polilink-web.netlify.app/' },
+      { hid: 'og:title', property: 'og:title', content: 'Poli Link - 政府会議体議事録検索システム' },
+      { hid: 'og:description', property: 'og:description', content: '政策がどう決まっていくのか、「議事録」を通じて見えるようにするためのアプリです。' },
+      { hid: 'og:image', property: 'og:image', content: 'https://polilink-web.netlify.app/people-icon.png' },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
