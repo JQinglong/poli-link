@@ -73,7 +73,7 @@ import PersonCareerList from './PersonCareerList.vue'
 import PersonCounscilList from './PersonCounscilList.vue'
 import PersonSpeechList from './PersonSpeechList.vue'
 
-import { ref, toRefs, useFetch, defineComponent, reactive, useContext } from '@nuxtjs/composition-api';
+import { ref, toRefs, useFetch, defineComponent, reactive, useContext, useMeta } from '@nuxtjs/composition-api';
 import { usePerson } from '@/compositions';
 import { PersonType } from "@/types";
 
@@ -86,10 +86,11 @@ export default defineComponent({
       required: true,
     },
   },
+  head: {
+  },
   setup(props, { root }) {
     const { state: personState, getPerson } = usePerson();
     const { route } = useContext();
-
 
     const state = reactive({
       people: [] as any[],
@@ -125,6 +126,16 @@ export default defineComponent({
       await getPerson(props.personId)
     }
     const { fetchState } = useFetch(() => fetchData());
+
+    const { title, meta } = useMeta()
+    title.value = `個人情報[${personState.personData.name}]`
+    meta.value = [
+      {
+        hid: 'og:url',
+        property: 'og:url',
+        content: `https://polilink-web.netlify.app/person/${props.personId}`,
+      },
+    ]
 
     return {
       externalLink,

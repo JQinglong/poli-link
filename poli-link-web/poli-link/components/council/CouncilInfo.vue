@@ -81,7 +81,7 @@
 
 <script lang="ts">
 // 会議体情報表示
-import { ref, toRefs, useFetch, defineComponent, reactive, useContext } from '@nuxtjs/composition-api';
+import { ref, toRefs, useFetch, defineComponent, reactive, useContext, useMeta } from '@nuxtjs/composition-api';
 import { useCouncil, useCouncilTree } from '@/compositions';
 import { defaultCouncilTreeItem } from '@/compositions/util/const'
 import { CouncilTreeType } from '@/types'
@@ -97,6 +97,8 @@ export default defineComponent({
       type: String,
       required: true,
     },
+  },
+  head: {
   },
   setup(props, { root }) {
     const { route } = useContext();
@@ -145,6 +147,16 @@ export default defineComponent({
       state.childTree = councilTreeState.councilTreeList
     };
     const { fetchState } = useFetch(() => fetchData());
+
+    const { title, meta } = useMeta()
+    title.value = `会議体情報[${councilState.councilData.name}]`
+    meta.value = [
+      {
+        hid: 'og:url',
+        property: 'og:url',
+        content: `https://polilink-web.netlify.app/council/${props.councilId}`,
+      },
+    ]
 
     return {
       externalLink,

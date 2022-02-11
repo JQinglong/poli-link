@@ -41,7 +41,7 @@
 
 <script lang="ts">
 // 議事情報表示
-import { ref, toRefs, useFetch, defineComponent, reactive, useContext } from '@nuxtjs/composition-api';
+import { ref, toRefs, useFetch, defineComponent, reactive, useContext, useMeta } from '@nuxtjs/composition-api';
 import { useCouncil, useCouncilMeeting } from '@/compositions';
 import { CouncilType } from "@/types";
 
@@ -61,6 +61,8 @@ export default defineComponent({
       type: String,
       required: true,
     },
+  },
+  head: {
   },
   setup(props, { root }) {
     const { state: councilMeetingState, getCouncilMeeting } = useCouncilMeeting();
@@ -99,6 +101,16 @@ export default defineComponent({
       await getCouncilMeeting(props.councilMeetingId)
     }
     const { fetchState } = useFetch(() => fetchData());
+
+    const { title, meta } = useMeta()
+    title.value = `議事[${councilMeetingState.councilMeetingData.name}]`
+    meta.value = [
+      {
+        hid: 'og:url',
+        property: 'og:url',
+        content: `https://polilink-web.netlify.app/council/${props.councilId}/${props.councilMeetingId}`,
+      },
+    ]
 
     return {
       externalLink,
