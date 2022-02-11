@@ -10,7 +10,7 @@
       <v-row justify="center" no-gutters>
         <v-btn
           v-for="link in links"
-          :key="link"
+          :key="link.name"
           color="white"
           text
           rounded
@@ -21,6 +21,9 @@
         </v-btn>
         <v-col class="red lighten-2 py-4 text-center white--text" cols="12">
           {{ new Date().getFullYear() }} — <strong>JQ</strong>
+          <v-btn icon>
+            <v-icon @click="externalLink('https://github.com/JQinglong/poli-link')">mdi-github</v-icon>
+          </v-btn>
         </v-col>
       </v-row>
     </v-footer>
@@ -42,5 +45,11 @@ export default {
       ],
     };
   },
+  methods: {
+    externalLink (url) {
+      window.open(url, '_blank')
+    }
+  }
+
 };
 </script>
