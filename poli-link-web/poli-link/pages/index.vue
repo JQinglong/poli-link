@@ -38,3 +38,23 @@
     </v-col>
   </v-row>
 </template>
+
+<script lang="ts">
+import { defineComponent, useMeta, computed, ref } from '@nuxtjs/composition-api'
+
+export default defineComponent({
+  head: {},
+  setup() {
+    const { title, meta } = useMeta()
+    title.value = "政府会議体議事録検索システム"
+    meta.value = [
+      {
+        hid: 'og:url',
+        property: 'og:url',
+        content: "https://polilink-web.netlify.app/",
+      },
+    ]
+
+  },
+})
+</script>
