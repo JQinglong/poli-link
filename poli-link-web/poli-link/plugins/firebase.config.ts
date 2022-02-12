@@ -1,5 +1,6 @@
 import  Firebase from "firebase/app";
 import "firebase/auth";
+import "firebase/analytics";
 
 // config について一部省略。
 const config = {
@@ -14,4 +15,8 @@ const config = {
 }
 
 const firebase = Firebase.apps.length? Firebase.app():Firebase.initializeApp(config);
-export const auth = firebase.auth();
+
+const auth = firebase.auth();
+const analytics = firebase.analytics();
+
+export { auth, analytics };
