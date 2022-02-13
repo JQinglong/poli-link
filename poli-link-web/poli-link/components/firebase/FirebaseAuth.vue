@@ -6,7 +6,7 @@
           <v-card class="mx-auto mt-5">
             <v-card-text>
               <v-form>
-                <v-text-field prepend-icon="mdi-account-circle" label="ユーザ名" v-model="email"/>
+                <v-text-field prepend-icon="mdi-account-circle" label="ユーザ名" v-model="email" />
                 <v-text-field
                   prepend-icon="mdi-lock"
                   :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
@@ -23,9 +23,7 @@
           </v-card>
         </v-col>
         <v-col>
-          <v-card class="mx-auto mt-5">
-            <v-card-text> google </v-card-text>
-          </v-card>
+          <singin-buttons />
         </v-col>
       </v-row>
     </v-container>
@@ -36,7 +34,9 @@
 import { defineComponent, ref } from '@vue/composition-api';
 import { SigninWithBasic } from '@/compositions/firebase/auth';
 import { injectGlobalState } from '@/compositions/states/user';
+import SinginButtons from '~/components/firebase/SinginButtons.vue';
 export default defineComponent({
+  components: { SinginButtons },
   name: 'SigninPage',
   setup(props: any, { root }) {
     // local States

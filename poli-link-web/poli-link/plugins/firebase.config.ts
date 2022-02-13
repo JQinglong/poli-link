@@ -20,3 +20,8 @@ const auth = firebase.auth();
 const analytics = firebase.analytics();
 
 export { auth, analytics };
+
+const googleProvider = new Firebase.auth.GoogleAuthProvider()
+const facebookProvider = new Firebase.auth.FacebookAuthProvider()
+export { googleProvider }
+export { facebookProvider }

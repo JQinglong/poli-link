@@ -12,7 +12,7 @@
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api';
 
-import FirebaseAuth from "~/components/FirebaseAuth.vue";
+import FirebaseAuth from "~/components/firebase/FirebaseAuth.vue";
 
 export default defineComponent({
   components: { FirebaseAuth },
