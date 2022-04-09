@@ -28,7 +28,7 @@ class CouncilNewsSerializer(WritableNestedModelSerializer):
 
 class CouncilSerializer(WritableNestedModelSerializer):
     ministry = MinistrySerializer()
-    news = CouncilNewsSerializer(many=True)
+    news = CouncilNewsSerializer(many=True, read_only=True)
     class Meta:
         model = Council
         fields = '__all__'
