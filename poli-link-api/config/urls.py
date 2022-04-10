@@ -27,4 +27,5 @@ urlpatterns = [
     path('api/', include(polilink_api_router.urls)),
     path('swagger/', schema_view),
     path('api-auth/', obtain_jwt_token),
+    path('polilink_app/', include('polilink_app.urls')),
 ]
