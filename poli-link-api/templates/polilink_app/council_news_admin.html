@@ -1,0 +1,46 @@
+{% extends "./base.html" %}
+{% block content %}
+<h1>council news admin</h1>
+
+id<br>
+{{ id }}<br>
+url<br>
+{{ url }}<br>
+council_id<br>
+{{ council_id }}<br>
+description<br>
+{{ description }}<br>
+image<br>
+{{ image }}<br>
+site_name<br>
+{{ site_name }}<br>
+title<br>
+{{ title }}<br>
+
+<br>
+サンプル<br>
+INSERT INTO `polilink_api_councilnews` (`id`, `url`, `council_id`, `description`, `image`, `site_name`, `title`)
+ VALUES
+(REPLACE(uuid(), '-', ''),
+ '{{ url }}',
+ '{{ council_id }}',
+ '{{ description }}',
+ '{{ image }}',
+ '{{ site_name }}',
+ '{{ title }}')
+
+
+ <br>
+ <br>
+ <br>
+ サンプル<br>
+INSERT INTO `polilink_api_councilnews` (`id`, `url`, `council_id`, `description`, `image`, `site_name`, `title`)
+ VALUES
+('1da11bd49f3745acad6dab2e55ba5827',
+ 'https://mainichi.jp/articles/20210408/k00/00m/010/292000c',
+ '05e7fe5b690f4a3ca8de126153c03b0b',
+ '政府の有識者会議「新型コロナウイルス感染症対策分科会」（尾身茂会長）は8日、感染状況を示す4段階のステージを判断する指標に、医療の逼迫（ひっぱく）状況を把握するため「入院率」を新設することなどを盛り込んだ修正案を大筋で合意した。',
+ 'https://cdn.mainichi.jp/vol1/2021/04/08/20210408k0000m010298000p/0c10.jpg?1',
+ '毎日新聞', 'コロナステージ指標に「入院率」新設　分科会、修正案を大筋合意 | 毎日新聞')
+
+{% endblock %}
