@@ -1,0 +1,56 @@
+{% extends "./base.html" %}
+{% block title %}検索結果 - {{ block.super }}{% endblock %}
+{% block content %}
+<div class="ui grid stackable">
+  <div class="eleven wide column">
+      <div class="ui segment">
+          <div class="content">
+              <div class="header"><h3>council_member_admin</h3></div>
+              <form action="{% url 'polilink_app:council_member_admin' %}" method="GET">
+                  <div class="ui action input" style="width: 100%;">
+                    <input type="text" placeholder="council id" value="{{council_id}}" name="council_id">
+                    <input type="text" placeholder="council url" value="{{query}}" name="url">
+                    <button class="ui button">検索</button><br>
+                  </div>
+                  <a href="{% url 'polilink_app:council_member_admin' %}?council_id=a2cced95a4b84bbe8885dd82514045af&url=https%3A%2F%2Fwww.mext.go.jp%2Fb_menu%2Fshingi%2Fchousa%2Fshotou%2F158%2Fmeibo%2Fmext_00421.html">教育データの利活用に関する有識者会議</a>
+              </form>
+              {% if council_member_list %}
+              まずは、polilink_api_person
+              {% for result in council_member_list %}
+              <div class="ui segment message">
+
+                INSERT INTO `polilink_api_person` (`id`, `name`, `name_kana`)
+                SELECT * FROM (SELECT REPLACE(uuid(), '-', ''), REPLACE('{{result.name}}', ' ', ''), '{{result.name_kana}}') AS tmp
+                WHERE NOT EXISTS (
+                    SELECT id FROM polilink_api_person WHERE REPLACE(name, ' ', '') = REPLACE('{{result.name}}', ' ', '')
+                );<br>
+              </div>
+              {% endfor %}
+              <br><br>
+              その上で、polilink_api_councilmember<br>
+              {% for result in council_member_list %}
+              <div class="ui segment message">
+                INSERT INTO `polilink_api_councilmember` (`id`, `name`, `occupation`, `position`, `council_id`, `person_id`)<br>
+                SELECT REPLACE(uuid(), '-', ''), '{{result.name}}', '{{ result.occupation }}', '{{ result.position }}',<br>
+                 '{{ result.council_id }}', id FROM `polilink_api_person`<br>
+                WHERE REPLACE(name, ' ', '') = REPLACE('{{result.name}}', ' ', '');<br>
+              </div>
+              {% endfor %}
+
+              {% else %}
+              <div class="ui segment warning message">
+                  <p>{{query}}<br>
+                    検索結果はありません。</p>
+              </div>
+              {% endif %}
+          </div>
+          <br><br><br><br>
+          サンプル<br>
+          INSERT INTO `polilink_api_councilmember` (`id`, `name`, `occupation`, `position`, `council_id`, `person_id`) <br>
+          VALUES<br>
+          ('00c54a31415143709a6bdf2eea64e85f', '柑本 美和', '', '', '27f1ed31a8764464ab20b4e30a1010fa', '3cb5b6f1020e48fbabb84a11f00a674b'),
+          <br>
+      </div>
+  </div>
+</div>
+{% endblock %}
