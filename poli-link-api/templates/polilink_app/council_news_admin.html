@@ -2,6 +2,14 @@
 {% block content %}
 <h1>council news admin</h1>
 
+<form action="{% url 'polilink_app:council_news_admin' %}" method="GET">
+  <div class="ui action input" style="width: 100%;">
+    <input type="text" placeholder="council_id" value="{{query}}" name="council_id">
+    <input type="text" placeholder="url" value="{{query}}" name="url">
+    <button class="ui button">検索</button>
+  </div>               
+</form>
+
 id<br>
 {{ id }}<br>
 url<br>
@@ -18,7 +26,7 @@ title<br>
 {{ title }}<br>
 
 <br>
-サンプル<br>
+INSERT文<br>
 INSERT INTO `polilink_api_councilnews` (`id`, `url`, `council_id`, `description`, `image`, `site_name`, `title`)
  VALUES
 (REPLACE(uuid(), '-', ''),
