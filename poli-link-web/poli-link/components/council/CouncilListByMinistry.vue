@@ -1,23 +1,32 @@
 <template>
   <div>
     <v-card dense>
-      <!-- <v-text-field
-        v-model="search"
-        clearable
-        flat
-        dense
-        solo-inverted
-        hide-details
-        prepend-inner-icon="mdi-magnify"
-        label="Search"
-      ></v-text-field> -->
-      <!-- タブはやめる -->
-      <!-- <v-tabs dark background-color="blue-grey darken-4" show-arrows v-model="tabModel">
-        <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
-        <v-tab v-for="ministry in ministryList" :key="ministry.id" :href="`#tab-${ministry.id}`">
-          {{ ministry.name }}
-        </v-tab>
-      </v-tabs> -->
+
+      <v-card>
+        <v-tabs
+          dark background-color="blue-grey darken-4" show-arrows
+          v-model="tabModel"
+        >
+          <v-tab
+            v-for="ministry in ministryList"
+            :key="ministry.id"
+          >
+            {{ ministry.name }}
+          </v-tab>
+        </v-tabs>
+        <!-- 
+        <v-tabs-items v-model="tabModel">
+          <v-tab-item
+            v-for="ministry in ministryList"
+            :key="ministry.id"
+          >
+            <v-card flat>
+              <v-card-text>{{ ministry.name }}</v-card-text>
+            </v-card>
+          </v-tab-item>
+        </v-tabs-items> -->
+      </v-card>
+
       <v-data-table
         :headers="headers"
         :items="councilList"
@@ -104,30 +113,44 @@ export default defineComponent({
   setup() {
     // const search = ref<String>('');
     // const selected = ref<Number[]>([2]);
-    const headers = [
-      { text: '名前', value: 'name' },
-      { text: '説明', value: 'description' },
-      { text: '', value: 'actions', sortable: false },
-    ];
-    const state = reactive({
-      search: '',
-      filter: {},
-      sortDesc: false,
-    });
     const sortDesc = ref<Boolean>(false);
     const sortBy = ref<String>('Name');
     const keys = ref<String[]>(['Name']);
     // const tabModel = 'tab-0'; //tab制御が効かないので中止
 
+const state = reactive({
+      search: '',
+      filter: {},
+      sortDesc: false,
+      tabModel: 0,
+    });
     const { state: ministryState, getMinistryList } = useMinistry();
 
     const { state: councilState, getCouncilList } = useCouncil();
+
+    const headers = [
+      { text: '省庁',
+        value: 'ministry.id',
+        filter: (value: string) => {
+          if (ministryState.ministryList && state.tabModel < (ministryState.ministryList.length - 1)) {
+            return value == ministryState.ministryList[state.tabModel + 1].id
+          } else {
+            return true
+          }
+        },
+      },
+      { text: '名前', value: 'name' },
+      { text: '説明', value: 'description' },
+      { text: '', value: 'actions', sortable: false },
+    ];
+
 
     const fetchData = async (offset = 0) => {
       await getMinistryList({ offset });
       await ministryState.ministryList.unshift({id:'0', name: '全て', name_e: '', abbreviation: '', url: ''})
       await getCouncilList({ offset });
       // console.log('ministryState', ministryState)
+      state.tabModel = ministryState.ministryList.length - 1
     };
 
     const { fetchState } = useFetch(() => fetchData());

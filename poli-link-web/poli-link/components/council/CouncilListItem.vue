@@ -2,6 +2,7 @@
   <div>
     <v-card>
       <v-card-title v-text="council.name"></v-card-title>
+      <v-card-text>[ {{ council.ministry.name }} ]</v-card-text>
       <v-card-text> {{ council.description }} </v-card-text>
       <v-card-actions>
         <v-btn class="ml-2 mt-5" outlined rounded small @click="$router.push(`/council/${council.id}/`)"> 詳細を見る </v-btn>
