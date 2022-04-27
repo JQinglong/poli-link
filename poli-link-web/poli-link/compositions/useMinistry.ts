@@ -53,7 +53,7 @@ export default function useMinistry() {
   const getMinistryList = async(payload: ListRequestType = {}) => {
     const ministrys= await $repository.ministry.getMinistryList(payload)
 
-    console.log('ministrys', ministrys)
+    // console.log('ministrys', ministrys)
     
     state.ministryList = ministrys.results
     state.ministryCount = ministrys.count
