@@ -48,7 +48,7 @@ export default function useCouncil() {
   const getCouncilList = async(payload: CouncilListRequest = {}) => {
     const councils= await $repository.council.getCouncilList(payload)
 
-    console.log('councils', councils)
+    // console.log('councils', councils)
     
     state.councilList = councils.results
     state.councilCount = councils.count
