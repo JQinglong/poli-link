@@ -189,6 +189,11 @@ export default defineComponent({
         to: '/person'
       },
       {
+        icon: 'mdi-comment-text',
+        title:'議事検索',
+        to: '/speech'
+      },
+      {
         icon: 'mdi-bookmark',
         title: '後で見る',
         to: '/later'
