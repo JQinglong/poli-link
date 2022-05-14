@@ -8,6 +8,7 @@
         <v-expansion-panel>
           <v-expansion-panel-header> 検索条件 </v-expansion-panel-header>
           <v-expansion-panel-content style="white-space: pre-line">
+            <form id="item-form">
             <v-card dense color="teal lighten-2" class="mb-1">
               <v-card-text>
                 <v-text-field dense v-model="searchAll" clearable flat solo-inverted hide-details label="全体検索"></v-text-field>
@@ -85,9 +86,6 @@
                           label="会義体名で絞り込み"
                         ></v-text-field>
                       </template>
-                      <template v-slot:[`item.actions`]="{ item }">
-                        <v-icon @click="handleAddMember(item)"> mdi-account-arrow-right </v-icon>
-                      </template>
                     </v-data-table>
                   </v-col>
                   <!-- <v-col> -->
@@ -123,11 +121,12 @@
                 <v-btn color="primary" @click="handleSearch">検索</v-btn>
               </v-card-text>
             </v-card>
+            </form>
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>
 
-    <speech-list />
+    <speech-list :searchConditions="searchConditions" />
 
 
     </v-card>
@@ -149,7 +148,7 @@ type Item = {
 
 export default defineComponent({
   components: { SpeechList },
-  setup() {
+  setup(props: any, { root }) {
     const { state: ministryState, getMinistryList } = useMinistry();
     const { state: councilState, getCouncilList } = useCouncil();
     const { state: personState, getPersonList } = usePerson();
@@ -163,6 +162,7 @@ export default defineComponent({
       selectedMinistry: [],
       selectedCouncil: [],
       selectedMeeting: [],
+      searchConditions: {},
     });
     const personHeaders = [
       { text: 'name', value: 'name' },
@@ -175,9 +175,23 @@ export default defineComponent({
 
     const handleSearch = async () => {
       try {
-        console.log('selectedPerson', state.selectedPerson);
-        console.log('selectedMinistry', state.selectedMinistry.length);
+        // console.log('selectedPerson', state.selectedPerson);
+        // console.log('selectedMinistry', state.selectedMinistry);
+        // console.log('selectedCouncil', state.selectedCouncil);
+        // console.log('selectedMeeting', state.selectedMeeting);
         // console.log('error', error);
+        // 配列はporpsに自動更新されない　されてるけど・・・
+        // this.$set(state.searchPerson, 0, state.searchPerson[0] + 1)
+        // if (state.selectedMinistry.length > 0){
+        //   console.log('state.selectedMinistry', state.selectedMinistry);
+        //   root.$set(state.selectedMinistry, 0, {})
+        //   console.log('state.selectedMinistry', state.selectedMinistry);
+        // }
+        // Propsはオブジェクトにして、このイベントで、オブジェクトに詰める
+        root.$set(state.searchConditions, 'speech', state.searchAll)
+        root.$set(state.searchConditions, 'councilIds', state.selectedCouncil?.map((element) => Reflect.get(element, "id")))
+        root.$set(state.searchConditions, 'personIds', state.selectedPerson?.map((element) => Reflect.get(element, "id")))
+        root.$set(state.searchConditions, 'ministryIds', state.selectedMinistry?.map((element) => Reflect.get(element, "id")))
       } catch (error) {
         console.log('error', error);
       }

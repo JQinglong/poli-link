@@ -77,10 +77,10 @@ class SpeechFilter(django_filters.FilterSet):
 
     # フィルタの定義
     speech = django_filters.CharFilter(lookup_expr='contains')
-    council = django_filters.AllValuesMultipleFilter(label="会義体（複数選択可）")
-    council_meeting = django_filters.AllValuesMultipleFilter(label="議事（複数選択可）")
-    person = django_filters.AllValuesMultipleFilter(label="構成員（複数選択可）")
-    council__ministry = django_filters.AllValuesMultipleFilter(label="省庁（複数選択可）")
+    council = django_filters.ModelMultipleChoiceFilter(label="会義体（複数選択可）", queryset=Council.objects.all(), field_name='council_id',)
+    council_meeting = django_filters.ModelMultipleChoiceFilter(label="議事（複数選択可）", queryset=CouncilMeeting.objects.all(), field_name='council_meeting_id',)
+    person = django_filters.ModelMultipleChoiceFilter(label="構成員（複数選択可）", queryset=Person.objects.all(), field_name='person_id',)
+    council__ministry = django_filters.ModelMultipleChoiceFilter(label="省庁（複数選択可）", queryset=Ministry.objects.all(), field_name='council__ministry',)
     class Meta:
         model = MeetingSpeech
         # フィルタを列挙する。
