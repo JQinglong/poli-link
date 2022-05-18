@@ -1,0 +1,44 @@
+select * from polilink_api_meetingspeech where council_id='05e7fe5b690f4a3ca8de126153c03b0b' and trim(speaker)=''
+
+select * from polilink_api_meetingspeech where
+ speaker <> ''
+ and council_id='05e7fe5b690f4a3ca8de126153c03b0b'
+-- and person_id is NULL
+order by speaker
+
+update polilink_api_meetingspeech set person_id='03b65568895f48879eba9c98d30acdf8' where council_id='05e7fe5b690f4a3ca8de126153c03b0b' and trim(speaker)='釜萢委員';
+update polilink_api_meetingspeech set person_id='be6a0073831b4accaccf49c65a4ebdd1' where council_id='05e7fe5b690f4a3ca8de126153c03b0b' and trim(speaker)='中山委員';
+update polilink_api_meetingspeech set person_id='59373e2be1294771ab10f083622de8ac' where council_id='05e7fe5b690f4a3ca8de126153c03b0b' and trim(speaker)='今村委員';
+update polilink_api_meetingspeech set person_id='ea9bfaf354cd4261a10887581657db4b' where council_id='05e7fe5b690f4a3ca8de126153c03b0b' and trim(speaker)='太田委員';
+update polilink_api_meetingspeech set person_id='3ce94bc937b84b5abe403a36a71fed90' where council_id='05e7fe5b690f4a3ca8de126153c03b0b' and trim(speaker)='小林委員';
+update polilink_api_meetingspeech set person_id='3f0d4deb0cc44ca4a50ae6b672ca9cad' where council_id='05e7fe5b690f4a3ca8de126153c03b0b' and trim(speaker)='尾身分科会長';
+update polilink_api_meetingspeech set person_id='bbadb3fc6f264e2b8dd5bd2855d6a89c' where council_id='05e7fe5b690f4a3ca8de126153c03b0b' and trim(speaker)='岡部委員';
+update polilink_api_meetingspeech set person_id='52563159d9b44cb1ab9e8dd25d703848' where council_id='05e7fe5b690f4a3ca8de126153c03b0b' and trim(speaker)='平井委員';
+
+これも自動生成したい
+select concat('update polilink_api_meetingspeech set person_id=''', person_id , ''' where council_id=''05e7fe5b690f4a3ca8de126153c03b0b'' and trim(speaker)='''  , `name` , '委員'';')
+from polilink_api_councilmember
+where council_id='05e7fe5b690f4a3ca8de126153c03b0b'
+
+shift+alt
+
+update polilink_api_meetingspeech set person_id='be6a0073831b4accaccf49c65a4ebdd1' where council_id='05e7fe5b690f4a3ca8de126153c03b0b' and trim(speaker)='中山委員';
+update polilink_api_meetingspeech set person_id='59373e2be1294771ab10f083622de8ac' where council_id='05e7fe5b690f4a3ca8de126153c03b0b' and trim(speaker)='今村委員';
+update polilink_api_meetingspeech set person_id='2aae7470aed641269259e0583b4b1eb9' where council_id='05e7fe5b690f4a3ca8de126153c03b0b' and trim(speaker)='押谷委員';
+update polilink_api_meetingspeech set person_id='5e87f552e5a44102b82a6b50df0fbcb8' where council_id='05e7fe5b690f4a3ca8de126153c03b0b' and trim(speaker)='石田委員';
+update polilink_api_meetingspeech set person_id='1e987981415a4e50ab5f2a9e35243056' where council_id='05e7fe5b690f4a3ca8de126153c03b0b' and trim(speaker)='脇田委員';
+update polilink_api_meetingspeech set person_id='3f0d4deb0cc44ca4a50ae6b672ca9cad' where council_id='05e7fe5b690f4a3ca8de126153c03b0b' and trim(speaker)='尾身委員';
+update polilink_api_meetingspeech set person_id='5fed6f39fbef491dab88be08a52ed6f6' where council_id='05e7fe5b690f4a3ca8de126153c03b0b' and trim(speaker)='石川委員';
+update polilink_api_meetingspeech set person_id='52563159d9b44cb1ab9e8dd25d703848' where council_id='05e7fe5b690f4a3ca8de126153c03b0b' and trim(speaker)='平井委員';
+update polilink_api_meetingspeech set person_id='c08330c92abc47db82eab75f9d9a7854' where council_id='05e7fe5b690f4a3ca8de126153c03b0b' and trim(speaker)='舘田委員';
+update polilink_api_meetingspeech set person_id='ea9bfaf354cd4261a10887581657db4b' where council_id='05e7fe5b690f4a3ca8de126153c03b0b' and trim(speaker)='太田委員';
+update polilink_api_meetingspeech set person_id='e68b79e4e3ee4b5aa5a6d14939f84d12' where council_id='05e7fe5b690f4a3ca8de126153c03b0b' and trim(speaker)='大竹委員';
+update polilink_api_meetingspeech set person_id='bbadb3fc6f264e2b8dd5bd2855d6a89c' where council_id='05e7fe5b690f4a3ca8de126153c03b0b' and trim(speaker)='岡部委員';
+update polilink_api_meetingspeech set person_id='41ac69eba1ed4281ba09c71f1218b41f' where council_id='05e7fe5b690f4a3ca8de126153c03b0b' and trim(speaker)='磯部委員';
+update polilink_api_meetingspeech set person_id='3ce94bc937b84b5abe403a36a71fed90' where council_id='05e7fe5b690f4a3ca8de126153c03b0b' and trim(speaker)='小林委員';
+update polilink_api_meetingspeech set person_id='ede9fc0b11c14ad0a72e3402f41fae12' where council_id='05e7fe5b690f4a3ca8de126153c03b0b' and trim(speaker)='清古委員';
+update polilink_api_meetingspeech set person_id='03b65568895f48879eba9c98d30acdf8' where council_id='05e7fe5b690f4a3ca8de126153c03b0b' and trim(speaker)='釜萢委員';
+update polilink_api_meetingspeech set person_id='678f2eb78a8d408e8bbb72f20eda2d91' where council_id='05e7fe5b690f4a3ca8de126153c03b0b' and trim(speaker)='幸本委員';
+update polilink_api_meetingspeech set person_id='dd38545184e04ab5bf9ffecf10ede41d' where council_id='05e7fe5b690f4a3ca8de126153c03b0b' and trim(speaker)='武藤委員';
+update polilink_api_meetingspeech set person_id='4bc6cf80d70648a8b0ea9d45ee86652d' where council_id='05e7fe5b690f4a3ca8de126153c03b0b' and trim(speaker)='河本委員';
+update polilink_api_meetingspeech set person_id='8a6e460eafc24b63bf5567148c71f5ac' where council_id='05e7fe5b690f4a3ca8de126153c03b0b' and trim(speaker)='南委員';

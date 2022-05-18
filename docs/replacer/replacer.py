@@ -23,7 +23,7 @@ with open(file_name, encoding="utf-8") as f:
     data_lines = re.sub(r'^', r",'", data_lines, flags=re.MULTILINE)
     data_lines = re.sub(r'$', r"'", data_lines, flags=re.MULTILINE)
 
-    data_lines = re.sub(r",'○'", r", ''\n, 'a963c26aaa934abfaef70d2cc929e3fb', '7e0291703a9f42ca96860013d89f8644'),\n (REPLACE(uuid(), '-', ''),'〇'", data_lines, flags=re.MULTILINE)
+    data_lines = re.sub(r",'○'", r", ''\n, '05e7fe5b690f4a3ca8de126153c03b0b', 'd806fbaedd5d4f78ac7afcd7ea7e40bb'),\n (REPLACE(uuid(), '-', ''),'〇'", data_lines, flags=re.MULTILINE)
 
     data_lines = re.sub(r"^, ''", r"INSERT INTO `polilink_api_meetingspeech` (`id`, `order`,\n `speaker`,\n `speech`,\n `description`, `council_id`, `council_meeting_id`)\n VALUES", data_lines)
 
