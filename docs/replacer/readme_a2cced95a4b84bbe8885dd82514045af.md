@@ -1,23 +1,14 @@
 # 手順
+a2cced95a4b84bbe8885dd82514045af
+教育データの利活用に関する有識者会議
 
 1. 議事録の本文部分を、text.txt に貼り付ける。
 
-<!-- スクリプトで対応した
-2. ページやフッタを削除する
-
-例（下記の「3」の行を削除）
-
-```
-皆様にわかりやすく説明できて、かつ、それが御納得いただけることが非常に重要だと考
-3
-えております。
-``` -->
-
-3. replacer.pyのID変更
+2. replacer.pyのID変更
    
-4. python replacer.py を実行
+3. python replacer.py を実行
 cd docs/replacer
-python replacer.py
+python replacer_a2cced95a4b84bbe8885dd82514045af.py
 
 5. 6行目削除
 例
