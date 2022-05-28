@@ -4,13 +4,20 @@
       {{ councilMeetingData.council.name }}
       <v-card-title class="pa-2 blue-grey darken-1">
         <h3 class="title grow">{{ councilMeetingData.name }}</h3>
+        <v-btn icon>
+          <v-icon @click="editItem" color="grey lighten-1"> mdi-share-variant </v-icon>
+        </v-btn>
+      </v-card-title>
+    </v-card>
+    <v-card-text class="py-0">
+      <v-card-title>日時</v-card-title>{{ councilMeetingData.meeting_date }} <v-card-title>場所</v-card-title>{{ councilMeetingData.place }}
+      <!-- <v-card-title>出席者</v-card-title> -->
+      <v-card-title
+        >議事
+
         <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
-            <v-btn
-              icon
-              v-bind="attrs"
-              v-on="on"
-            >
+            <v-btn icon v-bind="attrs" v-on="on">
               <v-icon @click="externalLink(councilMeetingData.url_minute)">mdi-file-document-edit-outline</v-icon>
             </v-btn>
           </template>
@@ -18,34 +25,27 @@
         </v-tooltip>
         <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
-            <v-btn
-              icon
-              v-bind="attrs"
-              v-on="on"
-            >
+            <v-btn icon v-bind="attrs" v-on="on">
               <v-icon @click="externalLink(councilMeetingData.url_document)">mdi-file-chart-outline</v-icon>
             </v-btn>
           </template>
           <span>資料</span>
         </v-tooltip>
-        <v-btn icon>
-          <v-icon @click="editItem" color="grey lighten-1"> mdi-share-variant </v-icon>
-        </v-btn>
       </v-card-title>
-    </v-card>
-    <v-card-text class="py-0">
-      <v-card-title>日時</v-card-title>{{ councilMeetingData.meeting_date }}
-      <v-card-title>場所</v-card-title>{{ councilMeetingData.place }}
-      <!-- <v-card-title>出席者</v-card-title> -->
-      <v-card-title>議事</v-card-title>
       <meeting-speech-list :councilId="councilId" :councilMeetingId="councilMeetingId" />
-      
     </v-card-text>
 
     <v-dialog v-model="dialogEdit" max-width="500px">
       <v-card>
         <v-card-title class="headline">この議事へのリンク</v-card-title>
-        <v-text-field v-model="editedItemUrl" append-icon="mdi-link-variant" filled type="text" @click:append="copyText(editedItemUrl)" onfocus="this.select();"></v-text-field>
+        <v-text-field
+          v-model="editedItemUrl"
+          append-icon="mdi-link-variant"
+          filled
+          type="text"
+          @click:append="copyText(editedItemUrl)"
+          onfocus="this.select();"
+        ></v-text-field>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" text @click="closeDelete">閉じる</v-btn>
@@ -53,7 +53,6 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-
   </v-card>
 </template>
 
@@ -61,11 +60,10 @@
 // 議事情報表示
 import { ref, toRefs, useFetch, defineComponent, reactive, useContext, useMeta } from '@nuxtjs/composition-api';
 import { useCouncil, useCouncilMeeting } from '@/compositions';
-import { CouncilType } from "@/types";
+import { CouncilType } from '@/types';
 
 import CouncilMemberList from '~/components/council/CouncilMemberList.vue';
 import MeetingSpeechList from '~/components/council/MeetingSpeechList.vue';
-
 
 export default defineComponent({
   name: 'MeetingInfo',
@@ -80,8 +78,7 @@ export default defineComponent({
       required: true,
     },
   },
-  head: {
-  },
+  head: {},
   setup(props, { root }) {
     const { state: councilMeetingState, getCouncilMeeting } = useCouncilMeeting();
     const { route } = useContext();
@@ -101,34 +98,34 @@ export default defineComponent({
       });
     };
     const copyText = (text: string) => {
-      console.log('copy text', text)
-      if(navigator.clipboard){
-          navigator.clipboard.writeText(text);
+      console.log('copy text', text);
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text);
       }
     };
 
-    const externalLink = (url: string) =>{
+    const externalLink = (url: string) => {
       if (url) {
-        window.open(url, '_blank')
+        window.open(url, '_blank');
       }
-    }
+    };
 
     console.log('MeetingInfo props', props);
 
     const fetchData = async () => {
-      await getCouncilMeeting(props.councilMeetingId)
-    }
+      await getCouncilMeeting(props.councilMeetingId);
+    };
     const { fetchState } = useFetch(() => fetchData());
 
-    const { title, meta } = useMeta()
-    title.value = `議事[${councilMeetingState.councilMeetingData.name}]`
+    const { title, meta } = useMeta();
+    title.value = `議事[${councilMeetingState.councilMeetingData.name}]`;
     meta.value = [
       {
         hid: 'og:url',
         property: 'og:url',
         content: `https://polilink-web.netlify.app/council/${props.councilId}/${props.councilMeetingId}`,
       },
-    ]
+    ];
 
     return {
       externalLink,
@@ -140,11 +137,7 @@ export default defineComponent({
     };
   },
 });
-
-
 </script>
 
 <style>
-
-
 </style>

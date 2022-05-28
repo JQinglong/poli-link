@@ -8,14 +8,15 @@
               <div class="header"><h3>検索結果</h3></div>
               <form action="{% url 'polilink_app:council_meeting_admin' %}" method="GET">
                   <div class="ui action input" style="width: 100%;">
-                    <input type="text" placeholder="council id" value="{{council_id}}" name="council_id">
-                    <input type="text" placeholder="council url" value="{{query}}" name="url">
+                    <input type="text" placeholder="council id" value="{{council_meeting_list.0.council_id}}" name="council_id">
+                    <input type="text" placeholder="council url" value="{{council_meeting_list.0.url}}" name="url">
                     <button class="ui button">検索</button><br>
                   </div>
                   <a href="{% url 'polilink_app:council_meeting_admin' %}?council_id=a2cced95a4b84bbe8885dd82514045af&url=https%3A%2F%2Fwww.mext.go.jp%2Fb_menu%2Fshingi%2Fchousa%2Fshotou%2F158%2Fgiji_list%2Findex.htm">教育データの利活用に関する有識者会議</a><br>
                   <a href="{% url 'polilink_app:council_meeting_admin' %}?council_id=3d5f4bfb0ef544b7a3864e3d3e69b103&url=https%3A%2F%2Fwww.cas.go.jp%2Fjp%2Fseisaku%2Fful%2Ftaisakusuisin.html">基本的対処方針分科会（令和３年４月）</a><br>
                   <a href="{% url 'polilink_app:council_meeting_admin' %}?council_id=05e7fe5b690f4a3ca8de126153c03b0b&url=https%3A%2F%2Fwww.cas.go.jp%2Fjp%2Fseisaku%2Fful%2Ftaisakusuisin.html">新型コロナウイルス感染症対策分科会（令和３年４月）</a><br>
                   <a href="{% url 'polilink_app:council_meeting_admin' %}?council_id=b739d60cd21245a9b5df939c944031bb&url=https%3A%2F%2Fwww.cas.go.jp%2Fjp%2Fseisaku%2Fatarashii_sihonsyugi%2Findex.html">新しい資本主義実現会議</a><br>
+                  <a href="{% url 'polilink_app:council_meeting_admin' %}?council_id=22d89b945528435eade71351466ac58c&url=https%3A%2F%2Fwww.mhlw.go.jp%2Fstf%2Fseisakunitsuite%2Fbunya%2F0000121431_00348.html">新型コロナウイルス感染症対策アドバイザリーボード</a><br>
               </form>
               {% if council_meeting_list %}
               {% for result in council_meeting_list %}
