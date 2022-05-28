@@ -11,7 +11,7 @@
           <v-icon>mdi-bookmark</v-icon>
         </v-btn>
       </v-card-actions>
-      <v-list three-line v-if="council.news.length > 0" max-width="800">
+      <v-list three-line v-if="council.news.length > 0" max-width="380">
         <v-subheader>関連ニュース</v-subheader>
         <template v-for="(item, index) in council.news">
           <v-list-item :key="index" @click="externalLink(item.url)">

@@ -1,9 +1,9 @@
 <template>
   <v-row justify="center" align="start">
-    <v-col cols="12" sm="6" md="8">
+    <v-col md="8">
       <council-list-hot />
     </v-col>
-    <v-col cols="6" md="4">
+    <v-col md="4">
       <v-card>
         <v-alert
           border="left"
