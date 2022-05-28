@@ -27,6 +27,8 @@ class SearchMeetingView(ListView):
                 meetings = self.meeting_3d5f4bfb0ef544b7a3864e3d3e69b103(council_id, soup)
             elif council_id == '05e7fe5b690f4a3ca8de126153c03b0b':
                 meetings = self.meeting_05e7fe5b690f4a3ca8de126153c03b0b(council_id, soup)
+            elif council_id == 'b739d60cd21245a9b5df939c944031bb':
+                meetings = self.meeting_b739d60cd21245a9b5df939c944031bb(council_id, soup)
             elif council_id == '':
                 meetings = []
             elif council_id == ' ':
@@ -217,6 +219,61 @@ class SearchMeetingView(ListView):
                                 url_minute = ''
                                 if tds[3].select_one('a'):
                                     url_minute = 'https://www.cas.go.jp/jp/seisaku/ful/' + tds[3].select_one('a')['href']
+    
+                                place = ''
+
+                                meetings.append({
+                                    'name': name,
+                                    'place': place,
+                                    'order': order,
+                                    'meeting_date': meeting_date,
+                                    'council_id': council_id,
+                                    'url_document': url_document,
+                                    'url_minute': url_minute,
+                                })
+
+                # links.append('https://www.mext.go.jp' + ul.select_one('a')['href'])
+        return meetings
+
+    def meeting_b739d60cd21245a9b5df939c944031bb(self, council_id, soup):
+        meetings = ['新しい資本主義実現会議']
+        # <h2>「新しい資本主義実現会議」開催状況一覧</h2> 以降を参照する
+        h2s = soup.find_all('h2')
+        for h2 in h2s:
+            if '「新しい資本主義実現会議」開催状況一覧' in h2.get_text():
+                name = ''
+                # その次からテーブルを探す
+                for sib in h2.next_siblings:
+                    if sib.name == 'h2':
+                        break
+
+                    if sib.name == 'table':
+                        # 各trが各会議
+                        for tr in sib:
+                            # タグ崩れ等あるのでもう一度確認
+                            if tr.name == 'tr' and len(tr.find_all('td')) > 0:
+
+                                # print(tr)
+                                tds = tr.find_all('td')
+                                print ('tds:')
+                                print (tds)
+
+                                if tds[0].text == '' or '第' not in tds[0].text:
+                                    print(tds[0].text)
+                                    continue
+
+                                name = '新しい資本主義実現会議（' + tds[0].text + '）'
+
+                                order = unicodedata.normalize("NFKC", name[name.find('第') + 1:name.find('回')])
+                                meeting_date = tds[1].text
+                                meeting_date = meeting_date[0:(meeting_date.find('日'))].replace('年', '-').replace('月', '-')
+                                meeting_date = meeting_date.replace('令和元','2019').replace('令和２','2020').replace('令和３','2021').replace('令和４','2022')
+                                meeting_date = unicodedata.normalize("NFKC", meeting_date)
+                                meeting_date = meeting_date.replace(' ', '')
+                                url_document = 'https://www.cas.go.jp/jp/seisaku/atarashii_sihonsyugi/' + tds[2].select_one('a')['href']
+                                url_minute = ''
+                                if tds[3].select_one('a'):
+                                    url_minute = 'https://www.cas.go.jp/jp/seisaku/atarashii_sihonsyugi/' + tds[3].select_one('a')['href']
     
                                 place = ''
 

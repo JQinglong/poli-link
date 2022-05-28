@@ -4,12 +4,30 @@
       {{ councilMeetingData.council.name }}
       <v-card-title class="pa-2 blue-grey darken-1">
         <h3 class="title grow">{{ councilMeetingData.name }}</h3>
-        <v-btn icon>
-          <v-icon @click="externalLink(councilMeetingData.url_minute)">mdi-file-document-edit-outline</v-icon>
-        </v-btn>
-        <v-btn icon>
-          <v-icon @click="externalLink(councilMeetingData.url_document)">mdi-file-chart-outline</v-icon>
-        </v-btn>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              icon
+              v-bind="attrs"
+              v-on="on"
+            >
+              <v-icon @click="externalLink(councilMeetingData.url_minute)">mdi-file-document-edit-outline</v-icon>
+            </v-btn>
+          </template>
+          <span>議事録</span>
+        </v-tooltip>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              icon
+              v-bind="attrs"
+              v-on="on"
+            >
+              <v-icon @click="externalLink(councilMeetingData.url_document)">mdi-file-chart-outline</v-icon>
+            </v-btn>
+          </template>
+          <span>資料</span>
+        </v-tooltip>
         <v-btn icon>
           <v-icon @click="editItem" color="grey lighten-1"> mdi-share-variant </v-icon>
         </v-btn>
