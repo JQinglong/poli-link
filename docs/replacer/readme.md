@@ -38,7 +38,7 @@ python replacer.py
 7. 連番処理
 
 VSCodeで
-'〇'をcommand+D（を連続して）で全選択
+'●'をcommand+D（を連続して）で全選択
 command+alt+N
 %d:1:1
 
