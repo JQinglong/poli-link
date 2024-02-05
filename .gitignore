@@ -6,3 +6,4 @@ poli-link-db/mysql/
 diagram
 poli-link-api/config/local_settings.py
 docs/dmp/
+.DS_Store

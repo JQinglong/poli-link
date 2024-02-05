@@ -30,6 +30,8 @@ class SearchMeetingView(ListView):
                 meetings = self.meeting_b739d60cd21245a9b5df939c944031bb(council_id, soup)
             elif council_id == '22d89b945528435eade71351466ac58c':
                 meetings = self.meeting_22d89b945528435eade71351466ac58c(council_id, soup)
+            elif council_id == '6b2c6a845d4242459cdc5c3ccfea584f':
+                meetings = self.meeting_6b2c6a845d4242459cdc5c3ccfea584f(council_id, soup)
             elif council_id == '':
                 meetings = []
             elif council_id == ' ':
@@ -402,4 +404,63 @@ class SearchMeetingView(ListView):
             })
 
             # links.append('https://www.mext.go.jp' + ul.select_one('a')['href'])
+        return meetings
+
+    def meeting_6b2c6a845d4242459cdc5c3ccfea584f(self, council_id, soup):
+        # meetings = ['デジタル市場競争会議　ワーキンググループ']
+        meetings = []
+        meetings.append({
+            'council_id': council_id,
+            'url': self.request.GET.get('url', ''),
+        })
+
+        # <table class="datatable99" summary="デジタル市場競争会議　ワーキンググループ">を参照する
+        name = ''
+        meets = soup.find_all('tr')
+        for tr in meets:
+            # タグ崩れ等あるのでもう一度確認
+            print('tr')
+            if tr.name == 'tr' and len(tr.find_all('td')) > 0:
+
+                # print(tr)
+                tds = tr.find_all('td')
+                # print ('tds:')
+                # print (tds)
+
+                if tds[0].text == '' or '回' not in tds[0].text:
+                    # print(tds[0].text)
+                    continue
+
+                name = 'デジタル市場競争会議　ワーキンググループ（' + tds[0].text + '）'
+
+                order = unicodedata.normalize("NFKC", name[name.find('第') + 1:name.find('回')])
+                meeting_date = tds[1].text
+                meeting_date = meeting_date[0:(meeting_date.find('日'))].replace('年', '-').replace('月', '-')
+                meeting_date = meeting_date.replace('令和元','2019').replace('令和２','2020').replace('令和３','2021').replace('令和４','2022')
+                meeting_date = unicodedata.normalize("NFKC", meeting_date)
+                meeting_date = meeting_date.replace(' ', '')
+
+                next_tr = tr.next_sibling.next_sibling
+                print('next_tr')
+                print(next_tr)
+                tds = next_tr.find_all('td')
+
+                url_document = 'https://www.kantei.go.jp/jp/singi/digitalmarket/kyosokaigi_wg/' + tds[1].select_one('a')['href']
+                url_minute = ''
+                if tds[2].select_one('a'):
+                    url_minute = 'https://www.kantei.go.jp/jp/singi/digitalmarket/kyosokaigi_wg/' + tds[2].select_one('a')['href']
+
+                place = ''
+
+                meetings.append({
+                    'name': name,
+                    'place': place,
+                    'order': order,
+                    'meeting_date': meeting_date,
+                    'council_id': council_id,
+                    'url_document': url_document,
+                    'url_minute': url_minute,
+                })
+
+                # links.append('https://www.mext.go.jp' + ul.select_one('a')['href'])
         return meetings
