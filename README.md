@@ -10,9 +10,8 @@ Poli Link
 
 ## Demo
 
-[Poli Link](https://polilink-web.netlify.app/)
-
-開発中ですが、公開してしまっています。
+停止中
+別リポジトリに移行予定です
 
 ## Feature
 
